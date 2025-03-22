@@ -118,6 +118,12 @@
 }
 
 @layer base {
+  ::-webkit-scrollbar {
+    @apply w-1 bg-transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-md bg-gray-400 /*color trackbar*/;
+  }
   * {
     @apply border-border outline-ring/50;
   }

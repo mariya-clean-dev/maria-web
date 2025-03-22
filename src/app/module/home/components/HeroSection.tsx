@@ -43,14 +43,14 @@ export default function HeroSection() {
               >
                 <Button
                   size="lg"
-                  className="bg-[#27AE60] hover:bg-[#219653] text-white border-none"
+                  className="bg-[#219653] hover:bg-[#219653] text-white border-none"
                 >
                   Book Now
                 </Button>
                 <Button
                   size="lg"
                   variant="outline"
-                  className="bg-[#27AE60] hover:bg-[#219653] text-white border-none"
+                  className="bg-[#219653] hover:bg-[#219653] text-white border-none"
                 >
                   Get Your Estimate
                 </Button>

@@ -8,6 +8,8 @@ import CompanyStory from "./components/CompanyStory";
 import BestServices from "./components/BestServices";
 import PricingSection from "./components/PriceSection";
 import TestimonialsCarousel from "./components/TestimonialsCarousel";
+import CTASection from "./components/CTASection";
+import Footer from "./components/Footer";
 
 const HomeModule = () => {
   return (
@@ -21,6 +23,8 @@ const HomeModule = () => {
       <BestServices />
       <PricingSection />
       <TestimonialsCarousel />
+      <CTASection />
+      <Footer />
     </>
   );
 };
