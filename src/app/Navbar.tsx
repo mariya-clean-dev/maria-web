@@ -6,8 +6,10 @@ import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
+import { useRouter } from "nextjs-toploader/app";
 
 export default function Navbar() {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -32,19 +34,19 @@ export default function Navbar() {
             Home
           </Link>
           <Link
-            href="/about"
+            href="/#"
             className="text-white font-medium hover:text-white/80 transition-colors"
           >
             About
           </Link>
           <Link
-            href="/services"
+            href="/#"
             className="text-white font-medium hover:text-white/80 transition-colors"
           >
             Services
           </Link>
           <Link
-            href="/bookings"
+            href="/#"
             className="text-white font-medium hover:text-white/80 transition-colors"
           >
             Bookings
@@ -55,11 +57,15 @@ export default function Navbar() {
         <div className="hidden md:flex items-center space-x-3">
           <Button
             variant="ghost"
-            className="text-white hover:text-white/80 hover:bg-white/10"
+            className="text-white hover:text-white/80 hover:bg-white/10 cursor-pointer"
+            onClick={() => router.push("/login")}
           >
             Login
           </Button>
-          <Button className="bg-white text-[#0ABED5] hover:bg-white/90">
+          <Button
+            className="bg-white text-[#0ABED5] hover:bg-white/90 cursor-pointer"
+            onClick={() => router.push("/signup")}
+          >
             Sign Up
           </Button>
           <Button
