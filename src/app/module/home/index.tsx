@@ -4,6 +4,7 @@ import FeatureCards from "./components/FeatureCards";
 import ImageSection from "./components/ImageSection";
 import EcoFriendlySection from "./components/EcoFriendlySection";
 import ServicesSection from "./components/ServiceSection";
+import CompanyStory from "./components/CompanyStory";
 
 const HomeModule = () => {
   return (
@@ -13,6 +14,7 @@ const HomeModule = () => {
       <ImageSection />
       <EcoFriendlySection />
       <ServicesSection />
+      <CompanyStory />
     </>
   );
 };
