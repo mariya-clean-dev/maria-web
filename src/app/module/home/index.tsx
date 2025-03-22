@@ -7,6 +7,7 @@ import ServicesSection from "./components/ServiceSection";
 import CompanyStory from "./components/CompanyStory";
 import BestServices from "./components/BestServices";
 import PricingSection from "./components/PriceSection";
+import TestimonialsCarousel from "./components/TestimonialsCarousel";
 
 const HomeModule = () => {
   return (
@@ -19,6 +20,7 @@ const HomeModule = () => {
       <CompanyStory />
       <BestServices />
       <PricingSection />
+      <TestimonialsCarousel />
     </>
   );
 };
