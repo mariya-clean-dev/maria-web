@@ -26,8 +26,8 @@ export default function EcoFriendlySection() {
   };
 
   return (
-    <div className="p-8">
-      <section className="bg-[#61B35C] py-24 overflow-hidden rounded-lg">
+    <div className="p-4 md:p-8">
+      <section className="bg-[#61B35C] py-7 md:py-24 overflow-hidden rounded-lg">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Content Column */}
@@ -92,7 +92,7 @@ export default function EcoFriendlySection() {
             </motion.div>
 
             {/* Images Column */}
-            <div className="relative h-[600px] md:h-[550px]">
+            <div className="relative h-[600px] md:h-[550px] hidden md:flex">
               {/* Image Container */}
               <div className="relative w-full h-full flex justify-center">
                 {/* Main Image */}

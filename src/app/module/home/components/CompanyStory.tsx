@@ -63,7 +63,7 @@ export default function CompanyStory() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="absolute -bottom-12 -right-6 w-[250px] h-[250px] rounded-3xl overflow-hidden "
+              className="absolute -bottom-12 -right-6 w-[250px] h-[250px] rounded-3xl overflow-hidden hidden md:flex"
             >
               <Image
                 src="/company-story/sub.png"

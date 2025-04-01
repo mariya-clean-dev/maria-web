@@ -62,12 +62,12 @@ export default function Navbar() {
           >
             Login
           </Button>
-          <Button
+          {/* <Button
             className="bg-white text-[#0ABED5] hover:bg-white/90 cursor-pointer"
             onClick={() => router.push("/signup")}
           >
             Sign Up
-          </Button>
+          </Button> */}
           <Button
             variant="ghost"
             className="rounded-full bg-white text-[#0ABED5] hover:bg-white/90 p-2"
@@ -128,12 +128,13 @@ export default function Navbar() {
                 <Button
                   variant="ghost"
                   className="justify-start text-white hover:text-white/80 hover:bg-white/10"
+                  onClick={() => router.push("/login")}
                 >
                   Login
                 </Button>
-                <Button className="bg-white text-[#0ABED5] hover:bg-white/90">
+                {/* <Button className="bg-white text-[#0ABED5] hover:bg-white/90">
                   Sign Up
-                </Button>
+                </Button> */}
                 <Button
                   variant="ghost"
                   className="justify-start text-white hover:text-white/80 hover:bg-white/10"

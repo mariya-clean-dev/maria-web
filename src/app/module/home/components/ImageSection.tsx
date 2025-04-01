@@ -95,7 +95,7 @@ const ImageSection = () => {
 
           {/* Overlapping Image 1 (left/top) - Now vertical */}
           <motion.div
-            className="absolute left-0 top-4 -translate-x-1/4 w-1/3 h-2/5 rounded-md shadow-lg overflow-hidden z-20"
+            className="absolute left-0 top-4 -translate-x-1/4 w-1/3 h-2/5 rounded-md shadow-lg overflow-hidden z-20 hidden md:flex"
             variants={floatingImageVariants}
             custom={{ x: "-10%", y: "-15px" }}
           >
@@ -111,7 +111,7 @@ const ImageSection = () => {
 
           {/* Overlapping Image 2 (right/bottom) - Now correctly vertical */}
           <motion.div
-            className="absolute right-0 bottom-16 translate-x-1/4 w-1/3 h-2/5 rounded-md shadow-lg overflow-hidden z-20"
+            className="absolute right-0 bottom-16 translate-x-1/4 w-1/3 h-2/5 rounded-md shadow-lg overflow-hidden z-20 hidden md:flex"
             variants={floatingImageVariants}
             custom={{ x: "10%", y: "15px" }}
           >
