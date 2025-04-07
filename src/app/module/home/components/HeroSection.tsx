@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function HeroSection() {
   return (
@@ -47,13 +48,15 @@ export default function HeroSection() {
                 >
                   Book Now
                 </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="bg-[#219653] hover:bg-[#219653] text-white border-none"
-                >
-                  Get Your Estimate
-                </Button>
+                <Link href="/estimate-service">
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="bg-[#219653] hover:bg-[#219653] text-white border-none hover:text-white cursor-pointer"
+                  >
+                    Get Your Estimate
+                  </Button>
+                </Link>
               </motion.div>
             </motion.div>
           </div>
