@@ -48,7 +48,7 @@ const formSchema = z.object({
     .number({
       required_error: "Please specify the number of rooms.",
     })
-    .min(0)
+    .min(1, "At least 1 room is required.")
     .max(6),
   bathrooms: z
     .number({
@@ -119,7 +119,7 @@ export default function CalculateServiceEstimate({ setEstimatePageView }: any) {
   const handleRoomsInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
     // If the input is empty or just "0", set value to 0
-    if (!inputValue || inputValue === "0") {
+    if (!inputValue) {
       setRoomsValue(0);
       form.setValue("rooms", 0);
       return;

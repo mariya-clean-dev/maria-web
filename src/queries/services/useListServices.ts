@@ -2,11 +2,7 @@ import axiosInstance from "@/services/axios";
 import { useQuery } from "@tanstack/react-query";
 
 const fetchServices = async () => {
-  const response = await axiosInstance.get(`/services`, {
-    params: {
-      perPage: 30,
-    },
-  });
+  const response = await axiosInstance.get(`/services`);
   return response?.data;
 };
 

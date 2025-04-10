@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <NextTopLoader showSpinner={false} />
+        <NextTopLoader showSpinner={false} color="#03fc24" />
         <QueryProvider>
           <Suspense>
             <main>{children}</main>
