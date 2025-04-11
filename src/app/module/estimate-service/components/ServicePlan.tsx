@@ -40,6 +40,7 @@ import {
   weekOfMonthToNumber,
 } from "@/services/heplerFunctions";
 import useCustomToast from "@/hooks/use-custom-toast";
+import { useCreateBooking } from "@/queries/services/useCreateBooking";
 
 export default function ServicePlan({ setEstimatePageView }: any) {
   const router = useRouter();
@@ -47,7 +48,10 @@ export default function ServicePlan({ setEstimatePageView }: any) {
   const { servicePlan } = useServicePlanStore();
   const { estimateValues } = useEstimateStore();
 
-  const { success, error } = useCustomToast();
+  const { success, error, showError } = useCustomToast();
+
+  //API CALLS
+  const { mutate: createBooking } = useCreateBooking();
 
   useEffect(() => {
     //CHECK IF estimate values are empty if empty then redirect to estimate page
@@ -257,7 +261,7 @@ export default function ServicePlan({ setEstimatePageView }: any) {
       serviceId: estimateValues?.cleaningType,
       type: bookingType,
       propertyType: estimateValues?.propertyType,
-      materialsProvided: estimateValues?.materialsProvided,
+      materialProvided: estimateValues?.materialsProvided,
       areaSize: areaSize,
       isEco: estimateValues?.ecoFriendly,
       price: plan.finalPrice,
@@ -268,7 +272,7 @@ export default function ServicePlan({ setEstimatePageView }: any) {
         addressLine1: values.address1,
         addressLine2: values.address2 || "",
         city: values.city,
-        state: "", // Not collected in the form
+        // state: "",
         zip: values.zipcode,
         specialInstructions: values.remark || "",
       },
@@ -278,7 +282,36 @@ export default function ServicePlan({ setEstimatePageView }: any) {
       ...schedules,
     };
 
-    console.log("Booking data:", bookingData);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //@ts-ignore
+    createBooking(bookingData, {
+      onSuccess: (response) => {
+        const responseData = response.data;
+
+        if (bookingType === "subscription") {
+          // For subscription, redirect to Stripe checkout URL
+          window.location.href = responseData.data.stripe.checkoutUrl;
+        } else {
+          // For instant booking, store payment intent details and redirect to payment page
+          localStorage.setItem(
+            "paymentDetails",
+            JSON.stringify({
+              bookingId: responseData.data.booking.id,
+              customerId: responseData.data.stripe.customerId,
+              paymentIntent: responseData.data.stripe.paymentIntent,
+              clientSecret: responseData.data.stripe.clientSecret,
+              amount: responseData.data.booking.price,
+              planName: plan.subscriptionName,
+            })
+          );
+
+          router.push("/payment");
+        }
+      },
+      onError: (error) => {
+        showError(error);
+      },
+    });
   };
 
   // ======== Main Render ========
