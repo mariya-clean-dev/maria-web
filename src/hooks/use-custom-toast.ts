@@ -5,13 +5,13 @@ export type customToast = ReturnType<typeof useCustomToast>;
 
 const useCustomToast = () => {
   const toastSuccess = (message: string, opts?: any) => {
-    return toast(message, {
+    return toast.success(message, {
       ...(opts && { ...opts }),
     });
   };
 
   const toastError = (message: string, opts?: any) => {
-    return toast("Uh oh! Something went wrong.", {
+    return toast.error("Uh oh! Something went wrong.", {
       variant: "destructive",
       description: message,
       ...(opts && { ...opts }),

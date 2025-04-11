@@ -57,7 +57,7 @@ export default function Footer() {
 
           {/* Services */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Services</h3>
+            {/* <h3 className="text-lg font-semibold mb-4">Services</h3>
             <ul className="space-y-3">
               <li>
                 <Link
@@ -99,7 +99,7 @@ export default function Footer() {
                   Specialized Cleaning
                 </Link>
               </li>
-            </ul>
+            </ul> */}
           </div>
 
           {/* Contact Info */}

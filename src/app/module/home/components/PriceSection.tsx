@@ -65,16 +65,20 @@ export default function PricingSection() {
               }}
               className="relative flex flex-col mt-8"
             >
-              {plan.isPopular && (
+              {/* {plan.isPopular && (
                 <div className="bg-[#27AE60] text-white py-2 text-center rounded-t-lg w-full -mt-8">
                   {plan.label}
                 </div>
-              )}
-              <div
+              )} */}
+              {/* <div
                 className={`flex-1 p-8 rounded-b-2xl ${
                   !plan.isPopular && "rounded-t-2xl"
                 } transition-all duration-300 flex flex-col items-center
                   ${plan.isPopular ? "bg-[#e3f7ed]" : "bg-white "}
+                `}
+              > */}
+              <div
+                className={`flex-1 p-8 rounded-2xl  transition-all duration-300 flex flex-col items-center bg-white
                 `}
               >
                 <h3 className="text-2xl font-medium mb-4 text-center">
@@ -84,12 +88,12 @@ export default function PricingSection() {
                   {plan.description}
                 </p>
 
-                <div className="mb-8 text-center">
+                {/* <div className="mb-8 text-center">
                   <span className="text-4xl font-semibold">${plan.price}</span>
                   <span className="text-gray-600 ml-2">/ month</span>
-                </div>
+                </div> */}
 
-                <Button
+                {/* <Button
                   className={`w-full ${
                     plan.isPopular
                       ? "bg-[#27AE60] hover:bg-[#27AE60]/90 text-white"
@@ -97,7 +101,7 @@ export default function PricingSection() {
                   }`}
                 >
                   Get Started
-                </Button>
+                </Button> */}
               </div>
             </motion.div>
           ))}

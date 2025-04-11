@@ -42,12 +42,12 @@ export default function HeroSection() {
                 transition={{ duration: 0.6, delay: 0.6 }}
                 className="flex flex-wrap gap-4"
               >
-                <Button
+                {/* <Button
                   size="lg"
                   className="bg-[#219653] hover:bg-[#219653] text-white border-none"
                 >
                   Book Now
-                </Button>
+                </Button> */}
                 <Link href="/estimate-service">
                   <Button
                     size="lg"

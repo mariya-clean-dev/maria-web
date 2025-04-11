@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function EcoFriendlySection() {
   const containerVariants = {
@@ -36,7 +37,7 @@ export default function EcoFriendlySection() {
               whileInView="visible"
               viewport={{ once: true }}
               variants={containerVariants}
-              className="text-white"
+              className="text-white pl-4"
             >
               <motion.h2
                 variants={itemVariants}
@@ -81,13 +82,15 @@ export default function EcoFriendlySection() {
                 </motion.div>
               </div>
 
-              <motion.div variants={itemVariants}>
-                <Button
-                  size="lg"
-                  className="bg-white text-[#27AE60] hover:bg-white/90 font-semibold"
-                >
-                  Request Service
-                </Button>
+              <motion.div variants={itemVariants} className="">
+                <Link href="/estimate-service" className="cursor-pointer">
+                  <Button
+                    size="lg"
+                    className="bg-white text-[#27AE60] hover:bg-white/90 font-semibold cursor-pointer"
+                  >
+                    Request Service
+                  </Button>
+                </Link>
               </motion.div>
             </motion.div>
 

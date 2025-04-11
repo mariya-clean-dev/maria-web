@@ -15,12 +15,16 @@ const HomeModule = () => {
   return (
     <>
       <HeroSection />
-      <FeatureCards />
-      <ImageSection />
+      <div id="features-section">
+        <FeatureCards />
+        <ImageSection />
+      </div>
       <EcoFriendlySection />
-      <ServicesSection />
-      <CompanyStory />
-      <BestServices />
+      <div id="services-section">
+        <ServicesSection />
+        <CompanyStory />
+        <BestServices />
+      </div>
       <PricingSection />
       <TestimonialsCarousel />
       <CTASection />

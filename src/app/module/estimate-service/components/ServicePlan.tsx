@@ -258,7 +258,8 @@ export default function ServicePlan({ setEstimatePageView }: any) {
 
     // Prepare the final data structure
     const bookingData = {
-      serviceId: estimateValues?.cleaningType,
+      serviceId:
+        bookingType === "instant" ? null : estimateValues?.cleaningType,
       type: bookingType,
       propertyType: estimateValues?.propertyType,
       materialProvided: estimateValues?.materialsProvided,

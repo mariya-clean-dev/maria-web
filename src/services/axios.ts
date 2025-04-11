@@ -1,5 +1,3 @@
-import useCustomToast from "@/hooks/use-custom-toast";
-import { deleteCookie } from "@/utils/cookies";
 import axios from "axios";
 
 const axiosInstance = axios.create({
@@ -15,12 +13,7 @@ axiosInstance.interceptors.request.use(
     let token;
 
     if (typeof window !== "undefined") {
-      const cookieToken = document.cookie
-        .split("; ")
-        .find((row) => row.startsWith("maria-cookie-token="))
-        ?.split("=")[1];
-
-      token = cookieToken;
+      token = sessionStorage.getItem("maria_access_token");
 
       if (!token) {
         window.location.href = "/signin";
@@ -46,19 +39,19 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   async (errors) => {
-    const { error } = useCustomToast();
+    // const { error } = useCustomToast();
     if (errors.response) {
       const status = errors.response.status;
       if (status === 401) {
-        deleteCookie("maria-cookie-token");
+        sessionStorage.clear();
 
         if (
           typeof window !== "undefined" &&
-          window.location.pathname !== "/signin"
+          window.location.pathname !== "/login"
         ) {
-          window.location.href = "/signin";
+          window.location.href = "/login";
         }
-        error("Please try again to login");
+        // error("Please try again to login");
       }
     }
 
