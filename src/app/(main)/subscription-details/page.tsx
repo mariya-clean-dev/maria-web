@@ -244,7 +244,7 @@ export default function BookingsPage() {
                 className="text-red-500 hover:text-red-700 hover:bg-red-50"
                 onClick={() => {
                   sessionStorage.clear();
-                  router.push("/");
+                  window.location.href = "/";
                 }}
               >
                 Logout

@@ -131,8 +131,8 @@ export default function LoginPage() {
   return (
     <div className="flex min-h-screen flex-col justify-center md:flex-row">
       {/* Left side - Image with padding */}
-      <div className="w-full md:w-1/2  min-h-[300px] md:min-h-screen p-4 md:p-6 lg:p-8 hidden md:flex">
-        <div className="relative w-full h-full rounded-lg overflow-hidden">
+      <div className="w-full md:w-1/2 bg-primary  min-h-[300px] md:min-h-screen  hidden md:flex">
+        <div className="relative w-full h-full  overflow-hidden">
           <Image
             src="/login-image.png"
             alt="Cleaning professional"
