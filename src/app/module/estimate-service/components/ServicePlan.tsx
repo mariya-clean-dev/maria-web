@@ -32,7 +32,7 @@ import { PersonalInfoFields } from "./PersonalInfoField";
 import { AddressFields } from "./AddressFields";
 import { ServiceDaySelector } from "./ServiceDaySelector";
 import { useServicePlanStore } from "@/store/useServicePlanStore";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Loader2 } from "lucide-react";
 import { useEstimateStore } from "@/store/useEstimateStore";
 import {
   dayOfWeekToNumber,
@@ -46,6 +46,7 @@ export default function ServicePlan({ setEstimatePageView }: any) {
   const router = useRouter();
 
   const { servicePlan } = useServicePlanStore();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { estimateValues } = useEstimateStore();
 
   const { success, error, showError } = useCustomToast();
@@ -253,20 +254,22 @@ export default function ServicePlan({ setEstimatePageView }: any) {
       }
     }
 
+    setIsSubmitting(true);
+
     const bookingType =
       plan.subscriptionName === "One Time" ? "instant" : "subscription";
 
     // Prepare the final data structure
     const bookingData = {
-      serviceId:
-        bookingType === "instant" ? null : estimateValues?.cleaningType,
+      serviceId: estimateValues?.cleaningType,
       type: bookingType,
       propertyType: estimateValues?.propertyType,
       materialProvided: estimateValues?.materialsProvided,
       areaSize: areaSize,
       isEco: estimateValues?.ecoFriendly,
       price: plan.finalPrice,
-      subscriptionTypeId: plan.subscriptionTypeId,
+      subscriptionTypeId:
+        bookingType === "instant" ? null : plan.subscriptionTypeId,
       address: {
         street: values.address1,
         landmark: values.landmark || "",
@@ -291,22 +294,24 @@ export default function ServicePlan({ setEstimatePageView }: any) {
 
         if (bookingType === "subscription") {
           // For subscription, redirect to Stripe checkout URL
-          window.location.href = responseData.data.stripe.checkoutUrl;
+          window.location.href = responseData.stripe.checkoutUrl;
+          setIsSubmitting(false);
         } else {
           // For instant booking, store payment intent details and redirect to payment page
           localStorage.setItem(
             "paymentDetails",
             JSON.stringify({
-              bookingId: responseData.data.booking.id,
-              customerId: responseData.data.stripe.customerId,
-              paymentIntent: responseData.data.stripe.paymentIntent,
-              clientSecret: responseData.data.stripe.clientSecret,
-              amount: responseData.data.booking.price,
+              bookingId: responseData.booking.id,
+              customerId: responseData.stripe.customerId,
+              paymentIntent: responseData.stripe.paymentIntent,
+              clientSecret: responseData.stripe.clientSecret,
+              amount: responseData.booking.price,
               planName: plan.subscriptionName,
             })
           );
 
           router.push("/payment");
+          setIsSubmitting(false);
         }
       },
       onError: (error) => {
@@ -470,8 +475,16 @@ export default function ServicePlan({ setEstimatePageView }: any) {
                       <Button
                         type="submit"
                         className="w-full mt-8 h-12 bg-[#19A4C6] hover:bg-[#19A4C6]/90 text-white"
+                        disabled={isSubmitting}
                       >
-                        Book Now
+                        {isSubmitting ? (
+                          <>
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            Processing...
+                          </>
+                        ) : (
+                          "Book Now"
+                        )}
                       </Button>
                     </div>
                   </motion.div>

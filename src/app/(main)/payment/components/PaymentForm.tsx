@@ -41,27 +41,49 @@ export default function PaymentForm({
     const { error, paymentIntent } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: `${window.location.origin}/booking-confirmed?bookingId=${bookingId}`,
+        // Redirect after successful payment
+        return_url: `${window.location.origin}/payment-success?bookingId=${bookingId}`,
       },
+      // Only redirect if 3D Secure or other authentication is required
       redirect: "if_required",
     });
 
     if (error) {
+      // Payment failed, show error and redirect to failure page
       setErrorMessage(
         error.message || "An error occurred while processing your payment"
       );
       setIsProcessing(false);
+
+      // Redirect to failure page after a short delay to show the error
+      setTimeout(() => {
+        router.push(
+          `/payment-failed?error=${encodeURIComponent(
+            error.message || "Payment failed"
+          )}`
+        );
+      }, 1500);
     } else if (paymentIntent && paymentIntent.status === "succeeded") {
       // Payment succeeded, clear localStorage and redirect to confirmation page
       localStorage.removeItem("paymentDetails");
-      router.push(`/booking-confirmed?bookingId=${bookingId}`);
+      router.push(`/payment-success?bookingId=${bookingId}`);
     } else {
+      // Payment requires additional actions or is processing
       setIsProcessing(false);
     }
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      {/* Test mode notice - only show in development */}
+      {process.env.NODE_ENV === "development" && (
+        <div className="bg-blue-50 p-3 rounded-md text-sm mb-4">
+          <p className="font-medium">Test Mode</p>
+          <p>Use card number: 4242 4242 4242 4242</p>
+          <p>Any future expiry date and any CVC</p>
+        </div>
+      )}
+
       <PaymentElement />
 
       {errorMessage && (
