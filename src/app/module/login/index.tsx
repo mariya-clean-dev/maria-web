@@ -241,7 +241,7 @@ export default function LoginPage() {
                     <FormItem>
                       <FormLabel>Enter OTP sent to your email</FormLabel>
                       <FormControl>
-                        <div className="flex justify-center w-full">
+                        <div className="flex justify-start w-full">
                           <OtpInput
                             value={otp}
                             onChange={handleOtpChange}
@@ -256,7 +256,7 @@ export default function LoginPage() {
                                 inputMode="numeric"
                               />
                             )}
-                            containerStyle="flex gap-1 sm:gap-2 justify-center w-full"
+                            containerStyle="flex gap-1 sm:gap-2 justify-start w-full"
                           />
                         </div>
                       </FormControl>

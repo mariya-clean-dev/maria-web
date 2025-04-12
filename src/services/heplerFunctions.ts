@@ -69,3 +69,28 @@ export const convertTo24HourFormat = (time: string | null): string => {
   // Format with leading zeros
   return `${hours.toString().padStart(2, "0")}:${minutes}`;
 };
+
+// Helper function to convert day number to day name
+export function formatDayOfWeek(dayNumber: number): string {
+  const dayMap: Record<number, string> = {
+    0: "Sun",
+    1: "Mon",
+    2: "Tue",
+    3: "Wed",
+    4: "Thu",
+    5: "Fri",
+    6: "Sat",
+  };
+  return dayMap[dayNumber] || `Day ${dayNumber}`;
+}
+
+// Helper function to convert week number to week name
+export function formatWeekOfMonth(weekNumber: number): string {
+  const weekMap: Record<number, string> = {
+    1: "First Week",
+    2: "Second Week",
+    3: "Third Week",
+    4: "Fourth Week",
+  };
+  return weekMap[weekNumber] || `Week ${weekNumber}`;
+}

@@ -79,20 +79,16 @@ export default function Navbar() {
           >
             Services
           </Link>
-          <Link
-            href="/#"
-            className="text-white font-medium hover:text-white/80 transition-colors"
-          >
-            Bookings
-          </Link>
         </nav>
 
         {/* Auth Buttons */}
         <div className="hidden md:flex items-center space-x-3">
           {accessToken ? (
-            <Button className="bg-white text-[#0ABED5] hover:bg-white/90">
-              Subscription
-            </Button>
+            <Link href={"/subscription-details"}>
+              <Button className="bg-white text-[#0ABED5] hover:bg-white/90">
+                Subscription
+              </Button>
+            </Link>
           ) : (
             <Button
               variant="ghost"
@@ -152,18 +148,14 @@ export default function Navbar() {
               >
                 Services
               </Link>
-              <Link
-                href="/bookings"
-                className="text-white font-medium py-2 hover:bg-white/10 rounded-md px-3"
-                onClick={() => setIsOpen(false)}
-              >
-                Bookings
-              </Link>
+
               <div className="flex flex-col space-y-2 pt-2 border-t border-white/20">
                 {accessToken ? (
-                  <Button className="bg-white text-[#0ABED5] hover:bg-white/90">
-                    Subscription
-                  </Button>
+                  <Link href={"/subscription-details"}>
+                    <Button className="bg-white text-[#0ABED5] hover:bg-white/90">
+                      Subscription
+                    </Button>
+                  </Link>
                 ) : (
                   <Button
                     variant="ghost"

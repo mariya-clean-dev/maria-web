@@ -12,11 +12,13 @@ axiosInstance.interceptors.request.use(
 
     let token;
 
+    token = sessionStorage.getItem("maria_access_token");
+    console.log(token, "token");
     if (typeof window !== "undefined") {
       token = sessionStorage.getItem("maria_access_token");
 
       if (!token) {
-        window.location.href = "/signin";
+        window.location.href = "/login";
         return Promise.reject(new Error("No access token"));
       }
     }
@@ -40,20 +42,20 @@ axiosInstance.interceptors.response.use(
   },
   async (errors) => {
     // const { error } = useCustomToast();
-    if (errors.response) {
-      const status = errors.response.status;
-      if (status === 401) {
-        sessionStorage.clear();
+    // if (errors.response) {
+    //   const status = errors.response.status;
+    //   if (status === 401) {
+    //     sessionStorage.clear();
 
-        if (
-          typeof window !== "undefined" &&
-          window.location.pathname !== "/login"
-        ) {
-          window.location.href = "/login";
-        }
-        // error("Please try again to login");
-      }
-    }
+    //     if (
+    //       typeof window !== "undefined" &&
+    //       window.location.pathname !== "/login"
+    //     ) {
+    //       window.location.href = "/login";
+    //     }
+    //     // error("Please try again to login");
+    //   }
+    // }
 
     return Promise.reject(errors);
   }
