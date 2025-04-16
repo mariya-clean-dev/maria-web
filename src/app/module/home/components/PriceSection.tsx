@@ -6,28 +6,28 @@ import { Button } from "@/components/ui/button";
 const pricingPlans = [
   {
     label: "Instant Booking",
-    name: "One time",
+    name: "One-Time",
     description:
-      "For companies that need to manage work happening across multiple teams.",
+      "Perfect for when you need a single deep clean to refresh your space.",
     price: "20",
     isPopular: true,
   },
   {
-    name: "Monthly Ones",
+    name: "Monthly",
     description:
-      "For companies that need to manage work happening across multiple teams.",
+      "Ideal for maintaining a clean home or office with low maintenance needs.",
     price: "100",
   },
   {
-    name: "ByWeekly",
+    name: "Bi-Weekly",
     description:
-      "For companies that need to manage work happening across multiple teams.",
+      "A great option for busy homes or small businesses that need frequent attention",
     price: "100",
   },
   {
     name: "Weekly",
     description:
-      "For companies that need to manage work happening across multiple teams.",
+      "Best for homes or workplaces that need consistent, high-level cleanliness. ",
     price: "100",
   },
 ];

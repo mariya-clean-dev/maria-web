@@ -19,42 +19,42 @@ const services: Service[] = [
     id: 1,
     title: "Regular Home Cleaning",
     description:
-      "Conducting all cleaning tasks with professionalism, including arriving on time.",
+      "Keep your home fresh and tidy with routine cleaning tailored to your needs.",
     image: "/service-image/service1.png",
   },
   {
     id: 2,
     title: "Deep Cleaning",
     description:
-      "Conducting all cleaning tasks with professionalism, including arriving on time.",
+      "A thorough top-to-bottom clean to refresh every corner of your home.",
     image: "/service-image/service2.png",
   },
   {
     id: 3,
     title: "Move-In/Out Cleaning",
     description:
-      "Conducting all cleaning tasks with professionalism, including arriving on time.",
+      "Make moving stress-free with detailed cleaning before or after your move.",
     image: "/service-image/service3.png",
   },
   {
     id: 4,
     title: "Post-Construction Cleaning",
     description:
-      "Conducting all cleaning tasks with professionalism, including arriving on time.",
+      "Clear out dust and debris after renovation or construction work.",
     image: "/service-image/service4.png",
   },
   {
     id: 5,
     title: "Commercial Cleaning",
     description:
-      "Conducting all cleaning tasks with professionalism, including arriving on time.",
+      "Maintain a spotless and professional environment for your business.",
     image: "/service-image/service5.png",
   },
   {
     id: 6,
     title: "Specialized Cleaning",
     description:
-      "Conducting all cleaning tasks with professionalism, including arriving on time.",
+      "Custom cleaning solutions for unique spaces and specific needs.",
     image: "/service-image/service6.png",
   },
 ];

@@ -89,17 +89,18 @@ export default function CompanyStory() {
               variants={itemVariants}
               className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight"
             >
-              Behind the HomeMaster Company Stories.
+              Experience Our Neighborly Done Right Promise™
             </motion.h2>
 
             <motion.p
               variants={itemVariants}
               className="text-gray-600 mb-8 text-lg"
             >
-              Explore the core mission and vision that drives us every day. At
-              Behind the Stories Company, we&apos;re not just about cleaning
-              homes; we&apos;re about making a difference in the lives of our
-              clients and our community.
+              We offer Marias’s Neighborly Done Right Promise™ on all our
+              services. This means you can trust us to meet your expectations.
+              If you’re not satisfied with our services, call us by the end of
+              the next business day and we’ll come back and clean it again at no
+              additional cost to you.
             </motion.p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

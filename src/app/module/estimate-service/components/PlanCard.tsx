@@ -23,9 +23,9 @@ const formatPrice = (price: number): string => {
 
 // Helper function to determine period based on plan name
 const getPeriodText = (planName: string): string => {
-  if (planName.includes("Weekly")) return "/week";
-  if (planName.includes("Monthly")) return "/month";
-  return "/cleaning";
+  // if (planName.includes("Weekly")) return "/week";
+  // if (planName.includes("Monthly")) return "/month";
+  return "/month";
 };
 
 export function PlanCard({ plan, field }: PlanCardProps) {

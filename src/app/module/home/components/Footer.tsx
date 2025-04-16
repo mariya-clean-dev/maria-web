@@ -26,31 +26,27 @@ export default function Footer() {
 
           {/* Navigation */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Navigation</h3>
+            <h3 className="text-lg font-semibold mb-4">Service Area</h3>
             <ul className="space-y-3">
               <li>
-                <Link
-                  href="/#"
-                  className="text-gray-600 hover:text-[#19A4C6] transition-colors"
-                >
-                  Service
-                </Link>
+                <p className="text-gray-600 hover:text-[#19A4C6] transition-colors">
+                  Marine County
+                </p>
               </li>
               <li>
-                <Link
-                  href="/#"
-                  className="text-gray-600 hover:text-[#19A4C6] transition-colors"
-                >
-                  Client Review
-                </Link>
+                <p className="text-gray-600 hover:text-[#19A4C6] transition-colors">
+                  San Francisco
+                </p>
               </li>
               <li>
-                <Link
-                  href="/#"
-                  className="text-gray-600 hover:text-[#19A4C6] transition-colors"
-                >
-                  Contact
-                </Link>
+                <p className="text-gray-600 hover:text-[#19A4C6] transition-colors">
+                  Napa and Sonoma County
+                </p>
+              </li>
+              <li>
+                <p className="text-gray-600 hover:text-[#19A4C6] transition-colors">
+                  Easy Bay
+                </p>
               </li>
             </ul>
           </div>
@@ -109,7 +105,7 @@ export default function Footer() {
               <li className="flex items-start">
                 <MapPin className="h-5 w-5 text-[#19A4C6] mt-0.5 mr-3 flex-shrink-0" />
                 <span className="text-gray-600">
-                  4296 Coplin Avenue, Phoenix, Arizona, 59412
+                  North Bay, East Bay and San Francisco.
                 </span>
               </li>
               <li className="flex items-center">
@@ -118,7 +114,7 @@ export default function Footer() {
                   href="mailto:contact@homemaster.pro"
                   className="text-gray-600 hover:text-[#19A4C6] transition-colors"
                 > */}
-                contact@homemaster.pro
+                info@greenplanetcleaningservices.com
                 {/* </a> */}
               </li>
               <li className="flex items-center">
@@ -127,7 +123,7 @@ export default function Footer() {
                   href="tel:+14802025906"
                   className="text-gray-600 hover:text-[#19A4C6] transition-colors"
                 > */}
-                +1 480-202-5906
+                415 895 0996
                 {/* </a> */}
               </li>
             </ul>
@@ -138,7 +134,7 @@ export default function Footer() {
         <div className="mt-12 pt-8 border-t border-gray-200">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-500 text-sm mb-4 md:mb-0">
-              © {new Date().getFullYear()} HomeMaster. All rights reserved.
+              © {new Date().getFullYear()} Team Maria. All rights reserved.
             </p>
             <div className="flex space-x-6">
               <Link

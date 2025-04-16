@@ -6,27 +6,23 @@ import { Home, Star, Trash2, Send } from "lucide-react";
 const services = [
   {
     icon: Home,
-    title: "House Cleaning",
-    description:
-      "Make your product more eye-catching with a touch of illustration",
+    title: "Residential Services",
+    description: "Choose a plan to fit to your needs-no contracts, no hassle",
   },
   {
     icon: Star,
-    title: "Office Cleaning",
-    description:
-      "Make your product more eye-catching with a touch of illustration",
+    title: "Perfect Gift",
+    description: "Give the gift of time with Maria Made gift certificate",
   },
   {
     icon: Trash2,
-    title: "Toilet Cleaning",
-    description:
-      "Make your product more eye-catching with a touch of illustration",
+    title: "Practically Spotless Blog",
+    description: "Get the expert advice from our team of cleaning specialists",
   },
   {
     icon: Send,
-    title: "Window Cleaning",
-    description:
-      "Make your product more eye-catching with a touch of illustration",
+    title: "Ms Maria Foundation",
+    description: "Supporting the victims of domestic violence",
   },
 ];
 
@@ -62,10 +58,10 @@ export default function BestServices() {
             transition={{ duration: 0.6 }}
             className="text-3xl md:text-4xl lg:text-5xl font-bold"
           >
-            Always Provide The Best Service
+            How Marias Cleaning Services Can Help You
           </motion.h2>
 
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -78,7 +74,7 @@ export default function BestServices() {
               Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
               eiusmod tempor incididunt ut labore
             </p>
-          </motion.div>
+          </motion.div> */}
         </div>
 
         {/* Service Cards */}

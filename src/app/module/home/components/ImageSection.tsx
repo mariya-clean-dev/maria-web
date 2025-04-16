@@ -138,8 +138,11 @@ const ImageSection = () => {
           </motion.h2>
 
           <motion.p className="text-gray-600 mb-8" variants={itemVariants}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit eius mod
-            tempor incididunt ut labore
+            Looking for the best home cleaning services near you? Look no
+            further than Marias&aposs custom home cleaning services. We
+            understand the challenges of maintaining a clean home amid a busy
+            schedule. Our team is dedicated to providing top-notch home cleaning
+            services tailored to your specific needs and preferences.
           </motion.p>
 
           <div className="space-y-6">
@@ -166,8 +169,8 @@ const ImageSection = () => {
                   Instant cleaning service
                 </h3>
                 <p className="text-gray-600">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                  eiusmod tempor incididunt
+                  Get your space cleaned right when you need it, with our fast
+                  and reliable team.
                 </p>
               </div>
             </motion.div>
@@ -195,8 +198,8 @@ const ImageSection = () => {
                   Subscription based
                 </h3>
                 <p className="text-gray-600">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                  eiusmod tempor incididunt
+                  Enjoy hassle-free regular cleaning with our flexible and
+                  affordable plans
                 </p>
               </div>
             </motion.div>
@@ -224,8 +227,8 @@ const ImageSection = () => {
                   Customisable services
                 </h3>
                 <p className="text-gray-600">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                  eiusmod tempor incididunt
+                  Tailor our cleaning packages to suit your unique needs and
+                  preferences.
                 </p>
               </div>
             </motion.div>

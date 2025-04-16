@@ -52,10 +52,11 @@ export default function EcoFriendlySection() {
                 variants={itemVariants}
                 className="text-white/90 mb-8 text-lg max-w-xl"
               >
-                Explore the core mission and vision that drives us every day. At
-                Behind the Stories Company, we&apos;re not just about cleaning
-                homes; we&apos;re about making a difference in the lives of our
-                clients and our community.
+                Marias is committed to your complete satisfaction, which is why
+                we strive to offer the most consistent, reliable, and affordable
+                housecleaning services around. Our team of experienced
+                professionals has taken the time to answer some of our most
+                frequently asked questions for your convenience.
               </motion.p>
 
               <div className="space-y-4 mb-8">

@@ -263,6 +263,8 @@ export default function ServicePlan({ setEstimatePageView }: any) {
     const bookingData = {
       serviceId: estimateValues?.cleaningType,
       type: bookingType,
+      no_of_rooms: estimateValues?.rooms,
+      no_of_bathrooms: estimateValues?.bathrooms,
       propertyType: estimateValues?.propertyType,
       materialProvided: estimateValues?.materialsProvided,
       areaSize: areaSize,
