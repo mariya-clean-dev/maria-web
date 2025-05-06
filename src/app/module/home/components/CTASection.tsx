@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function CTASection() {
   return (
@@ -22,12 +23,14 @@ export default function CTASection() {
                 Get Started on Your Journey to a Cleaner Home Today!
               </h2>
               <div className="mt-8">
+              <Link href="/estimate-service">
                 <Button
                   size="lg"
                   className="bg-[#1C9F0B] hover:bg-[#219653] text-white border-none px-8 py-6 text-lg"
                 >
                   Book Now
                 </Button>
+              </Link>
               </div>
             </motion.div>
 

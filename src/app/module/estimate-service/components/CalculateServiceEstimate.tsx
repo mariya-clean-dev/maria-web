@@ -88,7 +88,6 @@ export default function CalculateServiceEstimate({ setEstimatePageView }: any) {
 
   // Form submission handler
   function onSubmit(values: FormValues) {
-    console.log(values);
     setIsLoading(true);
 
     const estimatePayload = {
@@ -100,7 +99,6 @@ export default function CalculateServiceEstimate({ setEstimatePageView }: any) {
 
     estimateCalculation(estimatePayload, {
       onSuccess: (resp) => {
-        console.log(resp.data);
         setIsLoading(false);
         setEstimateValues(values);
         setServicePlan(resp.data);

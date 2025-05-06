@@ -105,6 +105,9 @@ export function PlanCard({ plan, field }: PlanCardProps) {
 
             <Button
               type="button"
+              onClick={() => {
+                field.onChange(plan.subscriptionTypeId);
+              }}
               className={cn(
                 "w-full mt-auto cursor-pointer",
                 field.value === plan.subscriptionTypeId
