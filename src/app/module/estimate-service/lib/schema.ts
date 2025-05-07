@@ -26,6 +26,9 @@ export const FORM_SCHEMA = z.object({
   zipcode: z.string().min(5, {
     message: "Please enter a valid zipcode.",
   }),
+  paymentMethod: z.string({
+    message: "Please select a valid payment method.",
+  }),
   landmark: z.string().optional().or(z.string()),
   remark: z.string().optional().or(z.string()),
 });

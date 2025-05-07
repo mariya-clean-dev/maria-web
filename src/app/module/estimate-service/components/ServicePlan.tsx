@@ -41,6 +41,7 @@ import {
 } from "@/services/heplerFunctions";
 import useCustomToast from "@/hooks/use-custom-toast";
 import { useCreateBooking } from "@/queries/services/useCreateBooking";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 export default function ServicePlan({ setEstimatePageView }: any) {
   const router = useRouter();
@@ -92,6 +93,8 @@ export default function ServicePlan({ setEstimatePageView }: any) {
     "day-4": false,
   });
 
+  const paymentMethodTypes = ["Cash", "Online"]
+
   // Track if form submission was attempted
   const [submissionAttempted, setSubmissionAttempted] = useState(false);
 
@@ -109,6 +112,7 @@ export default function ServicePlan({ setEstimatePageView }: any) {
       city: "",
       zipcode: "",
       landmark: "",
+      paymentMethod:"",
       remark: "",
     },
   });
@@ -276,6 +280,7 @@ export default function ServicePlan({ setEstimatePageView }: any) {
       areaSize: areaSize,
       isEco: estimateValues?.ecoFriendly,
       price: plan.finalPrice,
+      paymentMethod: values.paymentMethod,
       subscriptionTypeId:
         bookingType === "one time" ? null : plan.subscriptionTypeId,
       address: {
@@ -423,6 +428,35 @@ export default function ServicePlan({ setEstimatePageView }: any) {
                                 {...field}
                               />
                             </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      {/* Payment Method */}
+                      <FormField
+                        control={form.control}
+                        name="paymentMethod"
+                        render={({ field }) => (
+                          <FormItem className="mt-6">
+                            <FormLabel>Payment Method</FormLabel>
+                            <Select
+                              onValueChange={field.onChange}
+                              defaultValue={field.value}
+                            >
+                              <FormControl>
+                                <SelectTrigger className="h-12 w-full">
+                                  <SelectValue placeholder="Select payment method" />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                {paymentMethodTypes.map((type) => (
+                                  <SelectItem key={type} value={type}>
+                                    {type}
+                                  </SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
                             <FormMessage />
                           </FormItem>
                         )}

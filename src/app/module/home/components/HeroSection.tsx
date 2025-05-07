@@ -131,12 +131,12 @@ export default function HeroSection() {
               transition={{ duration: 0.6, delay: 0.6 }}
               className="flex flex-wrap gap-4"
             >
-              <Button
+              {/* <Button
                 size="lg"
                 className="bg-[#27AE60] hover:bg-[#219653] text-white border-none"
               >
                 Book Now
-              </Button>
+              </Button> */}
               <Button
                 size="lg"
                 variant="outline"
