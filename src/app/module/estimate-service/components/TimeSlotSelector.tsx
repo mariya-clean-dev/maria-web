@@ -28,7 +28,7 @@ export function TimeSlotSelector({
   );
 
   // If week or day is not selected yet, show a message
-  if (!weekOfMonth || !dayOfWeek) {
+  if (!dayOfWeek) {
     return (
       <div className="space-y-4">
         <h4 className={cn("font-medium", hasError ? "text-red-500" : "")}>
@@ -36,7 +36,7 @@ export function TimeSlotSelector({
           {hasError && <span className="text-red-500 ml-1">*</span>}
         </h4>
         <div className="p-4 bg-gray-50 rounded-md text-center text-gray-500">
-          Please select week and day first to view available time slots
+          Please select day first to view available time slots
         </div>
       </div>
     );
