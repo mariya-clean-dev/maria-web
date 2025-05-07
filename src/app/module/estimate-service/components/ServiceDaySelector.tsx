@@ -104,11 +104,11 @@ export function ServiceDaySelector({
         </DialogHeader>
         <div className="space-y-6 py-4">
           {/* Week of Month Selection */}
-          <WeekSelector
+          {/* <WeekSelector
             selectedWeek={serviceDay.weekOfMonth}
             onSelect={(week) => onServiceDaySelect("weekOfMonth", week)}
             hasError={hasError && !serviceDay.weekOfMonth}
-          />
+          /> */}
 
           {/* Day of Week Selection */}
           <DaySelector

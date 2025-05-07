@@ -25,7 +25,7 @@ const formatPrice = (price: number): string => {
 const getPeriodText = (planName: string): string => {
   // if (planName.includes("Weekly")) return "/week";
   // if (planName.includes("Monthly")) return "/month";
-  return "/month";
+  return "/clean";
 };
 
 export function PlanCard({ plan, field }: PlanCardProps) {

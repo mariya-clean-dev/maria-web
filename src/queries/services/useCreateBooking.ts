@@ -13,14 +13,14 @@ interface Address {
 }
 
 interface Schedule {
-  weekOfMonth: number;
+  // weekOfMonth: number;
   dayOfWeek: number;
   time: string;
 }
 
 interface SubscriptionRequest {
   serviceId: string;
-  type: "subscription" | "instant";
+  type: "recurring" | "one time";
   proprtyType: string;
   materialProvied: boolean;
   areaSize: number;
@@ -35,6 +35,7 @@ interface SubscriptionRequest {
   schedule_2?: Schedule;
   schedule_3?: Schedule;
   schedule_4?: Schedule;
+  schedule?: Schedule;
 }
 
 const createBooking = async (payload: SubscriptionRequest) => {

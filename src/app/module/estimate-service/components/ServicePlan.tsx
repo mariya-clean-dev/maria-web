@@ -176,9 +176,9 @@ export default function ServicePlan({ setEstimatePageView }: any) {
       case "One Time":
         return 1;
       case "Bi-Weekly Plan":
-        return 2;
+        return 1;
       case "Weekly Plan":
-        return 4;
+        return 1;
       case "Monthly Plan":
         return 1;
       default:
@@ -239,25 +239,31 @@ export default function ServicePlan({ setEstimatePageView }: any) {
     // Prepare schedules
     const schedules: Record<string, any> = {};
     const daysRequired = getDaysRequired();
+    let schedule: { dayOfWeek: number; time: string } | null = null;
 
     for (let i = 1; i <= daysRequired; i++) {
       const dayKey = `day-${i}`;
       const day = serviceDates[dayKey];
 
-      if (day.weekOfMonth && day.dayOfWeek && day.timeSlot) {
-        schedules[`schedule_${i}`] = {
-          weekOfMonth: weekOfMonthToNumber(day.weekOfMonth),
+      if (day.dayOfWeek && day.timeSlot) {
+        // schedules[dayKey] = {
+        //   // weekOfMonth: weekOfMonthToNumber(day.weekOfMonth),
+        //   dayOfWeek: dayOfWeekToNumber(day.dayOfWeek),
+        //   time: day.timeSlot,
+        //   // time: convertTo24HourFormat(day.timeSlot),
+        // };
+        schedule = {
           dayOfWeek: dayOfWeekToNumber(day.dayOfWeek),
           time: day.timeSlot,
-          // time: convertTo24HourFormat(day.timeSlot),
         };
+        break;
       }
     }
 
     setIsSubmitting(true);
 
     const bookingType =
-      plan.subscriptionName === "One Time" ? "instant" : "subscription";
+      plan.subscriptionName === "One Time" ? "one time" : "recurring";
 
     // Prepare the final data structure
     const bookingData = {
@@ -271,7 +277,7 @@ export default function ServicePlan({ setEstimatePageView }: any) {
       isEco: estimateValues?.ecoFriendly,
       price: plan.finalPrice,
       subscriptionTypeId:
-        bookingType === "instant" ? null : plan.subscriptionTypeId,
+        bookingType === "one time" ? null : plan.subscriptionTypeId,
       address: {
         street: values.address1,
         landmark: values.landmark || "",
@@ -285,7 +291,7 @@ export default function ServicePlan({ setEstimatePageView }: any) {
       name: `${values.firstName} ${values.lastName}`,
       email: values.email,
       phone: values.phone,
-      ...schedules,
+      ...schedule,
     };
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -294,7 +300,7 @@ export default function ServicePlan({ setEstimatePageView }: any) {
       onSuccess: (response) => {
         const responseData = response.data;
 
-        if (bookingType === "subscription") {
+        if (bookingType === "recurring") {
           // For subscription, redirect to Stripe checkout URL
           window.location.href = responseData.stripe.checkoutUrl;
           setIsSubmitting(false);
