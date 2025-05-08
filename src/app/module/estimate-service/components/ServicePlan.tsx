@@ -303,8 +303,6 @@ export default function ServicePlan({ setEstimatePageView }: any) {
       onSuccess: (response) => {
         const responseData = response.data;
 
-        console.log(responseData)
-
         if (bookingType === "recurring") {
           // For subscription, redirect to Stripe checkout URL
           window.location.href = responseData.stripe.checkoutUrl;
@@ -378,7 +376,7 @@ export default function ServicePlan({ setEstimatePageView }: any) {
                       <RadioGroup
                         onValueChange={field.onChange}
                         value={field.value}
-                        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+                        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
                       >
                         {servicePlan?.estimates?.map((plan: any) => (
                           <PlanCard
