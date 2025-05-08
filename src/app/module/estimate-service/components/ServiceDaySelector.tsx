@@ -12,7 +12,7 @@ import {
 import { cn } from "@/lib/utils";
 import type {
   ServiceDay,
-  WeekOfMonth,
+  // WeekOfMonth,
   DayOfWeek,
   TimeSlot,
 } from "../lib/types";
@@ -122,7 +122,6 @@ export function ServiceDaySelector({
             selectedTimeSlot={serviceDay.timeSlot}
             onSelect={(time) => onServiceDaySelect("timeSlot", time)}
             hasError={hasError && !serviceDay.timeSlot}
-            weekOfMonth={serviceDay.weekOfMonth}
             dayOfWeek={serviceDay.dayOfWeek}
           />
 

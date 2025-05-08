@@ -137,13 +137,15 @@ export default function HeroSection() {
               >
                 Book Now
               </Button> */}
+            <Link href="/estimate-service">
               <Button
                 size="lg"
                 variant="outline"
                 className="bg-[#27AE60] hover:bg-[#219653] text-white border-none"
               >
-                Get Your Estimate
+                Get Your Estimate 12
               </Button>
+             </Link>
             </motion.div>
           </motion.div>
         </div>

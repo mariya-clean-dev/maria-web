@@ -93,7 +93,7 @@ export default function ServicePlan({ setEstimatePageView }: any) {
     "day-4": false,
   });
 
-  const paymentMethodTypes = ["Offline", "Online"]
+  const paymentMethodTypes = ["offline", "online"]
 
   // Track if form submission was attempted
   const [submissionAttempted, setSubmissionAttempted] = useState(false);
@@ -202,7 +202,7 @@ export default function ServicePlan({ setEstimatePageView }: any) {
       const dayKey = `day-${i}`;
       const day = serviceDates[dayKey];
 
-      if (!day.weekOfMonth || !day.dayOfWeek || !day.timeSlot) {
+      if (!day.dayOfWeek || !day.timeSlot) {
         newErrors[dayKey] = true;
         isValid = false;
       } else {
@@ -257,7 +257,7 @@ export default function ServicePlan({ setEstimatePageView }: any) {
         schedule = {
           dayOfWeek: dayOfWeekToNumber(day.dayOfWeek),
           time: day.timeSlot,
-        };
+        };        
         break;
       }
     }
@@ -265,7 +265,7 @@ export default function ServicePlan({ setEstimatePageView }: any) {
     setIsSubmitting(true);
 
     const bookingType =
-      plan.title === "One Time" ? "one time" : "recurring";
+      plan.title === "One Time" ? "one_time" : "recurring";
 
     // Prepare the final data structure
     const bookingData = {
@@ -280,7 +280,7 @@ export default function ServicePlan({ setEstimatePageView }: any) {
       price: plan.finalPrice,
       paymentMethod: values.paymentMethod,
       recurringTypeId:
-        bookingType === "one time" ? null : plan.recurringTypeId,
+        bookingType === "one_time" ? null : plan.recurringTypeId,
       address: {
         street: values.address1,
         landmark: values.landmark || "",
@@ -294,7 +294,7 @@ export default function ServicePlan({ setEstimatePageView }: any) {
       name: `${values.firstName} ${values.lastName}`,
       email: values.email,
       phone: values.phone,
-      ...schedule,
+      schedule,
     };
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -302,6 +302,8 @@ export default function ServicePlan({ setEstimatePageView }: any) {
     createBooking(bookingData, {
       onSuccess: (response) => {
         const responseData = response.data;
+
+        console.log(responseData)
 
         if (bookingType === "recurring") {
           // For subscription, redirect to Stripe checkout URL
