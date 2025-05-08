@@ -93,7 +93,7 @@ export default function ServicePlan({ setEstimatePageView }: any) {
     "day-4": false,
   });
 
-  const paymentMethodTypes = ["Cash", "Online"]
+  const paymentMethodTypes = ["Offline", "Online"]
 
   // Track if form submission was attempted
   const [submissionAttempted, setSubmissionAttempted] = useState(false);
@@ -171,19 +171,17 @@ export default function ServicePlan({ setEstimatePageView }: any) {
   /**
    * Returns the number of service days required based on the selected plan
    */
-  const getDaysRequired = (): number => {
+  const getDaysRequired = (): number => {    
     if (!selectedPlan) return 0;
     const plan = servicePlan?.estimates?.find(
-      (p: any) => p.subscriptionTypeId === selectedPlan
-    );
-    switch (plan?.subscriptionName) {
+      (p: any) => p.recurringTypeId === selectedPlan
+    );    
+    switch (plan?.title) {
       case "One Time":
         return 1;
-      case "Bi-Weekly Plan":
+      case "Bi-Weekly":
         return 1;
-      case "Weekly Plan":
-        return 1;
-      case "Monthly Plan":
+      case "Weekly":
         return 1;
       default:
         return 0;
@@ -224,7 +222,7 @@ export default function ServicePlan({ setEstimatePageView }: any) {
 
     // Find the selected plan
     const plan = servicePlan?.estimates?.find(
-      (p: any) => p.subscriptionTypeId === values.plan
+      (p: any) => p.recurringTypeId === values.plan
     );
     if (!plan) {
       alert("Please select a plan");
@@ -267,7 +265,7 @@ export default function ServicePlan({ setEstimatePageView }: any) {
     setIsSubmitting(true);
 
     const bookingType =
-      plan.subscriptionName === "One Time" ? "one time" : "recurring";
+      plan.title === "One Time" ? "one time" : "recurring";
 
     // Prepare the final data structure
     const bookingData = {
@@ -281,8 +279,8 @@ export default function ServicePlan({ setEstimatePageView }: any) {
       isEco: estimateValues?.ecoFriendly,
       price: plan.finalPrice,
       paymentMethod: values.paymentMethod,
-      subscriptionTypeId:
-        bookingType === "one time" ? null : plan.subscriptionTypeId,
+      recurringTypeId:
+        bookingType === "one time" ? null : plan.recurringTypeId,
       address: {
         street: values.address1,
         landmark: values.landmark || "",
@@ -319,7 +317,7 @@ export default function ServicePlan({ setEstimatePageView }: any) {
               paymentIntent: responseData.stripe.paymentIntent,
               clientSecret: responseData.stripe.clientSecret,
               amount: responseData.booking.price,
-              planName: plan.subscriptionName,
+              planName: plan.title,
             })
           );
 
@@ -382,7 +380,7 @@ export default function ServicePlan({ setEstimatePageView }: any) {
                       >
                         {servicePlan?.estimates?.map((plan: any) => (
                           <PlanCard
-                            key={plan.subscriptionTypeId}
+                            key={plan.recurringTypeId}
                             plan={plan}
                             field={field}
                           />
@@ -464,7 +462,7 @@ export default function ServicePlan({ setEstimatePageView }: any) {
 
                       {/* Service Date Selection */}
                       <div className="mt-8">
-                        <h3 className="text-xl font-semibold mb-4">
+                        <h3 className="text-xl font-semibold mb-4"> 
                           Select Service Date
                         </h3>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">

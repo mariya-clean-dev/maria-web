@@ -30,7 +30,7 @@ const getPeriodText = (planName: string): string => {
 
 export function PlanCard({ plan, field }: PlanCardProps) {
   // Generate features based on plan type
-  const getFeatures = (planName: string): string[] => {
+  const getFeatures = (planName: string): string[] => {    
     const baseFeatures = ["Room Cleaning", "Bathroom Cleaning"];
 
     if (planName.includes("Weekly")) {
@@ -48,21 +48,21 @@ export function PlanCard({ plan, field }: PlanCardProps) {
     return [...baseFeatures, "One-time Service", "Flexible Scheduling"];
   };
 
-  const features = getFeatures(plan.subscriptionName);
-  const periodText = getPeriodText(plan.subscriptionName);
+  const features = getFeatures(plan.title);
+  const periodText = getPeriodText(plan.title);
   const formattedPrice = formatPrice(plan.finalPrice);
 
   return (
     <div className="h-full">
       <Label
-        htmlFor={plan.subscriptionTypeId}
+        htmlFor={plan.recurringTypeId}
         className="cursor-pointer block h-full"
       >
         <Card
           className={cn(
             "h-full flex flex-col overflow-hidden transition-all duration-200 hover:shadow-lg border-2",
             // plan.isPopular ? "border-[#27AE60]" : "border-gray-200",
-            field.value === plan.subscriptionTypeId
+            field.value === plan.recurringTypeId
               ? "ring-2 ring-primary bg-primary/25"
               : ""
           )}
@@ -78,7 +78,7 @@ export function PlanCard({ plan, field }: PlanCardProps) {
               // plan.isPopular ? "" : "pt-8"
             )}
           >
-            <h3 className="text-xl font-bold mb-2">{plan.subscriptionName}</h3>
+            <h3 className="text-xl font-bold mb-2">{plan.title}</h3>
             <div className="mb-4">
               <span className="text-3xl font-bold">
                 {formatPrice(plan.finalPrice)}
@@ -106,22 +106,22 @@ export function PlanCard({ plan, field }: PlanCardProps) {
             <Button
               type="button"
               onClick={() => {
-                field.onChange(plan.subscriptionTypeId);
+                field.onChange(plan.recurringTypeId);
               }}
               className={cn(
                 "w-full mt-auto cursor-pointer",
-                field.value === plan.subscriptionTypeId
+                field.value === plan.recurringTypeId
                   ? "bg-primary hover:bg-primary/90 text-white"
                   : "bg-white border text-primary hover:text-white"
               )}
             >
-              {field.value === plan.subscriptionTypeId
+              {field.value === plan.recurringTypeId
                 ? "Selected"
                 : "Choose Plan"}
             </Button>
             <RadioGroupItem
-              value={plan.subscriptionTypeId}
-              id={plan.subscriptionTypeId}
+              value={plan.recurringTypeId}
+              id={plan.recurringTypeId}
               className="sr-only"
             />
           </CardContent>

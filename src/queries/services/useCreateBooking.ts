@@ -26,7 +26,7 @@ interface SubscriptionRequest {
   areaSize: number;
   isEco: boolean;
   price: number;
-  subscriptionTypeId: string;
+  recurringTypeId: string;
   address: Address;
   name: string;
   email: string;

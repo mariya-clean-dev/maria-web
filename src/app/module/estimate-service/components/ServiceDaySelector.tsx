@@ -28,8 +28,8 @@ interface ServiceDaySelectorProps {
   hasError?: boolean;
   onDialogOpenChange: (isOpen: boolean) => void;
   onServiceDaySelect: (
-    field: "weekOfMonth" | "dayOfWeek" | "timeSlot",
-    value: WeekOfMonth | DayOfWeek | TimeSlot
+    field: "dayOfWeek" | "timeSlot",
+    value: DayOfWeek | TimeSlot
   ) => void;
 }
 
@@ -45,7 +45,7 @@ export function ServiceDaySelector({
   // Check what's missing in the service day selection
   const getMissingSelections = () => {
     const missing = [];
-    if (!serviceDay.weekOfMonth) missing.push("week");
+    // if (!serviceDay.weekOfMonth) missing.push("week");
     if (!serviceDay.dayOfWeek) missing.push("day");
     if (!serviceDay.timeSlot) missing.push("time");
     return missing;
@@ -79,7 +79,7 @@ export function ServiceDaySelector({
 
             {isComplete ? (
               <div className="text-sm text-gray-600 text-center">
-                <p className="font-medium">{serviceDay.weekOfMonth}</p>
+                {/* <p className="font-medium">{serviceDay.weekOfMonth}</p> */}
                 <p>{serviceDay.dayOfWeek}</p>
                 <p>{serviceDay.timeSlot}</p>
               </div>
