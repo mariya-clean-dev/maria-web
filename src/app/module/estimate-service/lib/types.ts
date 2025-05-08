@@ -24,8 +24,8 @@ export interface TimeSlotOption {
 
 // Updated to match API response format
 export interface PlanOption {
-  subscriptionTypeId: string;
-  subscriptionName: string;
+  recurringTypeId: string;
+  title: string;
   description: string;
   discountPercent: number;
   finalPrice: number;
