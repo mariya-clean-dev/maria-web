@@ -302,32 +302,33 @@ export default function ServicePlan({ setEstimatePageView }: any) {
     createBooking(bookingData, {
       onSuccess: (response) => {
         const responseData = response.data;
-
-        if (bookingType === "recurring") {
-          // For subscription, redirect to Stripe checkout URL
-          if (responseData.paymentMethod === "offline") {
-            router.push(`/payment-success?bookingId=${responseData.id}`);
-          } else {
-            window.location.href = responseData.stripe.checkoutUrl;
-          }
+        // if (bookingType === "recurring") {
+        // For subscription, redirect to Stripe checkout URL
+        if (responseData.booking.paymentMethod === "offline" || responseData.stripe === null) {
+          router.push(`/payment-success?bookingId=${responseData.id}`);
           setIsSubmitting(false);
-        } else {
-          // For instant booking, store payment intent details and redirect to payment page
-          localStorage.setItem(
-            "paymentDetails",
-            JSON.stringify({
-              bookingId: responseData.booking.id,
-              customerId: responseData.stripe.customerId,
-              paymentIntent: responseData.stripe.paymentIntent,
-              clientSecret: responseData.stripe.clientSecret,
-              amount: responseData.booking.price,
-              planName: plan.title,
-            })
-          );
 
-          router.push("/payment");
+        } else {
+          window.location.href = responseData.stripe.checkoutUrl;
           setIsSubmitting(false);
         }
+        // } else {
+        //   // For instant booking, store payment intent details and redirect to payment page
+        //   localStorage.setItem(
+        //     "paymentDetails",
+        //     JSON.stringify({
+        //       bookingId: responseData.booking.id,
+        //       customerId: responseData.stripe.customerId,
+        //       paymentIntent: responseData.stripe.paymentIntent,
+        //       clientSecret: responseData.stripe.clientSecret,
+        //       amount: responseData.booking.price,
+        //       planName: plan.title,
+        //     })
+        //   );
+
+        //   router.push("/payment");
+        //   setIsSubmitting(false);
+        // }
       },
       onError: (error) => {
         showError(error);
