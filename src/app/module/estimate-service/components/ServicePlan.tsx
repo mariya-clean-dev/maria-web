@@ -305,7 +305,11 @@ export default function ServicePlan({ setEstimatePageView }: any) {
 
         if (bookingType === "recurring") {
           // For subscription, redirect to Stripe checkout URL
-          window.location.href = responseData.stripe.checkoutUrl;
+          if (responseData.paymentMethod === "offline") {
+            router.push(`/payment-success?bookingId=${responseData.id}`);
+          } else {
+            window.location.href = responseData.stripe.checkoutUrl;
+          }
           setIsSubmitting(false);
         } else {
           // For instant booking, store payment intent details and redirect to payment page

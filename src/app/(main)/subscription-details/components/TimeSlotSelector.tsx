@@ -25,7 +25,7 @@ export function TimeSlotSelector({
 }: TimeSlotSelectorProps) {
   // Fetch time slots from API
   const { data, isLoading, isError, error } = useTimeSlotList(
-    weekOfMonth,
+    // weekOfMonth,
     dayOfWeek
   );
 
