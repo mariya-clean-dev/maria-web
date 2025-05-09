@@ -64,7 +64,7 @@ export function TimeSlotSelector({
   }, [data, selectedTimeSlot, onSelect]);
 
   // If week or day is not selected yet, show a message
-  if (!weekOfMonth || !dayOfWeek) {
+  if (!dayOfWeek) {
     return (
       <div className="space-y-4">
         <h4 className={cn("font-medium", hasError ? "text-red-500" : "")}>
