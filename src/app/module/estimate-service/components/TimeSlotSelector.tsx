@@ -10,7 +10,7 @@ interface TimeSlotSelectorProps {
   selectedTimeSlot: TimeSlot | null;
   onSelect: (time: TimeSlot) => void;
   hasError?: boolean;
-  weekOfMonth: string | null;
+  // weekOfMonth: string | null;
   dayOfWeek: string | null;
 }
 
@@ -18,12 +18,12 @@ export function TimeSlotSelector({
   selectedTimeSlot,
   onSelect,
   hasError = false,
-  weekOfMonth,
+  // weekOfMonth,
   dayOfWeek,
 }: TimeSlotSelectorProps) {
   // Fetch time slots from API
   const { data, isLoading, isError, error } = useTimeSlotList(
-    weekOfMonth,
+    // weekOfMonth,
     dayOfWeek
   );
 

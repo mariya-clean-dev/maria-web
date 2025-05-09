@@ -14,10 +14,10 @@ export interface TimeSlotResponse {
   }>;
 }
 
-const fetchTimeSlot = async (weekOfMonth: number, dayOfWeek: number) => {
+const fetchTimeSlot = async ( dayOfWeek: number) => {
   const response = await axiosInstance.get(`/scheduler/time-slots`, {
     params: {
-      weekOfMonth: weekOfMonth,
+      // weekOfMonth: weekOfMonth,
       dayOfWeek: dayOfWeek,
     },
   });
@@ -25,16 +25,16 @@ const fetchTimeSlot = async (weekOfMonth: number, dayOfWeek: number) => {
 };
 
 const useTimeSlotList = (
-  weekOfMonth: string | null,
+  // weekOfMonth: string | null,
   dayOfWeek: string | null
 ) => {
-  const weekNumber = weekOfMonthToNumber(weekOfMonth);
+  // const weekNumber = weekOfMonthToNumber(weekOfMonth);
   const dayNumber = dayOfWeekToNumber(dayOfWeek);
 
   return useQuery({
-    queryKey: ["time-slot-list", weekNumber, dayNumber],
-    queryFn: () => fetchTimeSlot(weekNumber, dayNumber),
-    enabled: weekNumber > 0 && dayNumber >= 0,
+    queryKey: ["time-slot-list", dayNumber],
+    queryFn: () => fetchTimeSlot( dayNumber),
+    enabled: dayNumber >= 0,
   });
 };
 
