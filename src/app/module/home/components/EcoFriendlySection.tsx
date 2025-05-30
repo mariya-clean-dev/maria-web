@@ -45,18 +45,15 @@ export default function EcoFriendlySection() {
               >
                 Our Commitment to
                 <br />
-                Ecofriendly Services
+                Eco-Friendly Services
               </motion.h2>
 
               <motion.p
                 variants={itemVariants}
                 className="text-white/90 mb-8 text-lg max-w-xl"
               >
-                Marias is committed to your complete satisfaction, which is why
-                we strive to offer the most consistent, reliable, and affordable
-                housecleaning services around. Our team of experienced
-                professionals has taken the time to answer some of our most
-                frequently asked questions for your convenience.
+                At Maria’s, we’re committed to your complete satisfaction—and to the health of your home and the planet. That’s why we provide consistent, reliable, and affordable house cleaning services using environmentally responsible practices. <br/>
+                Our experienced team goes the extra mile to deliver high-quality results while minimizing our ecological footprint.
               </motion.p>
 
               <div className="space-y-4 mb-8">
@@ -67,9 +64,15 @@ export default function EcoFriendlySection() {
                   <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center">
                     <Check className="w-4 h-4 text-white" />
                   </div>
-                  <span className="text-lg">
-                    Eco-Friendly Cleaning Products
-                  </span>
+              <div>
+                <h3 className="font-semibold text-lg text-white-800">
+                 Eco-Friendly Cleaning Products
+                </h3>
+                <p className="text-white-400">
+                  We use safe, non-toxic, and biodegradable products that protect your family, your pets, and the environment.
+                </p>
+              </div>
+              
                 </motion.div>
 
                 <motion.div
@@ -79,8 +82,14 @@ export default function EcoFriendlySection() {
                   <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center">
                     <Check className="w-4 h-4 text-white" />
                   </div>
-                  <span className="text-lg">Customized Cleaning Packages</span>
-                </motion.div>
+      <div>
+                <h3 className="font-semibold text-lg text-white-800">
+                 Customized Cleaning Packages
+                </h3>
+                <p className="text-white-400">
+                  Every home is different. We offer flexible cleaning plans tailored to your lifestyle, preferences, and sustainability goals.
+                </p>
+              </div>                </motion.div>
               </div>
 
               <motion.div variants={itemVariants} className="">

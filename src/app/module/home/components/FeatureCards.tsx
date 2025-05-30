@@ -27,9 +27,8 @@ export default function FeatureCards() {
             </div>
             <h3 className="text-lg font-bold mb-1 pt-2">Trustworthiness</h3>
             <p className="text-[#525254] text-[16px]">
-              Building trust with clients by being <br /> transparent, honest,
-              and reliable in all
-              <br /> interactions, including respecting privacy.
+              Your trust means everything to us. That’s why  <br /> why we prioritize honesty, clear communication,  <br />and respect
+              for your privacy in every interaction.
             </p>
           </motion.div>
 
@@ -49,9 +48,8 @@ export default function FeatureCards() {
             </div>
             <h3 className="text-lg font-bold mb-1  pt-2">Professionalism</h3>
             <p className="text-gray-600 text-[16px]">
-              Conducting all cleaning tasks with <br /> professionalism,
-              including arriving on time,
-              <br /> adhering to safety standards.
+              Punctual, prepared, and safety-focused — <br />we bring professional standards 
+              <br />to every cleaning task.
             </p>
           </motion.div>
 
@@ -73,8 +71,7 @@ export default function FeatureCards() {
               Customer Satisfaction
             </h3>
             <p className="text-gray-600 text-[16px]">
-              Prioritizing the needs and preferences of <br /> customers and
-              striving to exceed their <br /> expectations.
+              Your satisfaction is our top priority.  <br /> We tailor every service to your needs and  <br /> aim to leave you delighted every time.
             </p>
           </motion.div>
         </div>

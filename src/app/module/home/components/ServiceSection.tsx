@@ -19,7 +19,7 @@ const services: Service[] = [
     id: 1,
     title: "Regular Home Cleaning",
     description:
-      "Keep your home fresh and tidy with routine cleaning tailored to your needs.",
+      "Enjoy a consistently clean home with our reliable recurring cleaning services—customized to fit your lifestyle.",
     image: "/service-image/service1.png",
   },
   {
@@ -48,14 +48,14 @@ const services: Service[] = [
     title: "Commercial Cleaning",
     description:
       "Maintain a spotless and professional environment for your business.",
-    image: "/service-image/service5.png",
+    image: "/service-image/serrvice7.jpeg",
   },
   {
     id: 6,
     title: "Specialized Cleaning",
     description:
       "Custom cleaning solutions for unique spaces and specific needs.",
-    image: "/service-image/service6.png",
+    image: "/service-image/service8.webp",
   },
 ];
 

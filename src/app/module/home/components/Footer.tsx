@@ -30,7 +30,12 @@ export default function Footer() {
             <ul className="space-y-3">
               <li>
                 <p className="text-gray-600 hover:text-[#19A4C6] transition-colors">
-                  Marine County
+                  Contra Costa County
+                </p>
+              </li>
+              <li>
+                <p className="text-gray-600 hover:text-[#19A4C6] transition-colors">
+                  East Bay
                 </p>
               </li>
               <li>
@@ -38,16 +43,11 @@ export default function Footer() {
                   San Francisco
                 </p>
               </li>
-              <li>
-                <p className="text-gray-600 hover:text-[#19A4C6] transition-colors">
-                  Napa and Sonoma County
-                </p>
-              </li>
-              <li>
+              {/* <li>
                 <p className="text-gray-600 hover:text-[#19A4C6] transition-colors">
                   Easy Bay
                 </p>
-              </li>
+              </li> */}
             </ul>
           </div>
 
