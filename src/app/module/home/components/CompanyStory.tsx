@@ -96,7 +96,7 @@ export default function CompanyStory() {
               variants={itemVariants}
               className="text-gray-600 mb-8 text-lg"
             >
-              At Maria’s, we proudly stand behind our work with the Neighborly Done Right Promise™. Your satisfaction is our priority. If you're not completely happy with our service, just give us a call by the end of the next business day, and we’ll return to make it right—at no extra cost to you. That’s our promise.
+              At Maria&apos;s, we proudly stand behind our work with the Neighborly Done Right Promise™. Your satisfaction is our priority. If you're not completely happy with our service, just give us a call by the end of the next business day, and we&apos;ll return to make it right—at no extra cost to you. That&apos;s our promise.
             </motion.p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
