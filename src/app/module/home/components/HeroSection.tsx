@@ -25,7 +25,7 @@ export default function HeroSection() {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4"
               >
-                Your Trusted Partner for Clean Solutions
+                Your Trusted Partner for Spotless Spaces
               </motion.h1>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
@@ -114,7 +114,7 @@ export default function HeroSection() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-3xl font-bold leading-tight mb-4"
             >
-              Your Trusted Partner for Clean Solutions
+              Your Trusted Partner for Spotless Spaces 
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -143,7 +143,7 @@ export default function HeroSection() {
                 variant="outline"
                 className="bg-[#27AE60] hover:bg-[#219653] text-white border-none"
               >
-                Get Your Estimate 12
+                Get Your Estimate
               </Button>
              </Link>
             </motion.div>

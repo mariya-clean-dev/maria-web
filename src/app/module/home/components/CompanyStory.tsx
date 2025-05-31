@@ -96,14 +96,10 @@ export default function CompanyStory() {
               variants={itemVariants}
               className="text-gray-600 mb-8 text-lg"
             >
-              We offer Marias’s Neighborly Done Right Promise™ on all our
-              services. This means you can trust us to meet your expectations.
-              If you’re not satisfied with our services, call us by the end of
-              the next business day and we’ll come back and clean it again at no
-              additional cost to you.
+              At Maria’s, we proudly stand behind our work with the Neighborly Done Right Promise™. Your satisfaction is our priority. If you're not completely happy with our service, just give us a call by the end of the next business day, and we’ll return to make it right—at no extra cost to you. That’s our promise.
             </motion.p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <motion.div
                 variants={itemVariants}
                 className="flex items-center gap-3"
@@ -111,7 +107,14 @@ export default function CompanyStory() {
                 <div className="w-7 h-7 rounded-md bg-[#19A4C6] flex items-center justify-center">
                   <Check className="w-4 h-4 text-white" />
                 </div>
-                <span className="text-gray-700">Clean Homes, Happy Hearts</span>
+                <div>
+                  <h3 className="font-semibold text-md text-white-800">
+                    Clean Homes, Happy Hearts
+                  </h3>
+                  <p className="text-white-400">
+                    We believe a clean home brings peace, comfort, and joy.
+                  </p>
+                </div>
               </motion.div>
 
               <motion.div
@@ -121,7 +124,31 @@ export default function CompanyStory() {
                 <div className="w-7 h-7 rounded-md bg-[#19A4C6] flex items-center justify-center">
                   <Check className="w-4 h-4 text-white" />
                 </div>
-                <span className="text-gray-700">Sparkle Every Space</span>
+              <div>
+                  <h3 className="font-semibold text-md text-white-800">
+                    Sparkle Every Space
+                  </h3>
+                  <p className="text-white-400">
+                    From top to bottom, we leave every corner gleaming.
+                  </p>
+                </div>             
+             </motion.div>
+
+              <motion.div
+                variants={itemVariants}
+                className="flex items-center gap-3"
+              >
+                <div className="w-7 h-7 rounded-md bg-[#19A4C6] flex items-center justify-center">
+                  <Check className="w-4 h-4 text-white" />
+                </div>
+              <div>
+                  <h3 className="font-semibold text-md text-white-800">
+                    Purify. Refresh. Revitalize.
+                  </h3>
+                  <p className="text-white-400">
+                    More than cleaning—we transform your space into a sanctuary.
+                  </p>
+                </div> 
               </motion.div>
 
               <motion.div
@@ -131,20 +158,15 @@ export default function CompanyStory() {
                 <div className="w-7 h-7 rounded-md bg-[#19A4C6] flex items-center justify-center">
                   <Check className="w-4 h-4 text-white" />
                 </div>
-                <span className="text-gray-700">
-                  Purify. Refresh. Revitalize.
-                </span>
-              </motion.div>
-
-              <motion.div
-                variants={itemVariants}
-                className="flex items-center gap-3"
-              >
-                <div className="w-7 h-7 rounded-md bg-[#19A4C6] flex items-center justify-center">
-                  <Check className="w-4 h-4 text-white" />
-                </div>
-                <span className="text-gray-700">Cleanliness Standards</span>
-              </motion.div>
+              <div>
+                  <h3 className="font-semibold text-md text-white-800">
+                    Our Commitment to Cleanliness Standards.
+                  </h3>
+                  <p className="text-white-400">
+                    We follow strict cleaning protocols to ensure your home isn’t just clean—but truly cared for.
+                  </p>
+                </div> 
+            </motion.div>
             </div>
           </motion.div>
         </div>

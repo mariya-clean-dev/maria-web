@@ -132,17 +132,16 @@ const ImageSection = () => {
             className="text-3xl md:text-4xl font-semibold mb-6 text-gray-800"
             variants={itemVariants}
           >
-            We Are Very Experienced
+            Experienced. Reliable.
             <br />
-            In Cleaning Services
+            Personalized Cleaning.
           </motion.h2>
 
           <motion.p className="text-gray-600 mb-8" variants={itemVariants}>
             Looking for the best home cleaning services near you? Look no
-            further than Marias&aposs custom home cleaning services. We
-            understand the challenges of maintaining a clean home amid a busy
-            schedule. Our team is dedicated to providing top-notch home cleaning
-            services tailored to your specific needs and preferences.
+            further than Maria’s custom home cleaning. We
+            understand how hard it can be to keep a clean home with a busy
+            schedule. That’s why our expert team delivers top-quality cleaning—tailored to your specific needs, preferences, and lifestyle.
           </motion.p>
 
           <div className="space-y-6">
@@ -169,8 +168,7 @@ const ImageSection = () => {
                   Instant cleaning service
                 </h3>
                 <p className="text-gray-600">
-                  Get your space cleaned right when you need it, with our fast
-                  and reliable team.
+                  Need a clean space fast? Our responsive team is ready when you are—efficient, dependable, and always thorough.
                 </p>
               </div>
             </motion.div>
@@ -195,11 +193,10 @@ const ImageSection = () => {
               </div>
               <div>
                 <h3 className="font-semibold text-lg text-gray-800">
-                  Subscription based
+                  Subscription-Based Plans
                 </h3>
                 <p className="text-gray-600">
-                  Enjoy hassle-free regular cleaning with our flexible and
-                  affordable plans
+                  Enjoy peace of mind with regular cleanings. Our flexible and affordable subscription options are designed to fit your routine.
                 </p>
               </div>
             </motion.div>
@@ -227,8 +224,7 @@ const ImageSection = () => {
                   Customisable services
                 </h3>
                 <p className="text-gray-600">
-                  Tailor our cleaning packages to suit your unique needs and
-                  preferences.
+                  No two homes are the same. That’s why we let you tailor our services to match your exact cleaning priorities and preferences.
                 </p>
               </div>
             </motion.div>
