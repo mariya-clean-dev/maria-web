@@ -330,8 +330,9 @@ export default function ServicePlan({ setEstimatePageView }: any) {
         //   setIsSubmitting(false);
         // }
       },
-      onError: (error) => {
+      onError: (error) => {        
         showError(error);
+        setIsSubmitting(false);
       },
     });
   };
@@ -401,7 +402,7 @@ export default function ServicePlan({ setEstimatePageView }: any) {
                   <motion.div
                     ref={bookingFormRef}
                     initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    animate={{ opacity: 1, y: 0 }}  
                     transition={{ duration: 0.6, delay: 0.3 }}
                     className="mt-16"
                   >
