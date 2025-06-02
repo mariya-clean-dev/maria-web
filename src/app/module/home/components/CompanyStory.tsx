@@ -96,7 +96,7 @@ export default function CompanyStory() {
               variants={itemVariants}
               className="text-gray-600 mb-8 text-lg"
             >
-              At Maria&apos;s, we proudly stand behind our work with the Neighborly Done Right Promise™. Your satisfaction is our priority. If you're not completely happy with our service, just give us a call by the end of the next business day, and we&apos;ll return to make it right—at no extra cost to you. That&apos;s our promise.
+              At Maria&#39;s, we proudly stand behind our work with the Neighborly Done Right Promise™. Your satisfaction is our priority. If you&#39;re not completely happy with our service, just give us a call by the end of the next business day, and we&#39;ll return to make it right—at no extra cost to you. That&#39;s our promise.
             </motion.p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -163,7 +163,7 @@ export default function CompanyStory() {
                     Our Commitment to Cleanliness Standards.
                   </h3>
                   <p className="text-white-400">
-                    We follow strict cleaning protocols to ensure your home isn’t just clean—but truly cared for.
+                    We follow strict cleaning protocols to ensure your home isn&#39;t just clean—but truly cared for.
                   </p>
                 </div> 
             </motion.div>
