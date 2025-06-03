@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useQueryClient } from "@tanstack/react-query";
 import {
   flexRender,
   getCoreRowModel,
@@ -65,6 +66,7 @@ interface BookingData {
 
 export default function BookingsPage() {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const [sorting, setSorting] = useState<SortingState>([]);
   const [selectedBooking, setSelectedBooking] = useState<BookingData | null>(
     null
@@ -111,22 +113,20 @@ export default function BookingsPage() {
 
   const handleDateUpdate = async (
     bookingId: string,
-    weekOfMonth: number,
-    dayOfWeek: number,
+    date: any,
     time: string
   ) => {
     const params = {
       bookingId,
-      weekOfMonth,
-      dayOfWeek,
+      newDate: date,
       time,
-      month: new Date().getMonth() + 1,
     };
 
     mutate(params, {
       onSuccess: () => {
         success("Booking date updated successfully");
-        router.refresh();
+        // Invalidate and refetch the booking details query
+        queryClient.invalidateQueries({ queryKey: ["booking-details"] });
       },
       onError: (error) => {
         showError(error);
