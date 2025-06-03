@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -9,31 +9,16 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
 import { Loader2 } from "lucide-react";
-import {
-  DayOfWeek,
-  TimeSlot,
-  WeekOfMonth,
-} from "@/app/module/estimate-service/lib/types";
-import {
-  formatDayOfWeek,
-  formatTime,
-  formatWeekOfMonth,
-} from "@/services/heplerFunctions";
-import { WeekSelector } from "./WeekSelector";
-import { DaySelector } from "./DaySelector";
+import type { TimeSlot } from "@/app/module/estimate-service/lib/types";
 import { TimeSlotSelector } from "./TimeSlotSelector";
 
 interface DateEditDialogProps {
   isOpen: boolean;
   onClose: () => void;
   booking: any;
-  onUpdate: (
-    bookingId: string,
-    weekOfMonth: number,
-    dayOfWeek: number,
-    time: string
-  ) => void;
+  onUpdate: (bookingId: string, date: string, time: string) => void;
 }
 
 export function DateEditDialog({
@@ -44,53 +29,38 @@ export function DateEditDialog({
 }: DateEditDialogProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
+  const [selectedTime, setSelectedTime] = useState<TimeSlot | null>(null);
 
-  // Initialize with the current upcoming date values
-  const [selectedWeek, setSelectedWeek] = useState<WeekOfMonth | null>(
-    booking?.nextMonthSchedule
-      ? (formatWeekOfMonth(
-          booking.nextMonthSchedule.weekOfMonth
-        ) as WeekOfMonth)
-      : null
-  );
+  // Calculate disabled dates (past dates and next 3 days)
+  const today = new Date();
+  const threeDaysFromNow = new Date();
+  threeDaysFromNow.setDate(today.getDate() + 3);
 
-  const [selectedDay, setSelectedDay] = useState<DayOfWeek | null>(
-    booking?.nextMonthSchedule
-      ? (formatDayOfWeek(booking.nextMonthSchedule.dayOfWeek) as DayOfWeek)
-      : null
-  );
-
-  const [selectedTime, setSelectedTime] = useState<TimeSlot | null>(
-    booking?.nextMonthSchedule
-      ? formatTime(booking.nextMonthSchedule.time)
-      : null
-  );
-
-  // Reset selections when booking changes or when dialog opens
-  useEffect(() => {
-    if (booking?.nextMonthSchedule) {
-      // Convert the numeric week to the string format expected by the selector
-      const weekString = formatWeekOfMonth(
-        booking.nextMonthSchedule.weekOfMonth
-      );
-      const dayString = formatDayOfWeek(booking.nextMonthSchedule.dayOfWeek);
-      const timeString = formatTime(booking.nextMonthSchedule.time);
-
-      console.log("Setting selected week:", weekString);
-      console.log("Setting selected day:", dayString);
-      console.log("Setting selected time:", timeString);
-
-      // Make sure these are properly cast to the expected types
-      setSelectedWeek(weekString as WeekOfMonth);
-      setSelectedDay(dayString as DayOfWeek);
-      setSelectedTime(timeString);
+  const isDateDisabled = (date: Date) => {
+    // Disable past dates
+    if (date < today) {
+      return true;
     }
-  }, [booking, isOpen]); // Add isOpen to dependencies to ensure values are reset when dialog opens
 
-  // Update handleSubmit to use the selected values
+    // Disable next 3 days
+    if (date <= threeDaysFromNow) {
+      return true;
+    }
+
+    return false;
+  };
+
+  const handleDateSelect = (date: Date | undefined) => {
+    setSelectedDate(date);
+    // Reset selected time when date changes
+    setSelectedTime(null);
+    setError(null);
+  };
+
   const handleSubmit = async () => {
-    if (!selectedWeek || !selectedDay || !selectedTime) {
-      setError("Please select week, day and time");
+    if (!selectedDate || !selectedTime) {
+      setError("Please select both date and time");
       return;
     }
 
@@ -98,9 +68,10 @@ export function DateEditDialog({
     setError(null);
 
     try {
-      // Convert the selected values back to the format expected by the API
-      const weekNumber = booking.nextMonthSchedule.weekOfMonth;
-      const dayNumber = booking.nextMonthSchedule.dayOfWeek;
+      // Convert selected date to ISO format
+      const isoDate = `${selectedDate.getFullYear()}-${String(
+        selectedDate.getMonth() + 1
+      ).padStart(2, "0")}-${String(selectedDate.getDate()).padStart(2, "0")}`;
 
       // Convert the selected time from 12-hour format to 24-hour format
       const time24h = selectedTime.replace(
@@ -113,15 +84,10 @@ export function DateEditDialog({
         }
       );
 
-      console.log(booking);
+      console.log("Updating booking with date:", isoDate, "time:", time24h);
 
       // Call the update function
-      await onUpdate(
-        booking.nextMonthSchedule.id,
-        weekNumber,
-        dayNumber,
-        time24h
-      );
+      await onUpdate(booking.id, isoDate, time24h);
     } catch (err) {
       console.error("Error updating date:", err);
       setError("Failed to update date. Please try again.");
@@ -144,28 +110,29 @@ export function DateEditDialog({
             </div>
           )}
 
-          {/* Week of Month Selection */}
-          <WeekSelector
-            selectedWeek={selectedWeek}
-            onSelect={setSelectedWeek}
-            hasError={!selectedWeek}
-            currentWeek={booking?.nextMonthSchedule?.weekOfMonth || 0}
-          />
-
-          {/* Day of Week Selection */}
-          <DaySelector
-            selectedDay={selectedDay}
-            onSelect={setSelectedDay}
-            hasError={!selectedDay}
-          />
+          {/* Date Selection */}
+          <div className="space-y-4">
+            <h4 className="font-medium">
+              Select service date
+              <span className="text-red-500 ml-1">*</span>
+            </h4>
+            <div className="flex justify-center">
+              <Calendar
+                mode="single"
+                selected={selectedDate}
+                onSelect={handleDateSelect}
+                disabled={isDateDisabled}
+                className="rounded-md border"
+              />
+            </div>
+          </div>
 
           {/* Time Slot Selection */}
           <TimeSlotSelector
             selectedTimeSlot={selectedTime}
             onSelect={setSelectedTime}
             hasError={!selectedTime}
-            weekOfMonth={selectedWeek}
-            dayOfWeek={selectedDay}
+            selectedDate={selectedDate}
           />
         </div>
 

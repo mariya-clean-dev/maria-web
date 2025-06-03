@@ -1,70 +1,38 @@
 "use client";
-import { TimeSlot } from "@/app/module/estimate-service/lib/types";
+import type { TimeSlot } from "@/app/module/estimate-service/lib/types";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import useTimeSlotList from "@/queries/useTimeSlotList";
 import { formatTime } from "@/services/heplerFunctions";
 import { Loader2 } from "lucide-react";
 
-import { useEffect } from "react";
-
 interface TimeSlotSelectorProps {
   selectedTimeSlot: TimeSlot | null;
   onSelect: (time: TimeSlot) => void;
   hasError?: boolean;
-  weekOfMonth: string | null;
-  dayOfWeek: string | null;
+  selectedDate: Date | undefined;
 }
 
 export function TimeSlotSelector({
   selectedTimeSlot,
   onSelect,
   hasError = false,
-  weekOfMonth,
-  dayOfWeek,
+  selectedDate,
 }: TimeSlotSelectorProps) {
-  // Fetch time slots from API
-  const { data, isLoading, isError, error } = useTimeSlotList(
-    // weekOfMonth,
-    dayOfWeek
-  );
+  const dateParam = selectedDate
+    ? `${selectedDate.getFullYear()}-${String(
+        selectedDate.getMonth() + 1
+      ).padStart(2, "0")}-${String(selectedDate.getDate()).padStart(2, "0")}`
+    : null;
 
-  // When time slots are loaded, check if the selectedTimeSlot matches any of them
-  useEffect(() => {
-    if (data?.data && selectedTimeSlot) {
-      // Convert the selectedTimeSlot from 12-hour format to 24-hour format for comparison
-      const selectedTime24h = selectedTimeSlot.replace(
-        /(\d+):(\d+)(am|pm)/,
-        (_, hours, minutes, period) => {
-          let hour = Number.parseInt(hours, 10);
-          if (period === "pm" && hour < 12) hour += 12;
-          if (period === "am" && hour === 12) hour = 0;
-          return `${hour.toString().padStart(2, "0")}:${minutes}`;
-        }
-      );
+  console.log("Selected date:", selectedDate);
+  console.log("Date param being sent:", dateParam);
 
-      console.log("Selected time (24h):", selectedTime24h);
+  // Fetch time slots from API with the selected date
+  const { data, isLoading, isError, error } = useTimeSlotList(null, dateParam);
 
-      // Find the matching time slot in the API response
-      const matchingTimeSlot = data.data.find(
-        (slot) => slot.time === selectedTime24h
-      );
-
-      if (matchingTimeSlot && matchingTimeSlot.isAvailable) {
-        // If found and available, format it and set as selected
-        const formattedTime = formatTime(matchingTimeSlot.time);
-        console.log("Found matching time slot:", formattedTime);
-        onSelect(formattedTime);
-      } else if (matchingTimeSlot) {
-        console.log("Found matching time slot but it's not available");
-      } else {
-        console.log("No matching time slot found for:", selectedTime24h);
-      }
-    }
-  }, [data, selectedTimeSlot, onSelect]);
-
-  // If week or day is not selected yet, show a message
-  if (!dayOfWeek) {
+  // If date is not selected yet, show a message
+  if (!selectedDate) {
     return (
       <div className="space-y-4">
         <h4 className={cn("font-medium", hasError ? "text-red-500" : "")}>
@@ -72,7 +40,7 @@ export function TimeSlotSelector({
           {hasError && <span className="text-red-500 ml-1">*</span>}
         </h4>
         <div className="p-4 bg-gray-50 rounded-md text-center text-gray-500">
-          Please select week and day first to view available time slots
+          Please select a date first to view available time slots
         </div>
       </div>
     );
@@ -110,7 +78,7 @@ export function TimeSlotSelector({
       <div className="space-y-4">
         <h4 className="font-medium">Select time slot for your service</h4>
         <div className="p-4 bg-gray-50 rounded-md text-center text-gray-500">
-          No time slots available for the selected day
+          No time slots available for the selected date
         </div>
       </div>
     );
@@ -147,10 +115,7 @@ export function TimeSlotSelector({
                       : selectedTimeSlot === formattedTime
                       ? "bg-[#19A4C6] text-white border-[#19A4C6]"
                       : "",
-                    hasError &&
-                      !selectedTimeSlot &&
-                      slot.isAvailable &&
-                      "border-red-500 border-2"
+                    hasError && !selectedTimeSlot && slot.isAvailable && ""
                   )}
                   onClick={() => {
                     if (slot.isAvailable) {
