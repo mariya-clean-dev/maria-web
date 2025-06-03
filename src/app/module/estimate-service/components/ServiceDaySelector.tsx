@@ -28,8 +28,9 @@ interface ServiceDaySelectorProps {
   hasError?: boolean;
   onDialogOpenChange: (isOpen: boolean) => void;
   onServiceDaySelect: (
+    dayKey: string,
     field: "dayOfWeek" | "timeSlot",
-    value: DayOfWeek | TimeSlot
+    value: DayOfWeek | TimeSlot | null
   ) => void;
 }
 
@@ -113,14 +114,14 @@ export function ServiceDaySelector({
           {/* Day of Week Selection */}
           <DaySelector
             selectedDay={serviceDay.dayOfWeek}
-            onSelect={(day) => onServiceDaySelect("dayOfWeek", day)}
+            onSelect={(day) => onServiceDaySelect(dayKey,"dayOfWeek", day)}
             hasError={hasError && !serviceDay.dayOfWeek}
           />
 
           {/* Time Slot Selection */}
           <TimeSlotSelector
             selectedTimeSlot={serviceDay.timeSlot}
-            onSelect={(time) => onServiceDaySelect("timeSlot", time)}
+            onSelect={(time) => onServiceDaySelect(dayKey,"timeSlot", time)}
             hasError={hasError && !serviceDay.timeSlot}
             dayOfWeek={serviceDay.dayOfWeek}
           />

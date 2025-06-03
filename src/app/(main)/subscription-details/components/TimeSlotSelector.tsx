@@ -100,7 +100,7 @@ export function TimeSlotSelector({
         {timeSlotRows.map((row, rowIndex) => (
           <div key={`row-${rowIndex}`} className="grid grid-cols-4 gap-2">
             {row.map((slot, colIndex) => {
-              const formattedTime = formatTime(slot.time);
+              const formattedTime = formatTime(slot.time);              
               return (
                 <Button
                   key={`${rowIndex}-${colIndex}`}
@@ -112,18 +112,18 @@ export function TimeSlotSelector({
                     "text-xs h-10 px-2",
                     !slot.isAvailable
                       ? "bg-[#FFDAD6] text-[#E53935] border-[#E53935] opacity-70 cursor-not-allowed"
-                      : selectedTimeSlot === formattedTime
+                      : selectedTimeSlot === slot.time
                       ? "bg-[#19A4C6] text-white border-[#19A4C6]"
                       : "",
                     hasError && !selectedTimeSlot && slot.isAvailable && ""
                   )}
                   onClick={() => {
                     if (slot.isAvailable) {
-                      onSelect(formattedTime);
+                      onSelect(slot.time);
                     }
                   }}
                 >
-                  {formattedTime}
+                  {slot.time}
                 </Button>
               );
             })}

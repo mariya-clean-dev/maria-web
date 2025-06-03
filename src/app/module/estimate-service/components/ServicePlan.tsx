@@ -42,6 +42,7 @@ import {
 import useCustomToast from "@/hooks/use-custom-toast";
 import { useCreateBooking } from "@/queries/services/useCreateBooking";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { OneTimeServiceDateSelector } from "./OneTimeServiceDateSelector";
 
 export default function ServicePlan({ setEstimatePageView }: any) {
   const router = useRouter();
@@ -112,7 +113,7 @@ export default function ServicePlan({ setEstimatePageView }: any) {
       city: "",
       zipcode: "",
       landmark: "",
-      paymentMethod:"",
+      paymentMethod: "",
       remark: "",
     },
   });
@@ -138,8 +139,8 @@ export default function ServicePlan({ setEstimatePageView }: any) {
    */
   const handleServiceDaySelect = (
     dayKey: string,
-    field: "weekOfMonth" | "dayOfWeek" | "timeSlot",
-    value: WeekOfMonth | DayOfWeek | TimeSlot
+    field: "weekOfMonth" | "dayOfWeek" | "timeSlot" | "selectedDate",
+    value: WeekOfMonth | DayOfWeek | TimeSlot | Date | null
   ) => {
     setServiceDates((prev) => ({
       ...prev,
@@ -148,6 +149,10 @@ export default function ServicePlan({ setEstimatePageView }: any) {
         [field]: value,
       },
     }));
+
+    if (field === "selectedDate") {
+      const capturedDate = value;
+    }
 
     // Clear error for this day if it was previously marked as error
     if (serviceDayErrors[dayKey]) {
@@ -171,11 +176,11 @@ export default function ServicePlan({ setEstimatePageView }: any) {
   /**
    * Returns the number of service days required based on the selected plan
    */
-  const getDaysRequired = (): number => {    
+  const getDaysRequired = (): number => {
     if (!selectedPlan) return 0;
     const plan = servicePlan?.estimates?.find(
       (p: any) => p.recurringTypeId === selectedPlan
-    );    
+    );
     switch (plan?.title) {
       case "One Time":
         return 1;
@@ -191,17 +196,32 @@ export default function ServicePlan({ setEstimatePageView }: any) {
   /**
    * Validates service days and updates error state
    */
-  const validateServiceDays = (): boolean => {
-    const daysRequired = getDaysRequired();
-    if (daysRequired === 0) return true;
+const validateServiceDays = (): boolean => {
+  const daysRequired = getDaysRequired();
+  if (daysRequired === 0) return true;
 
-    let isValid = true;
-    const newErrors = { ...serviceDayErrors };
+  let isValid = true;
+  const newErrors = { ...serviceDayErrors };
 
-    for (let i = 1; i <= daysRequired; i++) {
-      const dayKey = `day-${i}`;
-      const day = serviceDates[dayKey];
+  const currentPlan = servicePlan?.estimates?.find(
+    (p: any) => p.recurringTypeId === selectedPlan
+  );
+  const isOneTimePlan = currentPlan?.title === "One Time";
 
+  for (let i = 1; i <= daysRequired; i++) {
+    const dayKey = `day-${i}`;
+    const day = serviceDates[dayKey];
+
+    if (isOneTimePlan) {
+      // For One Time plans, check selectedDate
+      if (!day.selectedDate || !day.timeSlot) {
+        newErrors[dayKey] = true;
+        isValid = false;
+      } else {
+        newErrors[dayKey] = false;
+      }
+    } else {
+      // For recurring plans, check dayOfWeek
       if (!day.dayOfWeek || !day.timeSlot) {
         newErrors[dayKey] = true;
         isValid = false;
@@ -209,10 +229,11 @@ export default function ServicePlan({ setEstimatePageView }: any) {
         newErrors[dayKey] = false;
       }
     }
+  }
 
-    setServiceDayErrors(newErrors);
-    return isValid;
-  };
+  setServiceDayErrors(newErrors);
+  return isValid;
+};
 
   /**
    * Validates and submits the form
@@ -257,7 +278,7 @@ export default function ServicePlan({ setEstimatePageView }: any) {
         schedule = {
           dayOfWeek: dayOfWeekToNumber(day.dayOfWeek),
           time: day.timeSlot,
-        };        
+        };
         break;
       }
     }
@@ -295,6 +316,11 @@ export default function ServicePlan({ setEstimatePageView }: any) {
       email: values.email,
       phone: values.phone,
       schedule,
+      ...(bookingType === "one_time" && {
+        date: serviceDates["day-1"].selectedDate,
+        time: serviceDates["day-1"].timeSlot,
+      }),
+
     };
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -330,7 +356,7 @@ export default function ServicePlan({ setEstimatePageView }: any) {
         //   setIsSubmitting(false);
         // }
       },
-      onError: (error) => {        
+      onError: (error) => {
         showError(error);
         setIsSubmitting(false);
       },
@@ -402,7 +428,7 @@ export default function ServicePlan({ setEstimatePageView }: any) {
                   <motion.div
                     ref={bookingFormRef}
                     initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}  
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.3 }}
                     className="mt-16"
                   >
@@ -468,32 +494,59 @@ export default function ServicePlan({ setEstimatePageView }: any) {
 
                       {/* Service Date Selection */}
                       <div className="mt-8">
-                        <h3 className="text-xl font-semibold mb-4"> 
+                        <h3 className="text-xl font-semibold mb-4">
                           Select Service Date
                         </h3>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                           {Array.from({ length: getDaysRequired() }).map(
                             (_, index) => {
                               const dayKey = `day-${index + 1}`;
-                              return (
-                                <ServiceDaySelector
-                                  key={dayKey}
-                                  dayIndex={index}
-                                  dayKey={dayKey}
-                                  serviceDay={serviceDates[dayKey]}
-                                  isDialogOpen={openDialogs[dayKey]}
-                                  hasError={
-                                    submissionAttempted &&
-                                    serviceDayErrors[dayKey]
-                                  }
-                                  onDialogOpenChange={(isOpen) =>
-                                    handleDialogOpenChange(dayKey, isOpen)
-                                  }
-                                  onServiceDaySelect={(field, value) =>
-                                    handleServiceDaySelect(dayKey, field, value)
-                                  }
-                                />
+
+                              const currentPlan = servicePlan?.estimates?.find(
+                                (p: any) => p.recurringTypeId === selectedPlan
                               );
+
+                              if (currentPlan?.title === "One Time") {
+                                return (
+                                  <OneTimeServiceDateSelector
+                                    key={dayKey}
+                                    dayIndex={index}
+                                    dayKey={dayKey}
+                                    serviceDay={serviceDates[dayKey]}
+                                    isDialogOpen={openDialogs[dayKey]}
+                                    hasError={
+                                      submissionAttempted &&
+                                      serviceDayErrors[dayKey]
+                                    }
+                                    onDialogOpenChange={(isOpen) =>
+                                      handleDialogOpenChange(dayKey, isOpen)
+                                    }
+                                    onServiceDaySelect={(childDayKey, field, value) =>
+                                      handleServiceDaySelect(childDayKey, field, value)
+                                    }
+                                  />
+                                );
+                              } else {
+                                return (
+                                  <ServiceDaySelector
+                                    key={dayKey}
+                                    dayIndex={index}
+                                    dayKey={dayKey}
+                                    serviceDay={serviceDates[dayKey]}
+                                    isDialogOpen={openDialogs[dayKey]}
+                                    hasError={
+                                      submissionAttempted &&
+                                      serviceDayErrors[dayKey]
+                                    }
+                                    onDialogOpenChange={(isOpen) =>
+                                      handleDialogOpenChange(dayKey, isOpen)
+                                    }
+                                    onServiceDaySelect={(childDayKey, field, value) =>
+                                      handleServiceDaySelect(childDayKey, field, value)
+                                    }
+                                  />
+                                );
+                              }
                             }
                           )}
                         </div>
