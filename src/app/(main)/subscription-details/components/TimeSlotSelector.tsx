@@ -36,7 +36,7 @@ export function TimeSlotSelector({
     return (
       <div className="space-y-4">
         <h4 className={cn("font-medium", hasError ? "text-red-500" : "")}>
-          Select time slot for your service 12
+          Select time slot for your service
           {hasError && <span className="text-red-500 ml-1">*</span>}
         </h4>
         <div className="p-2 bg-gray-50 rounded-md text-center text-gray-500">
