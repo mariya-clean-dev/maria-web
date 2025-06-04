@@ -38,8 +38,8 @@ export const columns = [
     (row) => {
       // Add debugging to see what's coming in
       console.log("Processing row:", row);
-      if (row.type === "subscription" && row.subscriptionType) {
-        return row.subscriptionType.name;
+      if (row.type === "recurring") {
+        return row.type;
       }
       return "One Time";
     },
