@@ -57,14 +57,16 @@ export const columns = [
       size: 180,
     }
   ),
-
   columnHelper.accessor(
     (row) => {
-      return new Date(row.createdAt).toLocaleDateString("en-IN", {
-        year: "numeric",
+      const date = new Date(row.createdAt);
+      const day = String(date.getUTCDate()).padStart(2, "0");
+      const month = date.toLocaleString("en-US", {
         month: "short",
-        day: "numeric",
+        timeZone: "UTC",
       });
+      const year = date.getUTCFullYear();
+      return `${day}-${month}-${year}`; // e.g., "30-Jun-2025"
     },
     {
       id: "bookingDate",
@@ -74,7 +76,8 @@ export const columns = [
       ),
       size: 180,
     }
-  ), ,
+  ),
+
 
   columnHelper.accessor("price", {
     header: "Amount",
@@ -104,13 +107,11 @@ export const columns = [
     (row) => {
       if (row.nextMonthSchedule?.startTime) {
         const date = new Date(row.nextMonthSchedule.startTime);
-        return date.toLocaleString("en-IN", {
-          year: "numeric",
+        const formatted = `${date.getUTCDate().toString().padStart(2, "0")}-${date.toLocaleString("en-US", {
           month: "short",
-          day: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
-        });
+          timeZone: "UTC",
+        })}-${date.getUTCFullYear()} ${String(date.getUTCHours()).padStart(2, "0")}:${String(date.getUTCMinutes()).padStart(2, "0")}`;
+        return formatted;
       }
       return "N/A";
     },
@@ -134,12 +135,12 @@ export const columns = [
       return (
         <div className="min-w-[100px]">
           {booking.nextMonthSchedule && (
-          <Button
-            onClick={() => meta?.handleEditDate(booking)}
-            className="bg-[#27AE60] hover:bg-[#27AE60]/90 text-white text-xs px-3 py-1 h-8"
-          >
-            Edit Date
-          </Button>
+            <Button
+              onClick={() => meta?.handleEditDate(booking)}
+              className="bg-[#27AE60] hover:bg-[#27AE60]/90 text-white text-xs px-3 py-1 h-8"
+            >
+              Edit Date
+            </Button>
           )}
         </div>
       );
