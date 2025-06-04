@@ -10,6 +10,7 @@ interface Booking {
   id: string;
   type: string;
   price: string;
+  createdAt: string;
   subscriptionType?: {
     name: string;
   };
@@ -23,6 +24,7 @@ interface Booking {
   };
   isEco: boolean;
   nextMonthSchedule?: {
+    startTime: string;
     weekOfMonth: number;
     dayOfWeek: number;
     time: string;
@@ -36,8 +38,8 @@ export const columns = [
     (row) => {
       // Add debugging to see what's coming in
       console.log("Processing row:", row);
-      if (row.type === "subscription" && row.subscriptionType) {
-        return row.subscriptionType.name;
+      if (row.type === "recurring") {
+        return row.type;
       }
       return "One Time";
     },
@@ -55,37 +57,27 @@ export const columns = [
       size: 180,
     }
   ),
-
   columnHelper.accessor(
     (row) => {
-      if (!row.monthSchedules || row.monthSchedules.length === 0) return "N/A";
-      return row.monthSchedules
-        .map(
-          (schedule) =>
-            `${formatWeekOfMonth(schedule.weekOfMonth)} ${formatDayOfWeek(
-              schedule.dayOfWeek
-            )}`
-        )
-        .join(", ");
+      const date = new Date(row.createdAt);
+      const day = String(date.getUTCDate()).padStart(2, "0");
+      const month = date.toLocaleString("en-US", {
+        month: "short",
+        timeZone: "UTC",
+      });
+      const year = date.getUTCFullYear();
+      return `${day}-${month}-${year}`; // e.g., "30-Jun-2025"
     },
     {
-      id: "bookingDates",
-      header: "Booking Dates",
-      cell: (info) => {
-        const value = info.getValue();
-        if (value === "N/A") return <div className="min-w-[180px]">N/A</div>;
-
-        return (
-          <div className="min-w-[180px] whitespace-normal">
-            {value.split(", ").map((date, index) => (
-              <div key={index}>{date}</div>
-            ))}
-          </div>
-        );
-      },
-      size: 200,
+      id: "bookingDate",
+      header: "Booked Date",
+      cell: (info) => (
+        <div className="min-w-[150px]">{info.getValue()}</div>
+      ),
+      size: 180,
     }
   ),
+
 
   columnHelper.accessor("price", {
     header: "Amount",
@@ -93,37 +85,42 @@ export const columns = [
     size: 120,
   }),
 
-  columnHelper.accessor(
-    (row) => {
-      if (row.monthSchedules && row.monthSchedules.length > 0) {
-        const schedule = row.monthSchedules[0];
-        return `${formatWeekOfMonth(schedule.weekOfMonth)} ${formatDayOfWeek(
-          schedule.dayOfWeek
-        )}`;
-      }
-      return "N/A";
-    },
-    {
-      id: "previousDate",
-      header: "Previous Date",
-      cell: (info) => <div className="min-w-[150px]">{info.getValue()}</div>,
-      size: 180,
-    }
-  ),
+  // columnHelper.accessor(
+  //   (row) => {
+  //     if (row.monthSchedules && row.monthSchedules.length > 0) {
+  //       const schedule = row.monthSchedules[0];
+  //       return `${formatWeekOfMonth(schedule.weekOfMonth)} ${formatDayOfWeek(
+  //         schedule.dayOfWeek
+  //       )}`;
+  //     }
+  //     return "N/A";
+  //   },
+  //   {
+  //     id: "previousDate",
+  //     header: "Previous Date",
+  //     cell: (info) => <div className="min-w-[150px]">{info.getValue()}</div>,
+  //     size: 180,
+  //   }
+  // ),
 
   columnHelper.accessor(
     (row) => {
-      if (row.nextMonthSchedule) {
-        return `${formatWeekOfMonth(
-          row.nextMonthSchedule.weekOfMonth
-        )} ${formatDayOfWeek(row.nextMonthSchedule.dayOfWeek)}`;
+      if (row.nextMonthSchedule?.startTime) {
+        const date = new Date(row.nextMonthSchedule.startTime);
+        const formatted = `${date.getUTCDate().toString().padStart(2, "0")}-${date.toLocaleString("en-US", {
+          month: "short",
+          timeZone: "UTC",
+        })}-${date.getUTCFullYear()} ${String(date.getUTCHours()).padStart(2, "0")}:${String(date.getUTCMinutes()).padStart(2, "0")}`;
+        return formatted;
       }
       return "N/A";
     },
     {
-      id: "upcomingDate",
-      header: "Upcoming Date",
-      cell: (info) => <div className="min-w-[150px]">{info.getValue()}</div>,
+      id: "scheduledTime",
+      header: "Scheduled Time",
+      cell: (info) => (
+        <div className="min-w-[180px]">{info.getValue()}</div>
+      ),
       size: 180,
     }
   ),
@@ -137,14 +134,14 @@ export const columns = [
 
       return (
         <div className="min-w-[100px]">
-          {/* {booking.nextMonthSchedule && ( */}
-          <Button
-            onClick={() => meta?.handleEditDate(booking)}
-            className="bg-[#27AE60] hover:bg-[#27AE60]/90 text-white text-xs px-3 py-1 h-8"
-          >
-            Edit Date
-          </Button>
-          {/* )} */}
+          {booking.nextMonthSchedule && (
+            <Button
+              onClick={() => meta?.handleEditDate(booking)}
+              className="bg-[#27AE60] hover:bg-[#27AE60]/90 text-white text-xs px-3 py-1 h-8"
+            >
+              Edit Date
+            </Button>
+          )}
         </div>
       );
     },
