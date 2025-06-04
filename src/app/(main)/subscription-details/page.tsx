@@ -88,13 +88,20 @@ export default function BookingsPage() {
   // Extract the actual bookings array from the nested response
   const bookings = bookingsResponse?.data || [];
 
+  const [pagination, setPagination] = useState({
+    pageIndex: 0,
+    pageSize: 10,
+  });
+
   const table = useReactTable({
     data: bookings,
     columns,
     state: {
       sorting,
+      pagination
     },
     onSortingChange: setSorting,
+    onPaginationChange: setPagination,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -190,9 +197,9 @@ export default function BookingsPage() {
                             {header.isPlaceholder
                               ? null
                               : flexRender(
-                                  header.column.columnDef.header,
-                                  header.getContext()
-                                )}
+                                header.column.columnDef.header,
+                                header.getContext()
+                              )}
                           </TableHead>
                         ))}
                       </TableRow>
@@ -231,6 +238,37 @@ export default function BookingsPage() {
                   </TableBody>
                 </Table>
               </div>
+            </div>
+
+            {/* Pagination Controls */}
+            <div className="flex justify-center items-center gap-2 mt-4">
+              <Button
+                disabled={!table.getCanPreviousPage()}
+                onClick={() => table.previousPage()}
+              >
+                Previous
+              </Button>
+              <Button
+                disabled={!table.getCanNextPage()}
+                onClick={() => table.nextPage()}
+              >
+                Next
+              </Button>
+              <span className="ml-4">
+                Page {table.getState().pagination.pageIndex + 1} of{" "}
+                {table.getPageCount()}
+              </span>
+              <select
+                className="ml-4 border rounded px-2 py-1"
+                value={table.getState().pagination.pageSize}
+                onChange={(e) => table.setPageSize(Number(e.target.value))}
+              >
+                {[10, 20, 50].map((size) => (
+                  <option key={size} value={size}>
+                    Show {size}
+                  </option>
+                ))}
+              </select>
             </div>
 
             <div className="flex justify-center gap-4 mt-8">
