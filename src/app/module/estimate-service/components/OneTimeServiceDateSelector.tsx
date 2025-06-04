@@ -87,7 +87,7 @@ export function OneTimeServiceDateSelector({
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     const threeDaysFromNow = new Date();
-    threeDaysFromNow.setDate(today.getDate() + 3);
+    threeDaysFromNow.setDate(today.getDate());
     threeDaysFromNow.setHours(23, 59, 59, 999);
 
     const isDateDisabled = (date: Date) => {
