@@ -10,6 +10,7 @@ interface Booking {
   id: string;
   type: string;
   price: string;
+  createdAt: string;
   subscriptionType?: {
     name: string;
   };
@@ -23,6 +24,7 @@ interface Booking {
   };
   isEco: boolean;
   nextMonthSchedule?: {
+    startTime: string;
     weekOfMonth: number;
     dayOfWeek: number;
     time: string;
@@ -58,34 +60,21 @@ export const columns = [
 
   columnHelper.accessor(
     (row) => {
-      if (!row.monthSchedules || row.monthSchedules.length === 0) return "N/A";
-      return row.monthSchedules
-        .map(
-          (schedule) =>
-            `${formatWeekOfMonth(schedule.weekOfMonth)} ${formatDayOfWeek(
-              schedule.dayOfWeek
-            )}`
-        )
-        .join(", ");
+      return new Date(row.createdAt).toLocaleDateString("en-IN", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      });
     },
     {
-      id: "bookingDates",
-      header: "Booking Dates",
-      cell: (info) => {
-        const value = info.getValue();
-        if (value === "N/A") return <div className="min-w-[180px]">N/A</div>;
-
-        return (
-          <div className="min-w-[180px] whitespace-normal">
-            {value.split(", ").map((date, index) => (
-              <div key={index}>{date}</div>
-            ))}
-          </div>
-        );
-      },
-      size: 200,
+      id: "bookingDate",
+      header: "Booked Date",
+      cell: (info) => (
+        <div className="min-w-[150px]">{info.getValue()}</div>
+      ),
+      size: 180,
     }
-  ),
+  ), ,
 
   columnHelper.accessor("price", {
     header: "Amount",
@@ -93,37 +82,44 @@ export const columns = [
     size: 120,
   }),
 
-  columnHelper.accessor(
-    (row) => {
-      if (row.monthSchedules && row.monthSchedules.length > 0) {
-        const schedule = row.monthSchedules[0];
-        return `${formatWeekOfMonth(schedule.weekOfMonth)} ${formatDayOfWeek(
-          schedule.dayOfWeek
-        )}`;
-      }
-      return "N/A";
-    },
-    {
-      id: "previousDate",
-      header: "Previous Date",
-      cell: (info) => <div className="min-w-[150px]">{info.getValue()}</div>,
-      size: 180,
-    }
-  ),
+  // columnHelper.accessor(
+  //   (row) => {
+  //     if (row.monthSchedules && row.monthSchedules.length > 0) {
+  //       const schedule = row.monthSchedules[0];
+  //       return `${formatWeekOfMonth(schedule.weekOfMonth)} ${formatDayOfWeek(
+  //         schedule.dayOfWeek
+  //       )}`;
+  //     }
+  //     return "N/A";
+  //   },
+  //   {
+  //     id: "previousDate",
+  //     header: "Previous Date",
+  //     cell: (info) => <div className="min-w-[150px]">{info.getValue()}</div>,
+  //     size: 180,
+  //   }
+  // ),
 
   columnHelper.accessor(
     (row) => {
-      if (row.nextMonthSchedule) {
-        return `${formatWeekOfMonth(
-          row.nextMonthSchedule.weekOfMonth
-        )} ${formatDayOfWeek(row.nextMonthSchedule.dayOfWeek)}`;
+      if (row.nextMonthSchedule?.startTime) {
+        const date = new Date(row.nextMonthSchedule.startTime);
+        return date.toLocaleString("en-IN", {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        });
       }
       return "N/A";
     },
     {
-      id: "upcomingDate",
-      header: "Upcoming Date",
-      cell: (info) => <div className="min-w-[150px]">{info.getValue()}</div>,
+      id: "scheduledTime",
+      header: "Scheduled Time",
+      cell: (info) => (
+        <div className="min-w-[180px]">{info.getValue()}</div>
+      ),
       size: 180,
     }
   ),

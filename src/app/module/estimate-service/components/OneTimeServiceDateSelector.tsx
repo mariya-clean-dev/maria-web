@@ -57,7 +57,7 @@ export function OneTimeServiceDateSelector({
     }, [serviceDay.selectedDate, selectedCalendarDate]);
 
     useEffect(() => {
-        console.log("Selected Calendar Date:", selectedCalendarDate);
+        // console.log("Selected Calendar Date:", selectedCalendarDate);
     }, [selectedCalendarDate]);
 
     const getMissingSelections = () => {

@@ -25,9 +25,6 @@ export function TimeSlotSelector({
       ).padStart(2, "0")}-${String(selectedDate.getDate()).padStart(2, "0")}`
     : null;
 
-  console.log("Selected date:", selectedDate);
-  console.log("Date param being sent:", dateParam);
-
   // Fetch time slots from API with the selected date
   const { data, isLoading, isError, error } = useTimeSlotList(null, dateParam);
 

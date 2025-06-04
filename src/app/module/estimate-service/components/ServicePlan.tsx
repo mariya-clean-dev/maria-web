@@ -151,7 +151,7 @@ export default function ServicePlan({ setEstimatePageView }: any) {
     }));
 
     if (field === "selectedDate") {
-      const capturedDate = value;
+      console.log(value);
     }
 
     // Clear error for this day if it was previously marked as error
@@ -196,44 +196,44 @@ export default function ServicePlan({ setEstimatePageView }: any) {
   /**
    * Validates service days and updates error state
    */
-const validateServiceDays = (): boolean => {
-  const daysRequired = getDaysRequired();
-  if (daysRequired === 0) return true;
+  const validateServiceDays = (): boolean => {
+    const daysRequired = getDaysRequired();
+    if (daysRequired === 0) return true;
 
-  let isValid = true;
-  const newErrors = { ...serviceDayErrors };
+    let isValid = true;
+    const newErrors = { ...serviceDayErrors };
 
-  const currentPlan = servicePlan?.estimates?.find(
-    (p: any) => p.recurringTypeId === selectedPlan
-  );
-  const isOneTimePlan = currentPlan?.title === "One Time";
+    const currentPlan = servicePlan?.estimates?.find(
+      (p: any) => p.recurringTypeId === selectedPlan
+    );
+    const isOneTimePlan = currentPlan?.title === "One Time";
 
-  for (let i = 1; i <= daysRequired; i++) {
-    const dayKey = `day-${i}`;
-    const day = serviceDates[dayKey];
+    for (let i = 1; i <= daysRequired; i++) {
+      const dayKey = `day-${i}`;
+      const day = serviceDates[dayKey];
 
-    if (isOneTimePlan) {
-      // For One Time plans, check selectedDate
-      if (!day.selectedDate || !day.timeSlot) {
-        newErrors[dayKey] = true;
-        isValid = false;
+      if (isOneTimePlan) {
+        // For One Time plans, check selectedDate
+        if (!day.selectedDate || !day.timeSlot) {
+          newErrors[dayKey] = true;
+          isValid = false;
+        } else {
+          newErrors[dayKey] = false;
+        }
       } else {
-        newErrors[dayKey] = false;
-      }
-    } else {
-      // For recurring plans, check dayOfWeek
-      if (!day.dayOfWeek || !day.timeSlot) {
-        newErrors[dayKey] = true;
-        isValid = false;
-      } else {
-        newErrors[dayKey] = false;
+        // For recurring plans, check dayOfWeek
+        if (!day.dayOfWeek || !day.timeSlot) {
+          newErrors[dayKey] = true;
+          isValid = false;
+        } else {
+          newErrors[dayKey] = false;
+        }
       }
     }
-  }
 
-  setServiceDayErrors(newErrors);
-  return isValid;
-};
+    setServiceDayErrors(newErrors);
+    return isValid;
+  };
 
   /**
    * Validates and submits the form
@@ -288,6 +288,11 @@ const validateServiceDays = (): boolean => {
     const bookingType =
       plan.title === "One Time" ? "one_time" : "recurring";
 
+    const selectedDate = serviceDates["day-1"].selectedDate;
+    const formattedDate = selectedDate
+      ? `${selectedDate.getFullYear()}-${String(selectedDate.getMonth() + 1).padStart(2, '0')}-${String(selectedDate.getDate()).padStart(2, '0')}`
+      : null;
+
     // Prepare the final data structure
     const bookingData = {
       serviceId: estimateValues?.cleaningType,
@@ -317,7 +322,7 @@ const validateServiceDays = (): boolean => {
       phone: values.phone,
       schedule,
       ...(bookingType === "one_time" && {
-        date: serviceDates["day-1"].selectedDate,
+        date: formattedDate,
         time: serviceDates["day-1"].timeSlot,
       }),
 
