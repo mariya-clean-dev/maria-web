@@ -12,6 +12,7 @@ interface TimeSlotSelectorProps {
   hasError?: boolean;
   // weekOfMonth: string | null;
   dayOfWeek: string | null;
+  selectedDate?: Date;
 }
 
 export function TimeSlotSelector({

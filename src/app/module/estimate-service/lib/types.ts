@@ -11,6 +11,7 @@ export interface ServiceDay {
   weekOfMonth: WeekOfMonth | null;
   dayOfWeek: DayOfWeek | null;
   timeSlot: TimeSlot | null;
+  selectedDate?: Date | null | undefined;
 }
 
 export interface ServiceDates {
