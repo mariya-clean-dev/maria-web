@@ -133,14 +133,14 @@ export const columns = [
 
       return (
         <div className="min-w-[100px]">
-          {/* {booking.nextMonthSchedule && ( */}
+          {booking.nextMonthSchedule && (
           <Button
             onClick={() => meta?.handleEditDate(booking)}
             className="bg-[#27AE60] hover:bg-[#27AE60]/90 text-white text-xs px-3 py-1 h-8"
           >
             Edit Date
           </Button>
-          {/* )} */}
+          )}
         </div>
       );
     },
