@@ -1,3 +1,5 @@
+/* eslint-disable react/no-unescaped-entities */
+
 // app/privacy/page.tsx
 import React from 'react';
 
