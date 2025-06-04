@@ -114,7 +114,7 @@ export default function Footer() {
                   href="mailto:contact@homemaster.pro"
                   className="text-gray-600 hover:text-[#19A4C6] transition-colors"
                 > */}
-                info@greenplanetcleaningservices.com
+                info@cleanmaria.com
                 {/* </a> */}
               </li>
               <li className="flex items-center">
@@ -123,7 +123,7 @@ export default function Footer() {
                   href="tel:+14802025906"
                   className="text-gray-600 hover:text-[#19A4C6] transition-colors"
                 > */}
-                415 895 0996
+                9255392941
                 {/* </a> */}
               </li>
             </ul>
@@ -138,13 +138,13 @@ export default function Footer() {
             </p>
             <div className="flex space-x-6">
               <Link
-                href="/terms"
+                href="/module/home/terms"
                 className="text-gray-500 text-sm hover:text-[#19A4C6] transition-colors"
               >
                 Terms of Service
               </Link>
               <Link
-                href="/privacy"
+                href="/module/home/privacy"
                 className="text-gray-500 text-sm hover:text-[#19A4C6] transition-colors"
               >
                 Privacy Policy
