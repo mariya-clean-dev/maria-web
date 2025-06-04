@@ -36,10 +36,10 @@ export function TimeSlotSelector({
     return (
       <div className="space-y-4">
         <h4 className={cn("font-medium", hasError ? "text-red-500" : "")}>
-          Select time slot for your service
+          Select time slot for your service 12
           {hasError && <span className="text-red-500 ml-1">*</span>}
         </h4>
-        <div className="p-4 bg-gray-50 rounded-md text-center text-gray-500">
+        <div className="p-2 bg-gray-50 rounded-md text-center text-gray-500">
           Please select a date first to view available time slots
         </div>
       </div>
@@ -91,12 +91,12 @@ export function TimeSlotSelector({
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-2">
       <h4 className={cn("font-medium", hasError ? "text-red-500" : "")}>
         Select time slot for your service
         {hasError && <span className="text-red-500 ml-1">*</span>}
       </h4>
-      <div className="space-y-2">
+      <div className="space-y-1">
         {timeSlotRows.map((row, rowIndex) => (
           <div key={`row-${rowIndex}`} className="grid grid-cols-4 gap-2">
             {row.map((slot, colIndex) => {

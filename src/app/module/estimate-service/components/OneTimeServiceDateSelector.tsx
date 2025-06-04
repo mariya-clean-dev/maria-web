@@ -149,7 +149,7 @@ export function OneTimeServiceDateSelector({
                 <DialogHeader>
                     <DialogTitle>Select Service Date & Time</DialogTitle>
                 </DialogHeader>
-                <div className="space-y-6 py-4">
+                <div className="space-y-1 py-1">
                     {/* Date Selection using Calendar */}
                     <div className="space-y-4">
                         <h4 className={cn("font-medium", hasError && !selectedCalendarDate && "text-red-500")}>
