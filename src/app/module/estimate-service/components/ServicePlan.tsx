@@ -389,7 +389,7 @@ export default function ServicePlan({ setEstimatePageView }: any) {
           className="max-w-6xl mx-auto"
         >
           <h1 className="text-3xl md:text-4xl font-bold mb-2 text-center">
-            Your estimates Results
+            Your Estimate Results
           </h1>
           <p className="text-gray-600 mb-12 text-center">
             This is a preliminary estimate. Final pricing may vary based on your home. We’re happy to tailor our services to fit your needs and preferences.
