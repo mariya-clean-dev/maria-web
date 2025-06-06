@@ -94,7 +94,7 @@ export default function ServicePlan({ setEstimatePageView }: any) {
     "day-4": false,
   });
 
-  const paymentMethodTypes = ["offline", "online"]
+  const paymentMethodTypes = ["Cash/Zelle/Venmo", "Card"]
 
   // Track if form submission was attempted
   const [submissionAttempted, setSubmissionAttempted] = useState(false);
@@ -304,7 +304,7 @@ export default function ServicePlan({ setEstimatePageView }: any) {
       areaSize: areaSize,
       isEco: estimateValues?.ecoFriendly,
       price: plan.finalPrice,
-      paymentMethod: values.paymentMethod,
+      paymentMethod: values.paymentMethod === "Cash/Zelle/Venmo" ? "offline" : "online",
       recurringTypeId:
         bookingType === "one_time" ? null : plan.recurringTypeId,
       address: {
@@ -392,14 +392,13 @@ export default function ServicePlan({ setEstimatePageView }: any) {
             Your estimates Results
           </h1>
           <p className="text-gray-600 mb-12 text-center">
-            Based on your requirements, here are our recommended cleaning plans
+            This is a preliminary estimate. Final pricing may vary based on your home. We’re happy to tailor our services to fit your needs and preferences.
           </p>
 
           {/* Pricing Plans Section */}
           <div className="mb-16">
             <h2 className="text-2xl md:text-3xl font-bold text-center mb-8">
-              We offer great <span className="text-[#27AE60]">price</span> plan
-              for the Services
+Enjoy guaranteed best <span className="text-[#27AE60]">pricing</span> and <span className="text-[#27AE60]">flexible</span> service options designed around you.
             </h2>
 
             <Form {...form}>

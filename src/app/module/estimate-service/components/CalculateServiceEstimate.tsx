@@ -294,7 +294,7 @@ export default function CalculateServiceEstimate({ setEstimatePageView }: any) {
                     name="rooms"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Number of rooms</FormLabel>
+                        <FormLabel>Number of bedrooms</FormLabel>
                         <div className="flex items-center space-x-4">
                           <div className="flex-1 relative">
                             <Slider

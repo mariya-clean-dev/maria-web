@@ -51,9 +51,9 @@ export default function Navbar() {
           <Image
             src="/logo.png"
             alt="Katrin Logo"
-            width={120}
-            height={40}
-            className="h-10 w-auto"
+            width={150}
+            height={60}
+            className="h-14 w-auto"
           />
         </Link>
 
