@@ -33,8 +33,10 @@ export default function HeroSection() {
                 transition={{ duration: 0.6, delay: 0.4 }}
                 className="text-lg mb-8 max-w-lg"
               >
-                We take pride in our attention to detail and commitment to
-                customer satisfaction.
+                {/* We take pride in our attention to detail and commitment to
+                customer satisfaction. */}
+                    We take pride in every detail<br/>
+                    delivering exceptional service and guaranteed satisfaction
               </motion.p>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
