@@ -126,8 +126,9 @@ export default function Footer() {
                 <a
                   href="tel:+19255392941"
                   className="text-gray-600 hover:text-[#19A4C6] transition-colors"
-                ></a>
-                925-539-2941
+                >
+                                  925-539-2941
+                </a>
                 {/* </a> */}
               </li>
             </ul>
