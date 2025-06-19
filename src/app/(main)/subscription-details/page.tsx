@@ -27,6 +27,7 @@ import { Loader2 } from "lucide-react";
 import { DateEditDialog } from "./components/DateEditDialog";
 import { useUpdateSchedule } from "@/queries/services/booking-details/useUpdateSchedule";
 import useCustomToast from "@/hooks/use-custom-toast";
+import axiosInstance from "@/services/axios";
 
 interface BookingData {
   id: string;
@@ -93,6 +94,29 @@ export default function BookingsPage() {
     pageSize: 10,
   });
 
+    const handleCancelSubscription = async (booking: BookingData) => {
+    if (!booking.id) {
+      showError("Booking ID is missing for cancellation.");
+      return;
+    }
+
+    if (!window.confirm("Are you sure you want to cancel this subscription? This action cannot be undone.")) {
+      return;
+    }
+
+    try {
+      const response = await axiosInstance.post(`/bookings/${booking.id}/cancel`);
+
+      success("Subscription cancelled successfully!");
+      queryClient.invalidateQueries({ queryKey: ["booking-details"] });
+
+    } catch (error: any) {
+      console.error("Error canceling subscription:", error);
+      const errorMessage = error.response?.data?.message || error.message || "An unknown error occurred during cancellation.";
+      showError(errorMessage);
+    }
+  };
+
   const table = useReactTable({
     data: bookings,
     columns,
@@ -110,6 +134,7 @@ export default function BookingsPage() {
         setSelectedBooking(booking);
         setIsDateEditOpen(true);
       },
+      handleCancelSubscription: handleCancelSubscription
     },
   });
 

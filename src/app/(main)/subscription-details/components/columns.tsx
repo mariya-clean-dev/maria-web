@@ -29,6 +29,7 @@ interface Booking {
     dayOfWeek: number;
     time: string;
   };
+  status: string
 }
 
 const columnHelper = createColumnHelper<Booking>();
@@ -125,6 +126,12 @@ export const columns = [
     }
   ),
 
+  columnHelper.accessor("status", {
+    header: "Status",
+    cell: (info) => <div className="min-w-[80px]">{info.getValue()}</div>,
+    size: 120,
+  }),
+
   columnHelper.display({
     id: "actions",
     header: "Actions",
@@ -140,6 +147,14 @@ export const columns = [
               className="bg-[#27AE60] hover:bg-[#27AE60]/90 text-white text-xs px-3 py-1 h-8"
             >
               Edit Date
+            </Button>
+          )}
+          {booking.type === "recurring" && booking.status !== "canceled" && (
+            <Button
+              onClick={() => meta?.handleCancelSubscription(booking)}
+              className="bg-red-500 hover:bg-red-600 text-white text-xs px-3 py-1 h-8 ms-1"
+            >
+              Cancel
             </Button>
           )}
         </div>
