@@ -398,7 +398,7 @@ export default function ServicePlan({ setEstimatePageView }: any) {
           {/* Pricing Plans Section */}
           <div className="mb-16">
             <h2 className="text-2xl md:text-3xl font-bold text-center mb-8">
-Enjoy guaranteed best <span className="text-[#27AE60]">pricing</span> and <span className="text-[#27AE60]">flexible</span> service options designed around you.
+              Enjoy guaranteed best <span className="text-[#27AE60]">pricing</span> and <span className="text-[#27AE60]">flexible</span> service options designed around you.
             </h2>
 
             <Form {...form}>
@@ -528,6 +528,7 @@ Enjoy guaranteed best <span className="text-[#27AE60]">pricing</span> and <span 
                                     onServiceDaySelect={(childDayKey, field, value) =>
                                       handleServiceDaySelect(childDayKey, field, value)
                                     }
+                                    totalDuration={servicePlan.totalDuration}
                                   />
                                 );
                               } else {
@@ -548,6 +549,7 @@ Enjoy guaranteed best <span className="text-[#27AE60]">pricing</span> and <span 
                                     onServiceDaySelect={(childDayKey, field, value) =>
                                       handleServiceDaySelect(childDayKey, field, value)
                                     }
+                                    totalDuration={servicePlan.totalDuration}
                                   />
                                 );
                               }

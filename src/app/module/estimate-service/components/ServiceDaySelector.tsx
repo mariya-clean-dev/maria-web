@@ -19,6 +19,7 @@ import type {
 import { WeekSelector } from "./WeekSelector";
 import { DaySelector } from "./DaySelector";
 import { TimeSlotSelector } from "./TimeSlotSelector";
+import { useEffect, useState } from "react";
 
 interface ServiceDaySelectorProps {
   dayIndex: number;
@@ -32,6 +33,7 @@ interface ServiceDaySelectorProps {
     field: "dayOfWeek" | "timeSlot",
     value: DayOfWeek | TimeSlot | null
   ) => void;
+  totalDuration: number | null;
 }
 
 export function ServiceDaySelector({
@@ -42,6 +44,7 @@ export function ServiceDaySelector({
   hasError = false,
   onDialogOpenChange,
   onServiceDaySelect,
+  totalDuration,
 }: ServiceDaySelectorProps) {
   // Check what's missing in the service day selection
   const getMissingSelections = () => {
@@ -124,6 +127,7 @@ export function ServiceDaySelector({
             onSelect={(time) => onServiceDaySelect(dayKey,"timeSlot", time)}
             hasError={hasError && !serviceDay.timeSlot}
             dayOfWeek={serviceDay.dayOfWeek}
+            totalDuration={totalDuration}
           />
 
           {/* Save Button */}

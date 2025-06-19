@@ -92,8 +92,13 @@ export default function LoginPage() {
       { email: values.email },
       {
         onSuccess: (data) => {
-          setOtpSent(true);
-          toast.success("OTP sent to your email");
+          if (data && data.message === "Not A Registered User") {
+            showError("This email is not registered. Please sign up or use a different email.");
+            setOtpSent(false);
+          } else {
+            setOtpSent(true);
+            toast.success("OTP sent to your email");
+          }
         },
         onError: (error) => {
           showError(error);
