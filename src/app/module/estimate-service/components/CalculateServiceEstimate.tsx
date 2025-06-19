@@ -95,6 +95,8 @@ export default function CalculateServiceEstimate({ setEstimatePageView }: any) {
       no_of_rooms: values.rooms,
       no_of_bathrooms: values.bathrooms,
       square_feet: Number(values.homeSize.split(" ")[2]),
+      materialsProvidedByClient: values.materialsProvided,
+      isEcoCleaning: values.ecoFriendly
     };
 
     estimateCalculation(estimatePayload, {

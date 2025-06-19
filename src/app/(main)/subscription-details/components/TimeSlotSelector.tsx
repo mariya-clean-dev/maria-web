@@ -11,6 +11,7 @@ interface TimeSlotSelectorProps {
   onSelect: (time: TimeSlot) => void;
   hasError?: boolean;
   selectedDate: Date | undefined;
+    totalDuration?: number | null
 }
 
 export function TimeSlotSelector({
@@ -18,6 +19,7 @@ export function TimeSlotSelector({
   onSelect,
   hasError = false,
   selectedDate,
+    totalDuration
 }: TimeSlotSelectorProps) {
   const dateParam = selectedDate
     ? `${selectedDate.getFullYear()}-${String(
@@ -26,7 +28,7 @@ export function TimeSlotSelector({
     : null;
 
   // Fetch time slots from API with the selected date
-  const { data, isLoading, isError, error } = useTimeSlotList(null, dateParam);
+  const { data, isLoading, isError, error } = useTimeSlotList(null, dateParam, totalDuration);
 
   // If date is not selected yet, show a message
   if (!selectedDate) {

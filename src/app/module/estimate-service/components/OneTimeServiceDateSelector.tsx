@@ -37,6 +37,7 @@ interface OneTimeServiceDateSelectorProps {
         field: "selectedDate" | "timeSlot",
         value: Date | TimeSlot | null
     ) => void;
+      totalDuration: number | null;
 }
 
 export function OneTimeServiceDateSelector({
@@ -47,6 +48,7 @@ export function OneTimeServiceDateSelector({
     hasError = false,
     onDialogOpenChange,
     onServiceDaySelect,
+      totalDuration,
 }: OneTimeServiceDateSelectorProps) {
     const [selectedCalendarDate, setSelectedCalendarDate] = useState<Date | undefined>(undefined);
 
@@ -173,6 +175,7 @@ export function OneTimeServiceDateSelector({
                         onSelect={handleTimeSelect}
                         hasError={hasError && !serviceDay.timeSlot}
                         selectedDate={selectedCalendarDate} // Pass the derived dayOfWeek
+                        totalDuration={totalDuration}
                     />
 
                     {/* Save Button */}

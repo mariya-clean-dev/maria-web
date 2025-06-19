@@ -13,6 +13,7 @@ interface TimeSlotSelectorProps {
   // weekOfMonth: string | null;
   dayOfWeek: string | null;
   selectedDate?: Date;
+  totalDuration?: number | null
 }
 
 export function TimeSlotSelector({
@@ -21,11 +22,18 @@ export function TimeSlotSelector({
   hasError = false,
   // weekOfMonth,
   dayOfWeek,
+  selectedDate,
+  totalDuration
 }: TimeSlotSelectorProps) {
   // Fetch time slots from API
+
+   const formattedDate = selectedDate ? selectedDate.toISOString().split('T')[0] : null;
+
   const { data, isLoading, isError, error } = useTimeSlotList(
     // weekOfMonth,
-    dayOfWeek
+    dayOfWeek,
+    formattedDate,
+    totalDuration
   );
 
   // If week or day is not selected yet, show a message
