@@ -98,6 +98,7 @@ export default function ServicePlan({ setEstimatePageView }: any) {
 
   // Track if form submission was attempted
   const [submissionAttempted, setSubmissionAttempted] = useState(false);
+  const [selectedPlanId, setSelectedPlanId] = useState<string | null>(null);
 
   // ======== Form Setup ========
   const form = useForm<FormValues>({
@@ -120,6 +121,10 @@ export default function ServicePlan({ setEstimatePageView }: any) {
 
   const selectedPlan = form.watch("plan");
   const bookingFormRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setSelectedPlanId(selectedPlan);
+  }, [selectedPlan]);
 
   useEffect(() => {
     if (selectedPlan && bookingFormRef.current) {
@@ -222,7 +227,7 @@ export default function ServicePlan({ setEstimatePageView }: any) {
         }
       } else {
         // For recurring plans, check dayOfWeek
-        if (!day.dayOfWeek || !day.timeSlot) {
+        if (!day.timeSlot) {
           newErrors[dayKey] = true;
           isValid = false;
         } else {
@@ -320,11 +325,8 @@ export default function ServicePlan({ setEstimatePageView }: any) {
       name: `${values.firstName} ${values.lastName}`,
       email: values.email,
       phone: values.phone,
-      schedule,
-      ...(bookingType === "one_time" && {
-        date: formattedDate,
-        time: serviceDates["day-1"].timeSlot,
-      }),
+      date: formattedDate,
+      time: serviceDates["day-1"].timeSlot,
 
     };
 
@@ -550,6 +552,7 @@ export default function ServicePlan({ setEstimatePageView }: any) {
                                       handleServiceDaySelect(childDayKey, field, value)
                                     }
                                     totalDuration={servicePlan.totalDuration}
+                                    selectedPlanId={selectedPlanId}
                                   />
                                 );
                               }

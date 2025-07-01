@@ -12,8 +12,9 @@ interface TimeSlotSelectorProps {
   hasError?: boolean;
   // weekOfMonth: string | null;
   dayOfWeek: string | null;
-  selectedDate?: Date;
-  totalDuration?: number | null
+  selectedDate?: Date | null;
+  totalDuration?: number | null;
+  selectedPlanId: string | null;
 }
 
 export function TimeSlotSelector({
@@ -23,7 +24,8 @@ export function TimeSlotSelector({
   // weekOfMonth,
   dayOfWeek,
   selectedDate,
-  totalDuration
+  totalDuration,
+  selectedPlanId,
 }: TimeSlotSelectorProps) {
   // Fetch time slots from API
 
@@ -33,11 +35,14 @@ export function TimeSlotSelector({
     // weekOfMonth,
     dayOfWeek,
     formattedDate,
-    totalDuration
+    totalDuration,
+    selectedPlanId 
   );
 
+  console.log(formattedDate);
+
   // If week or day is not selected yet, show a message
-  if (!dayOfWeek) {
+  if (!selectedDate) {
     return (
       <div className="space-y-4">
         <h4 className={cn("font-medium", hasError ? "text-red-500" : "")}>

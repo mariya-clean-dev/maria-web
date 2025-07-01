@@ -11,7 +11,7 @@ export interface TimeSlotResponse {
   }>;
 }
 
-const fetchTimeSlot = async (dayOfWeek?: number, date?: string, totalDuration?: number) => {
+const fetchTimeSlot = async (dayOfWeek?: number, date?: string, totalDuration?: number, planId?: string) => {
   const params: Record<string, any> = {};
 
   // Only add dayOfWeek if it's a valid number and no date is provided
@@ -28,6 +28,11 @@ const fetchTimeSlot = async (dayOfWeek?: number, date?: string, totalDuration?: 
     params.date = date;
   }
 
+  if (planId) {
+    params.planId = planId; // Assuming your backend expects 'recurringTypeId'
+  }
+
+
   const response = await axiosInstance.get(`/scheduler/time-slots`, {
     params,
   });
@@ -37,7 +42,8 @@ const fetchTimeSlot = async (dayOfWeek?: number, date?: string, totalDuration?: 
 const useTimeSlotList = (
   dayOfWeek: string | null = null,
   date: string | null = null,
-  totalDuration: number | null = null
+  totalDuration: number | null = null,
+  planId: string | null = null
 ) => {
   // Only convert dayOfWeek if it's not null
   const dayNumber = dayOfWeek ? dayOfWeekToNumber(dayOfWeek) : -1;
@@ -46,19 +52,22 @@ const useTimeSlotList = (
   const hasValidDayOfWeek = dayOfWeek !== null && dayNumber >= 0;
   const hasValidDate = date !== null && date.length > 0;
   const hasValidTotalDuration = totalDuration !== null && totalDuration > 0;
+  const hasValidPlanId = planId !== null
 
   return useQuery({
     queryKey: [
       "time-slot-list",
       hasValidDayOfWeek ? dayNumber : null,
       hasValidDate ? date : null,
-      hasValidTotalDuration ? totalDuration : null
+      hasValidTotalDuration ? totalDuration : null,
+      hasValidPlanId ? planId : null
     ],
     queryFn: () =>
       fetchTimeSlot(
         hasValidDayOfWeek ? dayNumber : undefined,
         hasValidDate ? date : undefined,
-        hasValidTotalDuration ? totalDuration : undefined
+        hasValidTotalDuration ? totalDuration : undefined,
+        hasValidPlanId ? planId : undefined
       ),
     // Enable only if we have either a valid dayOfWeek OR a valid date, but not both
     enabled: hasValidDayOfWeek || hasValidDate,
