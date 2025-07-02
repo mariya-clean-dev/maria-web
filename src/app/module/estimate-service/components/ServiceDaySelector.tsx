@@ -1,5 +1,5 @@
 "use client";
-import { Calendar, AlertCircle } from "lucide-react";
+import { Calendar as CalendarIcon, AlertCircle } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
@@ -20,6 +20,7 @@ import { WeekSelector } from "./WeekSelector";
 import { DaySelector } from "./DaySelector";
 import { TimeSlotSelector } from "./TimeSlotSelector";
 import { useEffect, useState } from "react";
+import { Calendar } from "@/components/ui/calendar";
 
 interface ServiceDaySelectorProps {
   dayIndex: number;
@@ -30,10 +31,11 @@ interface ServiceDaySelectorProps {
   onDialogOpenChange: (isOpen: boolean) => void;
   onServiceDaySelect: (
     dayKey: string,
-    field: "dayOfWeek" | "timeSlot",
-    value: DayOfWeek | TimeSlot | null
+    field: "selectedDate" | "timeSlot",
+    value: Date | TimeSlot | null
   ) => void;
   totalDuration: number | null;
+  selectedPlanId: string | null;
 }
 
 export function ServiceDaySelector({
@@ -45,18 +47,64 @@ export function ServiceDaySelector({
   onDialogOpenChange,
   onServiceDaySelect,
   totalDuration,
+  selectedPlanId,
 }: ServiceDaySelectorProps) {
+  const [selectedCalendarDate, setSelectedCalendarDate] = useState<Date | undefined>(
+    serviceDay.selectedDate ? new Date(serviceDay.selectedDate) : undefined
+  );
+
+  useEffect(() => {
+    setSelectedCalendarDate(serviceDay.selectedDate ? new Date(serviceDay.selectedDate) : undefined);
+  }, [serviceDay.selectedDate]);
+
   // Check what's missing in the service day selection
   const getMissingSelections = () => {
     const missing = [];
     // if (!serviceDay.weekOfMonth) missing.push("week");
-    if (!serviceDay.dayOfWeek) missing.push("day");
+    if (!selectedCalendarDate) missing.push("date");
     if (!serviceDay.timeSlot) missing.push("time");
     return missing;
   };
 
   const missingSelections = getMissingSelections();
   const isComplete = missingSelections.length === 0;
+
+  // Handler for calendar date selection
+  const handleDateSelect = (date: Date | undefined) => {
+    setSelectedCalendarDate(date);
+    onServiceDaySelect(dayKey, "selectedDate", date || null); // Pass date to parent
+  };
+
+  // Function to disable dates
+  const isDateDisabled = (date: Date) => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Normalize today to start of day
+
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1); // Start from tomorrow
+
+    const twentyTwoDaysFromTomorrow = new Date(tomorrow);
+    twentyTwoDaysFromTomorrow.setDate(tomorrow.getDate() + 21); // 21 days after tomorrow makes it 22 days inclusive
+
+    // Check if the date is before tomorrow or after 22 days from tomorrow
+    return date < tomorrow || date > twentyTwoDaysFromTomorrow;
+  };
+
+    const getNextServiceDay = () => {
+    if (!selectedCalendarDate) return null;
+
+    const nextDate = new Date(selectedCalendarDate);
+    if (selectedPlanId === "61e437e4-8397-4cff-972c-3a9047dfba0e") {
+      nextDate.setDate(selectedCalendarDate.getDate() + 7);
+      return nextDate;
+    } else if (selectedPlanId === "152445a3-a9eb-48f8-9b9a-113de83c2504") {
+      nextDate.setDate(selectedCalendarDate.getDate() + 14);
+      return nextDate;
+    }
+    return null;
+  };
+
+  const nextServiceDay = getNextServiceDay();
 
   return (
     <Dialog open={isDialogOpen} onOpenChange={onDialogOpenChange}>
@@ -74,7 +122,7 @@ export function ServiceDaySelector({
             {hasError ? (
               <AlertCircle className="h-8 w-8 text-red-500 mb-2" />
             ) : (
-              <Calendar className="h-8 w-8 text-[#27AE60] mb-2" />
+              <CalendarIcon className="h-8 w-8 text-[#27AE60] mb-2" />
             )}
 
             <h4 className="font-medium text-lg mb-1">
@@ -83,8 +131,11 @@ export function ServiceDaySelector({
 
             {isComplete ? (
               <div className="text-sm text-gray-600 text-center">
-                {/* <p className="font-medium">{serviceDay.weekOfMonth}</p> */}
-                <p>{serviceDay.dayOfWeek}</p>
+                <p>
+                  {selectedCalendarDate
+                    ? selectedCalendarDate.toLocaleDateString()
+                    : "N/A"}
+                </p>
                 <p>{serviceDay.timeSlot}</p>
               </div>
             ) : (
@@ -102,7 +153,7 @@ export function ServiceDaySelector({
           </CardContent>
         </Card>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-md overflow-y-auto max-h-[90vh]">
         <DialogHeader>
           <DialogTitle>Select Service Day {dayIndex + 1}</DialogTitle>
         </DialogHeader>
@@ -115,19 +166,39 @@ export function ServiceDaySelector({
           /> */}
 
           {/* Day of Week Selection */}
-          <DaySelector
-            selectedDay={serviceDay.dayOfWeek}
-            onSelect={(day) => onServiceDaySelect(dayKey,"dayOfWeek", day)}
-            hasError={hasError && !serviceDay.dayOfWeek}
-          />
+          <div className="space-y-4">
+            <p className="text-sm text-red-500 text-center mb-2">
+              * This selected date determines the fixed day of the week for recurring plans.
+            </p>
+            <h4 className={cn("font-medium", hasError && !selectedCalendarDate && "text-red-500")}>
+              Select a date
+              {hasError && !selectedCalendarDate && <span className="text-red-500 ml-1">*</span>}
+            </h4>
+            <div className="flex justify-center">
+            <Calendar
+              mode="single"
+              selected={selectedCalendarDate}
+              onSelect={handleDateSelect}
+              disabled={isDateDisabled}
+              className="rounded-md border mx-auto"
+            />
+            </div>
+            {nextServiceDay && (
+              <p className="text-sm text-gray-600 text-center mt-2">
+                Next Service Day: {nextServiceDay.toLocaleDateString()}
+              </p>
+            )}
+          </div>
 
           {/* Time Slot Selection */}
           <TimeSlotSelector
             selectedTimeSlot={serviceDay.timeSlot}
-            onSelect={(time) => onServiceDaySelect(dayKey,"timeSlot", time)}
+            onSelect={(time) => onServiceDaySelect(dayKey, "timeSlot", time)}
             hasError={hasError && !serviceDay.timeSlot}
             dayOfWeek={serviceDay.dayOfWeek}
+            selectedDate={selectedCalendarDate}
             totalDuration={totalDuration}
+            selectedPlanId={selectedPlanId} 
           />
 
           {/* Save Button */}
