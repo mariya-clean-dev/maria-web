@@ -38,7 +38,6 @@ export const columns = [
   columnHelper.accessor(
     (row) => {
       // Add debugging to see what's coming in
-      console.log("Processing row:", row);
       if (row.type === "recurring") {
         return row.type;
       }

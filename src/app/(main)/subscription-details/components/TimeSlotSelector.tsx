@@ -11,7 +11,7 @@ interface TimeSlotSelectorProps {
   onSelect: (time: TimeSlot) => void;
   hasError?: boolean;
   selectedDate: Date | undefined;
-    totalDuration?: number | null
+  totalDuration?: number | null
 }
 
 export function TimeSlotSelector({
@@ -19,7 +19,7 @@ export function TimeSlotSelector({
   onSelect,
   hasError = false,
   selectedDate,
-    totalDuration
+  totalDuration
 }: TimeSlotSelectorProps) {
   const dateParam = selectedDate
     ? `${selectedDate.getFullYear()}-${String(
