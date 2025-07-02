@@ -29,17 +29,22 @@ export function TimeSlotSelector({
 }: TimeSlotSelectorProps) {
   // Fetch time slots from API
 
-   const formattedDate = selectedDate ? selectedDate.toISOString().split('T')[0] : null;
+  let dateForApiCall: string | null = null;
+  if (selectedDate) {
+    const datePlusOneDay = new Date(selectedDate);
+    datePlusOneDay.setDate(selectedDate.getDate() + 1);
+    dateForApiCall = datePlusOneDay.toISOString().split('T')[0];
+  }
+
+  const formattedDate = selectedDate ? selectedDate.toISOString().split('T')[0] : null;
 
   const { data, isLoading, isError, error } = useTimeSlotList(
     // weekOfMonth,
     dayOfWeek,
-    formattedDate,
+    dateForApiCall,
     totalDuration,
-    selectedPlanId 
+    selectedPlanId
   );
-
-  console.log(formattedDate);
 
   // If week or day is not selected yet, show a message
   if (!selectedDate) {
@@ -121,13 +126,13 @@ export function TimeSlotSelector({
                   !slot.isAvailable
                     ? "bg-[#FFDAD6] text-[#E53935] border-[#E53935] opacity-70 cursor-not-allowed"
                     : selectedTimeSlot === slot.time
-                    ? // : selectedTimeSlot === formatTime(slot.time)
+                      ? // : selectedTimeSlot === formatTime(slot.time)
                       "bg-[#19A4C6] text-white border-[#19A4C6]"
-                    : "",
+                      : "",
                   hasError &&
-                    !selectedTimeSlot &&
-                    slot.isAvailable &&
-                    "border-red-500 border-2"
+                  !selectedTimeSlot &&
+                  slot.isAvailable &&
+                  "border-red-500 border-2"
                 )}
                 onClick={() => {
                   if (slot.isAvailable) {

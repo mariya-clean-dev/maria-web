@@ -90,6 +90,22 @@ export function ServiceDaySelector({
     return date < tomorrow || date > twentyTwoDaysFromTomorrow;
   };
 
+    const getNextServiceDay = () => {
+    if (!selectedCalendarDate) return null;
+
+    const nextDate = new Date(selectedCalendarDate);
+    if (selectedPlanId === "61e437e4-8397-4cff-972c-3a9047dfba0e") {
+      nextDate.setDate(selectedCalendarDate.getDate() + 7);
+      return nextDate;
+    } else if (selectedPlanId === "152445a3-a9eb-48f8-9b9a-113de83c2504") {
+      nextDate.setDate(selectedCalendarDate.getDate() + 14);
+      return nextDate;
+    }
+    return null;
+  };
+
+  const nextServiceDay = getNextServiceDay();
+
   return (
     <Dialog open={isDialogOpen} onOpenChange={onDialogOpenChange}>
       <DialogTrigger asChild>
@@ -151,6 +167,9 @@ export function ServiceDaySelector({
 
           {/* Day of Week Selection */}
           <div className="space-y-4">
+            <p className="text-sm text-red-500 text-center mb-2">
+              * This selected date determines the fixed day of the week for recurring plans.
+            </p>
             <h4 className={cn("font-medium", hasError && !selectedCalendarDate && "text-red-500")}>
               Select a date
               {hasError && !selectedCalendarDate && <span className="text-red-500 ml-1">*</span>}
@@ -164,6 +183,11 @@ export function ServiceDaySelector({
               className="rounded-md border mx-auto"
             />
             </div>
+            {nextServiceDay && (
+              <p className="text-sm text-gray-600 text-center mt-2">
+                Next Service Day: {nextServiceDay.toLocaleDateString()}
+              </p>
+            )}
           </div>
 
           {/* Time Slot Selection */}
