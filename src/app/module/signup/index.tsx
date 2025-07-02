@@ -47,7 +47,7 @@ export default function SignupModule() {
 
   // Form submission handler
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+    // console.log(values);
     // Here you would typically send the data to your API
     // For example: signUp(values)
   }

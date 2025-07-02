@@ -84,8 +84,6 @@ export function DateEditDialog({
         }
       );
 
-      console.log("Updating booking with date:", isoDate, "time:", time24h);
-
       // Call the update function
       await onUpdate(booking.id, isoDate, time24h);
     } catch (err) {
@@ -133,6 +131,7 @@ export function DateEditDialog({
             onSelect={setSelectedTime}
             hasError={!selectedTime}
             selectedDate={selectedDate}
+            totalDuration={booking.durationMins}
           />
         </div>
 

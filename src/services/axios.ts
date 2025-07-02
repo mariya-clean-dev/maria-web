@@ -13,7 +13,7 @@ axiosInstance.interceptors.request.use(
     let token;
 
     token = sessionStorage.getItem("maria_access_token");
-    console.log(token, "token");
+    // console.log(token, "token");
     if (typeof window !== "undefined") {
       token = sessionStorage.getItem("maria_access_token");
 

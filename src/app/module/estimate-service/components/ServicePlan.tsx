@@ -155,9 +155,9 @@ export default function ServicePlan({ setEstimatePageView }: any) {
       },
     }));
 
-    if (field === "selectedDate") {
-      console.log(value);
-    }
+    // if (field === "selectedDate") {
+    //   console.log(value);
+    // }
 
     // Clear error for this day if it was previously marked as error
     if (serviceDayErrors[dayKey]) {
