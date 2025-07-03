@@ -94,10 +94,11 @@ export default function ServicePlan({ setEstimatePageView }: any) {
     "day-4": false,
   });
 
-  const paymentMethodTypes = ["offline", "online"]
+  const paymentMethodTypes = ["Cash/Zelle/Venmo", "Card"]
 
   // Track if form submission was attempted
   const [submissionAttempted, setSubmissionAttempted] = useState(false);
+  const [selectedPlanId, setSelectedPlanId] = useState<string | null>(null);
 
   // ======== Form Setup ========
   const form = useForm<FormValues>({
@@ -120,6 +121,10 @@ export default function ServicePlan({ setEstimatePageView }: any) {
 
   const selectedPlan = form.watch("plan");
   const bookingFormRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setSelectedPlanId(selectedPlan);
+  }, [selectedPlan]);
 
   useEffect(() => {
     if (selectedPlan && bookingFormRef.current) {
@@ -150,9 +155,9 @@ export default function ServicePlan({ setEstimatePageView }: any) {
       },
     }));
 
-    if (field === "selectedDate") {
-      console.log(value);
-    }
+    // if (field === "selectedDate") {
+    //   console.log(value);
+    // }
 
     // Clear error for this day if it was previously marked as error
     if (serviceDayErrors[dayKey]) {
@@ -222,7 +227,7 @@ export default function ServicePlan({ setEstimatePageView }: any) {
         }
       } else {
         // For recurring plans, check dayOfWeek
-        if (!day.dayOfWeek || !day.timeSlot) {
+        if (!day.timeSlot) {
           newErrors[dayKey] = true;
           isValid = false;
         } else {
@@ -304,7 +309,7 @@ export default function ServicePlan({ setEstimatePageView }: any) {
       areaSize: areaSize,
       isEco: estimateValues?.ecoFriendly,
       price: plan.finalPrice,
-      paymentMethod: values.paymentMethod,
+      paymentMethod: values.paymentMethod === "Cash/Zelle/Venmo" ? "offline" : "online",
       recurringTypeId:
         bookingType === "one_time" ? null : plan.recurringTypeId,
       address: {
@@ -320,11 +325,8 @@ export default function ServicePlan({ setEstimatePageView }: any) {
       name: `${values.firstName} ${values.lastName}`,
       email: values.email,
       phone: values.phone,
-      schedule,
-      ...(bookingType === "one_time" && {
-        date: formattedDate,
-        time: serviceDates["day-1"].timeSlot,
-      }),
+      date: formattedDate,
+      time: serviceDates["day-1"].timeSlot,
 
     };
 
@@ -389,17 +391,16 @@ export default function ServicePlan({ setEstimatePageView }: any) {
           className="max-w-6xl mx-auto"
         >
           <h1 className="text-3xl md:text-4xl font-bold mb-2 text-center">
-            Your estimates Results
+            Your Estimate Results
           </h1>
           <p className="text-gray-600 mb-12 text-center">
-            Based on your requirements, here are our recommended cleaning plans
+            This is a preliminary estimate. Final pricing may vary based on your home. We’re happy to tailor our services to fit your needs and preferences.
           </p>
 
           {/* Pricing Plans Section */}
           <div className="mb-16">
             <h2 className="text-2xl md:text-3xl font-bold text-center mb-8">
-              We offer great <span className="text-[#27AE60]">price</span> plan
-              for the Services
+              Enjoy guaranteed best <span className="text-[#27AE60]">pricing</span> and <span className="text-[#27AE60]">flexible</span> service options designed around you.
             </h2>
 
             <Form {...form}>
@@ -529,6 +530,7 @@ export default function ServicePlan({ setEstimatePageView }: any) {
                                     onServiceDaySelect={(childDayKey, field, value) =>
                                       handleServiceDaySelect(childDayKey, field, value)
                                     }
+                                    totalDuration={servicePlan.totalDuration}
                                   />
                                 );
                               } else {
@@ -549,6 +551,8 @@ export default function ServicePlan({ setEstimatePageView }: any) {
                                     onServiceDaySelect={(childDayKey, field, value) =>
                                       handleServiceDaySelect(childDayKey, field, value)
                                     }
+                                    totalDuration={servicePlan.totalDuration}
+                                    selectedPlanId={selectedPlanId}
                                   />
                                 );
                               }

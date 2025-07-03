@@ -95,6 +95,8 @@ export default function CalculateServiceEstimate({ setEstimatePageView }: any) {
       no_of_rooms: values.rooms,
       no_of_bathrooms: values.bathrooms,
       square_feet: Number(values.homeSize.split(" ")[2]),
+      materialsProvidedByClient: values.materialsProvided,
+      isEcoCleaning: values.ecoFriendly
     };
 
     estimateCalculation(estimatePayload, {
@@ -294,7 +296,7 @@ export default function CalculateServiceEstimate({ setEstimatePageView }: any) {
                     name="rooms"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Number of rooms</FormLabel>
+                        <FormLabel>Number of bedrooms</FormLabel>
                         <div className="flex items-center space-x-4">
                           <div className="flex-1 relative">
                             <Slider

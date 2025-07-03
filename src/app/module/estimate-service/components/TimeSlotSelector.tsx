@@ -12,7 +12,9 @@ interface TimeSlotSelectorProps {
   hasError?: boolean;
   // weekOfMonth: string | null;
   dayOfWeek: string | null;
-  selectedDate?: Date;
+  selectedDate?: Date | null;
+  totalDuration?: number | null;
+  selectedPlanId: string | null;
 }
 
 export function TimeSlotSelector({
@@ -21,15 +23,31 @@ export function TimeSlotSelector({
   hasError = false,
   // weekOfMonth,
   dayOfWeek,
+  selectedDate,
+  totalDuration,
+  selectedPlanId,
 }: TimeSlotSelectorProps) {
   // Fetch time slots from API
+
+  let dateForApiCall: string | null = null;
+  if (selectedDate) {
+    const datePlusOneDay = new Date(selectedDate);
+    datePlusOneDay.setDate(selectedDate.getDate() + 1);
+    dateForApiCall = datePlusOneDay.toISOString().split('T')[0];
+  }
+
+  const formattedDate = selectedDate ? selectedDate.toISOString().split('T')[0] : null;
+
   const { data, isLoading, isError, error } = useTimeSlotList(
     // weekOfMonth,
-    dayOfWeek
+    dayOfWeek,
+    dateForApiCall,
+    totalDuration,
+    selectedPlanId
   );
 
   // If week or day is not selected yet, show a message
-  if (!dayOfWeek) {
+  if (!selectedDate) {
     return (
       <div className="space-y-4">
         <h4 className={cn("font-medium", hasError ? "text-red-500" : "")}>
@@ -108,13 +126,13 @@ export function TimeSlotSelector({
                   !slot.isAvailable
                     ? "bg-[#FFDAD6] text-[#E53935] border-[#E53935] opacity-70 cursor-not-allowed"
                     : selectedTimeSlot === slot.time
-                    ? // : selectedTimeSlot === formatTime(slot.time)
+                      ? // : selectedTimeSlot === formatTime(slot.time)
                       "bg-[#19A4C6] text-white border-[#19A4C6]"
-                    : "",
+                      : "",
                   hasError &&
-                    !selectedTimeSlot &&
-                    slot.isAvailable &&
-                    "border-red-500 border-2"
+                  !selectedTimeSlot &&
+                  slot.isAvailable &&
+                  "border-red-500 border-2"
                 )}
                 onClick={() => {
                   if (slot.isAvailable) {
