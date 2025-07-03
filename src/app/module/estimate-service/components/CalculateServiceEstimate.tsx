@@ -427,7 +427,7 @@ export default function CalculateServiceEstimate({ setEstimatePageView }: any) {
                               </FormLabel>
                             </div>
                             <FormDescription className="text-sm text-gray-500">
-                              We provide all cleaning materials and equipment
+                              Client provides all cleaning materials and equipment
                             </FormDescription>
                           </div>
                           <FormControl>
