@@ -221,7 +221,7 @@ const ImageSection = () => {
               </div>
               <div>
                 <h3 className="font-semibold text-lg text-gray-800">
-                  Customisable services
+                  Customizable services
                 </h3>
                 <p className="text-gray-600">
                   No two homes are the same. That’s why we let you tailor our services to match your exact cleaning priorities and preferences.

@@ -133,7 +133,7 @@ export function ServiceDaySelector({
               <div className="text-sm text-gray-600 text-center">
                 <p>
                   {selectedCalendarDate
-                    ? selectedCalendarDate.toLocaleDateString()
+                    ? selectedCalendarDate.toLocaleDateString("en-US")
                     : "N/A"}
                 </p>
                 <p>{serviceDay.timeSlot}</p>
