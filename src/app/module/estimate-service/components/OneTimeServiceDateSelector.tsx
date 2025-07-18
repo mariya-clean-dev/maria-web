@@ -147,7 +147,7 @@ export function OneTimeServiceDateSelector({
                     </CardContent>
                 </Card>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-md">
+            <DialogContent className="sm:max-w-md overflow-y-auto max-h-[90vh]">
                 <DialogHeader>
                     <DialogTitle>Select Service Date & Time</DialogTitle>
                 </DialogHeader>
