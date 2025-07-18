@@ -407,7 +407,12 @@ export default function CalculateServiceEstimate({ setEstimatePageView }: any) {
                           <FormControl>
                             <Switch
                               checked={field.value}
-                              onCheckedChange={field.onChange}
+                              onCheckedChange={(checked) => {
+                                field.onChange(checked);
+                                if (checked) {
+                                  form.setValue("materialsProvided", false);
+                                }
+                              }}
                               className="data-[state=checked]:bg-primary"
                             />
                           </FormControl>
@@ -435,7 +440,12 @@ export default function CalculateServiceEstimate({ setEstimatePageView }: any) {
                           <FormControl>
                             <Switch
                               checked={field.value}
-                              onCheckedChange={field.onChange}
+                              onCheckedChange={(checked) => {
+                                field.onChange(checked);
+                                if (checked) {
+                                  form.setValue("ecoFriendly", false);
+                                }
+                              }}
                               className="data-[state=checked]:bg-[#19A4C6]"
                             />
                           </FormControl>
