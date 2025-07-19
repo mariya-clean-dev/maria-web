@@ -94,7 +94,8 @@ export default function ServicePlan({ setEstimatePageView }: any) {
     "day-4": false,
   });
 
-  const paymentMethodTypes = ["Cash/Zelle/Venmo", "Card"]
+  // const paymentMethodTypes = ["Cash/Zelle/Venmo", "Card"]
+  const paymentMethodTypes = ["Cash/Zelle/Venmo"]
 
   // Track if form submission was attempted
   const [submissionAttempted, setSubmissionAttempted] = useState(false);
