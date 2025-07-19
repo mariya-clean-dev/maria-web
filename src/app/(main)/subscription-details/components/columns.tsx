@@ -125,11 +125,15 @@ export const columns = [
     }
   ),
 
-  columnHelper.accessor("status", {
-    header: "Status",
-    cell: (info) => <div className="min-w-[80px]">{info.getValue()}</div>,
-    size: 120,
-  }),
+columnHelper.accessor("status", {
+  header: "Status",
+  cell: (info) => {
+    const status = info.getValue();
+    const formattedStatus = status === "canceled" ? "Cancelled" : status;
+    return <div className="min-w-[80px]">{formattedStatus}</div>;
+  },
+  size: 120,
+}),
 
   columnHelper.display({
     id: "actions",
