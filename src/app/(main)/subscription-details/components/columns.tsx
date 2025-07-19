@@ -148,7 +148,7 @@ export const columns = [
               Edit Date
             </Button>
           )}
-          {booking.type === "recurring" && booking.status !== "cancelled" && booking.status !== "completed" && (
+          {booking.type === "recurring" && booking.status !== "canceled" && booking.status !== "completed" && (
             <Button
               onClick={() => meta?.handleCancelSubscription(booking)}
               className="bg-red-500 hover:bg-red-600 text-white text-xs px-3 py-1 h-8 ms-1"
