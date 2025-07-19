@@ -34,7 +34,7 @@ export function PlanCard({ plan, field }: PlanCardProps) {
     const baseFeatures = ["Room Cleaning", "Bathroom Cleaning"];
 
     if (planName.includes("Weekly")) {
-      return [...baseFeatures, "Weekly Schedule", "Priority Booking"];
+      return [...baseFeatures, "Flexible Scheduling", "Priority Booking"];
     }
 
     if (planName.includes("Monthly")) {
