@@ -17,7 +17,7 @@ const testimonials = [
   {
     headline: "Outstanding results every time!",
     content:
-      "I've been using HomeMaster for my home cleaning needs for over a year now, and they consistently deliver outstanding results.",
+      "I've been using Clean by Maria for my home cleaning needs for over a year now, and they consistently deliver outstanding results.",
     author: "Sarah Davis",
     position: "Co-founder, MasterPlate",
     avatar: "/placeholder.svg?height=40&width=40",
@@ -25,7 +25,7 @@ const testimonials = [
   {
     headline: "Effortless booking process!",
     content:
-      "I've been using HomeMaster for my home cleaning needs for over a year now, and they consistently deliver outstanding results.",
+      "I've been using Clean by Maria for my home cleaning needs for over a year now, and they consistently deliver outstanding results.",
     author: "Emily Johnson",
     position: "Founder",
     avatar: "/placeholder.svg?height=40&width=40",
@@ -33,7 +33,7 @@ const testimonials = [
   {
     headline: "Exceptional customer service!",
     content:
-      "I've been using HomeMaster for my home cleaning needs for over a year now, and they consistently deliver outstanding results.",
+      "I've been using Clean by Maria for my home cleaning needs for over a year now, and they consistently deliver outstanding results.",
     author: "David Williams",
     position: "Marketing managers",
     avatar: "/placeholder.svg?height=40&width=40",
@@ -49,7 +49,7 @@ const testimonials = [
   {
     headline: "Reliable and trustworthy!",
     content:
-      "I can always count on HomeMaster to provide consistent quality. Their staff is trustworthy and I feel comfortable having them in my home.",
+      "I can always count on Clean by Maria to provide consistent quality. Their staff is trustworthy and I feel comfortable having them in my home.",
     author: "Jennifer Lee",
     position: "Interior Designer",
     avatar: "/placeholder.svg?height=40&width=40",
