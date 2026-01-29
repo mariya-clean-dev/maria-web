@@ -125,11 +125,15 @@ export const columns = [
     }
   ),
 
-  columnHelper.accessor("status", {
-    header: "Status",
-    cell: (info) => <div className="min-w-[80px]">{info.getValue()}</div>,
-    size: 120,
-  }),
+columnHelper.accessor("status", {
+  header: "Status",
+  cell: (info) => {
+    const status = info.getValue();
+    const formattedStatus = status === "canceled" ? "Cancelled" : status;
+    return <div className="min-w-[80px]">{formattedStatus}</div>;
+  },
+  size: 120,
+}),
 
   columnHelper.display({
     id: "actions",
@@ -140,7 +144,7 @@ export const columns = [
 
       return (
         <div className="min-w-[100px]">
-          {booking.nextMonthSchedule && (
+          {booking.nextMonthSchedule && booking.status !== "cancelled" && booking.status !== "completed" && (
             <Button
               onClick={() => meta?.handleEditDate(booking)}
               className="bg-[#27AE60] hover:bg-[#27AE60]/90 text-white text-xs px-3 py-1 h-8"
@@ -148,7 +152,7 @@ export const columns = [
               Edit Date
             </Button>
           )}
-          {booking.type === "recurring" && booking.status !== "canceled" && (
+          {booking.type === "recurring" && booking.status !== "canceled" && booking.status !== "completed" && (
             <Button
               onClick={() => meta?.handleCancelSubscription(booking)}
               className="bg-red-500 hover:bg-red-600 text-white text-xs px-3 py-1 h-8 ms-1"

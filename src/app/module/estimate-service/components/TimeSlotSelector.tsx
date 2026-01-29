@@ -28,11 +28,10 @@ export function TimeSlotSelector({
   selectedPlanId,
 }: TimeSlotSelectorProps) {
   // Fetch time slots from API
-
   let dateForApiCall: string | null = null;
   if (selectedDate) {
     const datePlusOneDay = new Date(selectedDate);
-    datePlusOneDay.setDate(selectedDate.getDate() + 1);
+    datePlusOneDay.setDate(selectedDate.getDate());
     dateForApiCall = datePlusOneDay.toISOString().split('T')[0];
   }
 

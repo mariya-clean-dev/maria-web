@@ -25,13 +25,14 @@ import {
 import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
 import { Card, CardContent } from "@/components/ui/card";
-import { Leaf, Loader, Package } from "lucide-react";
+import { Factory, Leaf, Loader, Minus, Package, Plus } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { useEstimateCalculation } from "@/queries/estimate-calculation/useEstimateCalculation";
 import useListServices from "@/queries/services/useListServices";
 import useCustomToast from "@/hooks/use-custom-toast";
 import { useEstimateStore } from "@/store/useEstimateStore";
 import { useServicePlanStore } from "@/store/useServicePlanStore";
+import Stepper from "./Stepper";
 
 // Define form validation schema
 const formSchema = z.object({
@@ -62,7 +63,7 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>;
 
-export default function CalculateServiceEstimate({ setEstimatePageView }: any) {
+export default function CalculateServiceEstimate({ setView  }: any) {
   const [roomsValue, setRoomsValue] = useState(0);
   const [bathroomsValue, setBathroomsValue] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
@@ -105,7 +106,7 @@ export default function CalculateServiceEstimate({ setEstimatePageView }: any) {
         setEstimateValues(values);
         setServicePlan(resp.data);
         success("Estimate calculated successfully!");
-        setEstimatePageView(false);
+        setView("plans");
       },
       onError: (error) => {
         console.log("Error calculating estimate:", error);
@@ -153,6 +154,32 @@ export default function CalculateServiceEstimate({ setEstimatePageView }: any) {
     form.setValue("bathrooms", clampedValue);
   };
 
+
+  const incrementRooms = () => {
+    handleRoomsInputChange({
+      target: { value: String(roomsValue + 1) },
+    } as React.ChangeEvent<HTMLInputElement>);
+  };
+
+  const decrementRooms = () => {
+    handleRoomsInputChange({
+      target: { value: String(roomsValue - 1) },
+    } as React.ChangeEvent<HTMLInputElement>);
+  };
+
+  const incrementBathrooms = () => {
+    handleBathroomsInputChange({
+      target: { value: String(bathroomsValue + 1) },
+    } as React.ChangeEvent<HTMLInputElement>);
+  };
+
+  const decrementBathrooms = () => {
+    handleBathroomsInputChange({
+      target: { value: String(bathroomsValue - 1) },
+    } as React.ChangeEvent<HTMLInputElement>);
+  };
+
+
   const homeSizes = [
     "500 - 1000 sq ft",
     "1000 - 1500 sq ft",
@@ -178,22 +205,23 @@ export default function CalculateServiceEstimate({ setEstimatePageView }: any) {
 
   return (
     <div className="min-h-screen bg-gray-50 py-12 pt-32">
+      <Stepper currentStep={1} />
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="max-w-3xl mx-auto"
+          className="max-w-[900px] mx-auto"
         >
-          <h1 className="text-3xl md:text-4xl font-bold mb-2 text-center">
-            Get Your Estimate
-          </h1>
-          <p className="text-gray-600 mb-8 text-center">
-            Fill out the form below to receive a customized cleaning service
-            estimate.
-          </p>
 
-          <Card className="bg-white shadow-md">
+          <Card className="bg-white rounded-[40px]  px-[25px] md:px-[100px] py-[48px] md:py-[48px] shadow-[0_5px_20px_rgba(0,0,0,0.10)] ">
+            <h1 className="text-3xl md:text-4xl font-bold text-center">
+              Get Your Estimate
+            </h1>
+            <p className="text-gray-600 text-center">
+              Fill out the form below to receive a customized cleaning service
+              estimate.
+            </p>
             <CardContent className="pt-6">
               <Form {...form}>
                 <form
@@ -208,14 +236,14 @@ export default function CalculateServiceEstimate({ setEstimatePageView }: any) {
                       name="homeSize"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Size of your home</FormLabel>
+                          <FormLabel className="uppercase text-xs">Size of your home</FormLabel>
                           <Select
                             onValueChange={field.onChange}
                             defaultValue={field.value}
                           >
                             <FormControl>
                               <SelectTrigger className="h-12 w-full">
-                                <SelectValue placeholder="Select size" />
+                                <SelectValue />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
@@ -237,14 +265,14 @@ export default function CalculateServiceEstimate({ setEstimatePageView }: any) {
                       name="cleaningType"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Type of cleaning</FormLabel>
+                          <FormLabel className="uppercase text-xs">Type of cleaning</FormLabel>
                           <Select
                             onValueChange={field.onChange}
                             defaultValue={field.value}
                           >
                             <FormControl>
                               <SelectTrigger className="h-12 w-full">
-                                <SelectValue placeholder="Select type" />
+                                <SelectValue />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
@@ -266,14 +294,14 @@ export default function CalculateServiceEstimate({ setEstimatePageView }: any) {
                       name="propertyType"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Type of property</FormLabel>
+                          <FormLabel className="uppercase text-xs">Type of property</FormLabel>
                           <Select
                             onValueChange={field.onChange}
                             defaultValue={field.value}
                           >
                             <FormControl>
                               <SelectTrigger className="h-12 w-full">
-                                <SelectValue placeholder="Select property" />
+                                <SelectValue />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
@@ -296,7 +324,7 @@ export default function CalculateServiceEstimate({ setEstimatePageView }: any) {
                     name="rooms"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Number of bedrooms</FormLabel>
+                        <FormLabel className="text-black text-base">Number of bedrooms</FormLabel>
                         <div className="flex items-center space-x-4">
                           <div className="flex-1 relative">
                             <Slider
@@ -320,16 +348,26 @@ export default function CalculateServiceEstimate({ setEstimatePageView }: any) {
                               {roomsValue}
                             </div> */}
                           </div>
+                          <div className="flex items-center overflow-hidden rounded-2xl border border-[#F5F5F4] bg-[#FAFAF9] h-11 w-32">
+
+                          <button type="button" onClick={decrementRooms} className="w-100 h-ful flex items-center justify-center cursor-pointer">
+                            <Minus className="w-4 h-4"/>
+                          </button>
+
                           <Input
-                            type="number"
-                            min={0}
-                            max={6}
-                            value={
-                              roomsValue === 0 ? "0" : roomsValue.toString()
-                            }
+                            type="text"
+                            inputMode="numeric"
+                            value={roomsValue}
                             onChange={handleRoomsInputChange}
-                            className="w-20 h-12 text-center"
+                            className="w-full text-center font-bold shadow-none border-0 focus-visible:ring-0"
                           />
+
+                          <button type="button" onClick={incrementRooms} className="w-100 h-full flex items-center justify-center cursor-pointer">
+                            <Plus className="w-4 h-4"/>
+                          </button>
+
+                        </div>
+
                         </div>
                         <FormMessage />
                       </FormItem>
@@ -342,7 +380,7 @@ export default function CalculateServiceEstimate({ setEstimatePageView }: any) {
                     name="bathrooms"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Number of bathrooms</FormLabel>
+                        <FormLabel className="text-black text-base">Number of bathrooms</FormLabel>
                         <div className="flex items-center space-x-4">
                           <div className="flex-1 relative">
                             <Slider
@@ -367,18 +405,26 @@ export default function CalculateServiceEstimate({ setEstimatePageView }: any) {
                               {bathroomsValue}
                             </div> */}
                           </div>
+                          <div className="flex items-center overflow-hidden rounded-2xl border border-[#F5F5F4] bg-[#FAFAF9] h-11 w-32">
+
+                          <button type="button" onClick={decrementBathrooms} className="w-100 h-full flex items-center justify-center cursor-pointer">
+                            <Minus className="w-4 h-4"/>
+                          </button>
+
                           <Input
-                            type="number"
-                            min={0}
-                            max={5}
-                            value={
-                              bathroomsValue === 0
-                                ? "0"
-                                : bathroomsValue.toString()
-                            }
+                            type="text"
+                            inputMode="numeric"
+                            value={bathroomsValue}
                             onChange={handleBathroomsInputChange}
-                            className="w-20 h-12 text-center"
+                            className="w-full text-center font-bold shadow-none border-0 focus-visible:ring-0"
                           />
+
+                          <button type="button" onClick={incrementBathrooms} className="w-100 h-full flex items-center justify-center cursor-pointer">
+                            <Plus className="w-4 h-4"/>
+                          </button>
+
+                        </div>
+
                         </div>
                         <FormMessage />
                       </FormItem>
@@ -386,17 +432,28 @@ export default function CalculateServiceEstimate({ setEstimatePageView }: any) {
                   />
 
                   {/* Switches for Eco-Friendly and Materials Provided */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-gray-50 p-4 rounded-lg">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-4 rounded-lg">
                     {/* Eco-Friendly Switch */}
                     <FormField
                       control={form.control}
                       name="ecoFriendly"
                       render={({ field }) => (
-                        <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4 shadow-sm">
+                        <FormItem className="flex flex-row items-start justify-between rounded-xl border-2 border-[#F5F5F4] bg-[#FAFAF9] p-4">
+                          <FormControl>
+                            <Switch
+                              checked={field.value}
+                              onCheckedChange={(checked) => {
+                                field.onChange(checked);
+                                if (checked) {
+                                  form.setValue("materialsProvided", false);
+                                }
+                              }}
+                            />
+                          </FormControl>
                           <div className="space-y-0.5">
                             <div className="flex items-center space-x-2">
-                              <Leaf className="h-5 w-5 text-[#27AE60]" />
-                              <FormLabel className="font-medium">
+                              <Leaf className="h-4 w-4 text-[#A6A09B]" />
+                              <FormLabel className="font-bold text-[#1C1917]">
                                 Eco-Friendly Cleaning
                               </FormLabel>
                             </div>
@@ -404,13 +461,6 @@ export default function CalculateServiceEstimate({ setEstimatePageView }: any) {
                               Use environmentally friendly cleaning products
                             </FormDescription>
                           </div>
-                          <FormControl>
-                            <Switch
-                              checked={field.value}
-                              onCheckedChange={field.onChange}
-                              className="data-[state=checked]:bg-primary"
-                            />
-                          </FormControl>
                         </FormItem>
                       )}
                     />
@@ -420,25 +470,29 @@ export default function CalculateServiceEstimate({ setEstimatePageView }: any) {
                       control={form.control}
                       name="materialsProvided"
                       render={({ field }) => (
-                        <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4 shadow-sm">
+                        <FormItem className="flex flex-row items-start justify-between rounded-xl border-2 border-[#F5F5F4] bg-[#FAFAF9] p-4 ">
+                          <FormControl>
+                            <Switch
+                              checked={field.value}
+                              onCheckedChange={(checked) => {
+                                field.onChange(checked);
+                                if (checked) {
+                                  form.setValue("ecoFriendly", false);
+                                }
+                              }}
+                            />
+                          </FormControl>
                           <div className="space-y-0.5">
                             <div className="flex items-center space-x-2">
-                              <Package className="h-5 w-5 text-[#19A4C6]" />
-                              <FormLabel className="font-medium">
+                              <Package className="h-4 w-4 text-[#A6A09B]" />
+                              <FormLabel className="font-bold text-[#1C1917] ">
                                 Materials Provided
                               </FormLabel>
                             </div>
                             <FormDescription className="text-sm text-gray-500">
-                              We provide all cleaning materials and equipment
+                              Client provides all cleaning materials and equipment
                             </FormDescription>
                           </div>
-                          <FormControl>
-                            <Switch
-                              checked={field.value}
-                              onCheckedChange={field.onChange}
-                              className="data-[state=checked]:bg-[#19A4C6]"
-                            />
-                          </FormControl>
                         </FormItem>
                       )}
                     />
@@ -446,7 +500,7 @@ export default function CalculateServiceEstimate({ setEstimatePageView }: any) {
 
                   <Button
                     type="submit"
-                    className="w-full h-12 bg-primary hover:bg-primary cursor-pointer text-white"
+                    className="w-full h-12 bg-primary hover:bg-primary rounded-full cursor-pointer text-white"
                     disabled={isLoading}
                   >
                     {isLoading ? (

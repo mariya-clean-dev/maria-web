@@ -1,0 +1,108 @@
+.priceSection {
+  padding: 120px 50px;
+  background: #ffffff;
+  font-family: Inter;
+  text-align: center;
+}
+
+.heading {
+  font-size: 48px;
+  font-weight: 700;
+  color: #1c1917;
+  margin-bottom: 90px;
+  line-height: 1.2;
+}
+
+.heading span {
+  color: #17A5C6;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.card {
+  background: #ffffff;
+  box-shadow: 0 20px 35px #17a6c620;
+  border-radius: 32px;
+  padding: 48px 36px;
+  position: relative;
+}
+.othercard{
+  background: #FAFAF980;
+  border: 1px solid #F5F5F4;
+  border-radius: 32px;
+  padding: 48px 36px;
+  position: relative;
+}
+.othercard h3,
+.card h3 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 18px;
+  color: #1c1917;
+}
+.othercard p,
+.card p {
+  font-size: 16px;
+  color: #78716c;
+  line-height: 1.7;
+}
+
+.popular {
+  border: 2px solid #17A5C6;
+}
+
+.badge {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #17A5C6;
+  color: #ffffff;
+  padding: 6px 18px;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 999px;
+  box-shadow: 0 8px 20px #17a6c62b;
+}
+
+@media (max-width: 1024px) {
+  .priceSection {
+    padding: 100px 40px;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+    max-width: 520px;
+  }
+
+  .heading {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .priceSection {
+    padding: 80px 20px;
+  }
+
+  .heading {
+    font-size: 34px;
+    margin-bottom: 70px;
+  }
+}
+
+@media (max-width: 480px) {
+  .heading {
+    font-size: 28px;
+  }
+
+  .card {
+    padding: 40px 28px;
+  }
+}

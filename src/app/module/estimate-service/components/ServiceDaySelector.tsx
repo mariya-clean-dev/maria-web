@@ -111,40 +111,41 @@ export function ServiceDaySelector({
       <DialogTrigger asChild>
         <Card
           className={cn(
-            "cursor-pointer transition-colors h-full",
+            "cursor-pointer transition-colors h-10 flex items-start justify-center bg-[#FAFAF9] shadow-none border-none",
             hasError
               ? "border-red-500 hover:border-red-600"
-              : "hover:border-[#27AE60]",
-            isComplete && "border-[#27AE60]/50"
+              : "hover:border-[#17A5C6]",
+            isComplete && "border-[#17A5C6]/50"
           )}
         >
-          <CardContent className="p-6 flex flex-col items-center justify-center min-h-[150px]">
+          <CardContent className="p-2 flex items-center h-full">
             {hasError ? (
-              <AlertCircle className="h-8 w-8 text-red-500 mb-2" />
+              <AlertCircle className="h-5 w-5 text-red-500 mr-2" />
             ) : (
-              <CalendarIcon className="h-8 w-8 text-[#27AE60] mb-2" />
+              <CalendarIcon className="h-5 w-5 text-[#17A5C6] mr-2" />
             )}
 
-            <h4 className="font-medium text-lg mb-1">
+            {/* <h4 className="font-medium text-lg">
               Choose Day {dayIndex + 1}
-            </h4>
+            </h4> */}
 
             {isComplete ? (
               <div className="text-sm text-gray-600 text-center">
                 <p>
                   {selectedCalendarDate
-                    ? selectedCalendarDate.toLocaleDateString()
+                    ? selectedCalendarDate.toLocaleDateString("en-US")
                     : "N/A"}
+                    {" - "}
+                    {serviceDay.timeSlot}
                 </p>
-                <p>{serviceDay.timeSlot}</p>
               </div>
             ) : (
               <>
-                <p className="text-sm text-gray-500">
+                {/* <p className="text-sm text-gray-500">
                   {hasError ? "Selection required" : "Click to select"}
-                </p>
+                </p> */}
                 {hasError && (
-                  <p className="text-xs text-red-500 mt-1 text-center">
+                  <p className="text-xs text-red-500">
                     Please select {missingSelections.join(", ")}
                   </p>
                 )}
@@ -155,7 +156,7 @@ export function ServiceDaySelector({
       </DialogTrigger>
       <DialogContent className="sm:max-w-md overflow-y-auto max-h-[90vh]">
         <DialogHeader>
-          <DialogTitle>Select Service Day {dayIndex + 1}</DialogTitle>
+          <DialogTitle>Select Service Day </DialogTitle>
         </DialogHeader>
         <div className="space-y-6 py-4">
           {/* Week of Month Selection */}
