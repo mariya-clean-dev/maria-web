@@ -9,6 +9,7 @@ import type { PlanOption } from "../lib/types";
 interface PlanCardProps {
   plan: PlanOption;
   field: any;
+  onSelect: (planId: string) => void;
 }
 
 // Helper function to format price
@@ -28,7 +29,7 @@ const getPeriodText = (planName: string): string => {
   return "/cleaning";
 };
 
-export function PlanCard({ plan, field }: PlanCardProps) {
+export function PlanCard({ plan, field, onSelect  }: PlanCardProps) {
   // Generate features based on plan type
   const getFeatures = (planName: string): string[] => {    
     const baseFeatures = ["Room Cleaning", "Bathroom Cleaning"];
@@ -74,7 +75,7 @@ export function PlanCard({ plan, field }: PlanCardProps) {
           )} */}
           <CardContent
             className={cn(
-              "p-6 flex-1 flex flex-col"
+              "px-9 flex-1 flex flex-col"
               // plan.isPopular ? "" : "pt-8"
             )}
           >
@@ -92,7 +93,7 @@ export function PlanCard({ plan, field }: PlanCardProps) {
             )}
             <p className="text-gray-600 text-sm mb-6">{plan.description}</p>
 
-            <div className="space-y-3 mb-6 flex-grow">
+            <div className="space-y-3 mb-8 flex-grow">
               {features.map((feature, idx) => (
                 <div key={idx} className="flex items-center">
                   <div className="w-5 h-5 rounded-full bg-gray-100 flex items-center justify-center mr-3">
@@ -107,9 +108,10 @@ export function PlanCard({ plan, field }: PlanCardProps) {
               type="button"
               onClick={() => {
                 field.onChange(plan.recurringTypeId);
+                onSelect(plan.recurringTypeId);
               }}
               className={cn(
-                "w-full mt-auto cursor-pointer",
+                "w-full mt-auto cursor-pointer rounded-full p-6",
                 field.value === plan.recurringTypeId
                   ? "bg-primary hover:bg-primary/90 text-white"
                   : "bg-white border text-primary hover:text-white"

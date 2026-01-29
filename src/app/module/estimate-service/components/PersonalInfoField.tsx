@@ -15,15 +15,16 @@ interface PersonalInfoFieldsProps {
 
 export function PersonalInfoFields({ form }: PersonalInfoFieldsProps) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <FormField
+    <div className="flex flex-col gap-6">
+      <div className="flex gap-6">
+        <FormField
         control={form.control}
         name="firstName"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>First Name</FormLabel>
+            <FormLabel className="uppercase text-xs">FIRST NAME</FormLabel>
             <FormControl>
-              <Input placeholder="Enter your first name" {...field} />
+              <Input  {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -35,23 +36,25 @@ export function PersonalInfoFields({ form }: PersonalInfoFieldsProps) {
         name="lastName"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Last Name</FormLabel>
+            <FormLabel className="uppercase text-xs">LAST NAME</FormLabel>
             <FormControl>
-              <Input placeholder="Enter your last name" {...field} />
+              <Input  {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>
         )}
       />
+      </div>
 
-      <FormField
+      <div className="flex flex-col gap-6">
+        <FormField
         control={form.control}
         name="email"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Email</FormLabel>
+            <FormLabel className="uppercase text-xs">EMAIL</FormLabel>
             <FormControl>
-              <Input placeholder="Enter your email" type="email" {...field} />
+              <Input type="email" {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -63,14 +66,15 @@ export function PersonalInfoFields({ form }: PersonalInfoFieldsProps) {
         name="phone"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Phone</FormLabel>
+            <FormLabel className="uppercase text-xs">PHONE</FormLabel>
             <FormControl>
-              <Input placeholder="Enter your phone number" {...field} />
+              <Input placeholder="(555) 000-0000" {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>
         )}
       />
+      </div>
     </div>
   );
 }

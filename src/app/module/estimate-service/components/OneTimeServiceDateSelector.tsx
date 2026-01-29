@@ -107,38 +107,37 @@ export function OneTimeServiceDateSelector({
             <DialogTrigger asChild>
                 <Card
                     className={cn(
-                        "cursor-pointer transition-colors h-full",
+                        "cursor-pointer transition-colors h-10 flex items-start justify-center bg-[#FAFAF9] shadow-none border-none",
                         hasError
                             ? "border-red-500 hover:border-red-600"
-                            : "hover:border-[#27AE60]",
-                        isComplete && "border-[#27AE60]/50"
+                            : "hover:border-[#17A5C6]",
+                        isComplete && "border-[#17A5C6]/50"
                     )}
                 >
-                    <CardContent className="p-6 flex flex-col items-center justify-center min-h-[150px]">
+                    <CardContent className="p-2 flex items-center h-full">
                         {hasError ? (
-                            <AlertCircle className="h-8 w-8 text-red-500 mb-2" />
+                            <AlertCircle className="h-5 w-5 text-red-500 mr-2" />
                         ) : (
-                            <CalendarIcon className="h-8 w-8 text-[#27AE60] mb-2" />
+                            <CalendarIcon className="h-5 w-5 text-[#17A5C6] mr-2" />
                         )}
 
-                        <h4 className="font-medium text-lg mb-1">
+                        {/* <h4 className="font-medium text-lg mb-1">
                             Choose Date & Time
-                        </h4>
+                        </h4> */}
 
                         {isComplete ? (
-                            <div className="text-sm text-gray-600 text-center">
+                            <div className="text-sm text-gray-600">
                                 {selectedCalendarDate && (
-                                    <p className="font-medium">{format(selectedCalendarDate, "PPP")}</p>
+                                    <p className="font-medium">{format(selectedCalendarDate, "PPP")} - {serviceDay.timeSlot}</p>
                                 )}
-                                <p>{serviceDay.timeSlot}</p>
                             </div>
                         ) : (
                             <>
-                                <p className="text-sm text-gray-500">
+                                {/* <p className="text-sm text-gray-500">
                                     {hasError ? "Selection required" : "Click to select"}
-                                </p>
+                                </p> */}
                                 {hasError && (
-                                    <p className="text-xs text-red-500 mt-1 text-center">
+                                    <p className="text-xs text-red-500">
                                         Please select {missingSelections.join(" and ")}
                                     </p>
                                 )}

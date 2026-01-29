@@ -15,13 +15,13 @@ interface AddressFieldsProps {
 
 export function AddressFields({ form }: AddressFieldsProps) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-1 gap-6">
       <FormField
         control={form.control}
         name="address1"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Address</FormLabel>
+            <FormLabel className="uppercase text-xs">Address Line 1</FormLabel>
             <FormControl>
               <Input placeholder="Enter address first line" {...field} />
             </FormControl>
@@ -30,12 +30,12 @@ export function AddressFields({ form }: AddressFieldsProps) {
         )}
       />
 
-      <FormField
+      {/* <FormField
         control={form.control}
         name="address2"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Address Second Line</FormLabel>
+            <FormLabel className="uppercase text-xs">Address Second Line</FormLabel>
             <FormControl>
               <Input
                 placeholder="Enter address second line (optional)"
@@ -45,16 +45,17 @@ export function AddressFields({ form }: AddressFieldsProps) {
             <FormMessage />
           </FormItem>
         )}
-      />
+      /> */}
 
-      <FormField
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <FormField
         control={form.control}
         name="city"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>City</FormLabel>
+            <FormLabel className="uppercase text-xs">City</FormLabel>
             <FormControl>
-              <Input placeholder="Enter city" {...field} />
+              <Input {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -66,14 +67,15 @@ export function AddressFields({ form }: AddressFieldsProps) {
         name="zipcode"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Zipcode</FormLabel>
+            <FormLabel className="uppercase text-xs">Zipcode</FormLabel>
             <FormControl>
-              <Input placeholder="Enter zipcode" {...field} />
+              <Input {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>
         )}
       />
+      </div>
     </div>
   );
 }

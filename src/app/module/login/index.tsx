@@ -9,6 +9,7 @@ import * as z from "zod";
 import { Loader2 } from "lucide-react";
 import OtpInput from "react-otp-input";
 import { toast } from "sonner";
+import { motion } from "framer-motion";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -134,10 +135,17 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col justify-center md:flex-row">
+    <div className="flex min-h-screen flex-col justify-center md:flex-row bg-[#17A5C61A] md:bg-transparent">
       {/* Left side - Image with padding */}
-      <div className="w-full md:w-1/2 bg-primary  min-h-[300px] md:min-h-screen  hidden md:flex">
-        <div className="relative w-full h-full  overflow-hidden">
+      <motion.div className="w-full md:w-1/2 bg-primary  min-h-[300px] md:min-h-screen overflow-hidden rounded-tr-[40px] rounded-br-[40px] hidden md:flex"
+      initial={{ x: -80, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{
+        duration: 0.8,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      >
+        <div className="relative w-full h-full  overflow-hidden ">
           <Image
             src="/login-image.png"
             alt="Cleaning professional"
@@ -147,14 +155,22 @@ export default function LoginPage() {
             unoptimized
           />
         </div>
-      </div>
+      </motion.div>
 
-      <div className="w-full md:w-1/2 p-6 md:p-10 lg:p-16 flex flex-col justify-center">
-        <div className="max-w-md mx-auto w-full space-y-2">
+      <motion.div className="w-full md:w-1/2 p-6 md:p-10 lg:p-16 flex flex-col justify-center"
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{
+        duration: 0.8,
+        delay: 0.2,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      >
+        <div className="max-w-md mx-auto w-full space-y-2 bg-[#17A5C61A] border-2 border-[#17A5C61A] px-10 py-15 rounded-[20px]">
           {/* Logo */}
           <div className="flex justify-center mb-8">
             <Image
-              src="/footer-logo.png"
+              src="/footerlogo.png"
               alt="Clean by Maria"
               width={180}
               height={60}
@@ -246,7 +262,7 @@ export default function LoginPage() {
                     <FormItem>
                       <FormLabel>Enter OTP sent to your email</FormLabel>
                       <FormControl>
-                        <div className="flex justify-start w-full">
+                        <div className="flex justify-start w-90">
                           <OtpInput
                             value={otp}
                             onChange={handleOtpChange}
@@ -257,7 +273,7 @@ export default function LoginPage() {
                             renderInput={(props) => (
                               <Input
                                 {...props}
-                                className="!w-8 !h-10 sm:!w-10 sm:!h-12 md:!w-12 md:!h-12 text-center p-0 sm:p-2"
+                                className="!w-10 !h-10 sm:!w-12 sm:!h-12 md:!w-12 md:!h-12 text-center p-0 sm:p-2"
                                 inputMode="numeric"
                               />
                             )}
@@ -333,7 +349,7 @@ export default function LoginPage() {
             </Link>
           </p>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }
