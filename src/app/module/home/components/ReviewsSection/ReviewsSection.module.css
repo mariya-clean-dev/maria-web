@@ -95,6 +95,9 @@
 
 /* Mobile */
 @media (max-width: 768px) {
+  .reviewsSection {
+    padding: 80px 40px;
+  }
   .heading {
     font-size: 34px;
   }

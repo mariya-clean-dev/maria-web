@@ -5,7 +5,7 @@
 
 .wrapper {
   background: #FAFAF9;
-  padding: 20px 80px;
+  padding: 40px 80px;
   width: 100%;
 }
 
@@ -15,7 +15,7 @@
 }
 
 .label {
-  font-size: 12px;
+  font-size: 15px;
   font-weight: 700;
   color: #61B35C; 
   display: inline-block;
@@ -63,13 +63,13 @@
 }
 
 .step h4 {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 700;
   color: #1c1917;
 }
 
 .step p {
-  font-size: 16px;
+  font-size: 17px;
   color: #808080;
   line-height: 1.6;
 }

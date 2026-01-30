@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import styles from "./HeroSection.module.css";
-import { Sparkles } from "lucide-react";
+import { LucideClock4, LucideStar, LucideVerified, Sparkles, User, UserCircle } from "lucide-react";
 import { motion } from "framer-motion";
 import EstimateModal from "../../EstimateModal/EstimateModal";
 
@@ -47,7 +47,7 @@ export default function HeroSection() {
             }}
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
-            Cleaning made <span>effortless.</span>
+            Cleaning Made <span>Effortless.</span>
           </motion.h1>
 
           <motion.p
@@ -75,6 +75,54 @@ export default function HeroSection() {
               <button  className={styles.button} onClick={() => setOpen(true)}>
                 See My Estimate
               </button>
+              <div className={styles.review}>
+              <div className={styles.users}>
+                <div className={styles.avatar}>
+                  <Image
+                  src={"/hero-section/avatar1.jpg"}
+                  alt=""
+                  height={40}
+                  width={40}
+                  objectFit="contain"
+                  />
+
+                </div>
+                <div className={styles.avatar}>
+                  <Image
+                  src={"/hero-section/avatar3.jpg"}
+                  alt=""
+                  height={40}
+                  width={40}
+                  objectFit="contain"
+                  />
+                </div>
+                <div className={styles.avatar}>
+                  <Image
+                  src={"/hero-section/avatar2.jpg"}
+                  alt=""
+                  height={40}
+                  width={40}
+                  objectFit="contain"
+                  />
+                </div>
+
+                <div className={styles.avatar}>+4k</div>
+              </div>
+
+              <div className={styles.divider}></div>
+
+              <div className={styles.rating}>
+                <div className={styles.stars}>
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <LucideStar key={i} size={15} />
+                  ))}
+                </div>
+
+                <p>
+                  <span>4.9/5</span>{" "}from Verified Reviews
+                </p>
+              </div>
+            </div>
             </motion.div>
           </motion.div>
         </motion.div>
@@ -87,11 +135,25 @@ export default function HeroSection() {
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <Image
-            src="/hero-image.png"
+            src="/signup-left-image.png"
             alt="Cleaning service"
             fill
             priority
           />
+          <div className={styles.fcleft}>
+            <LucideClock4 className={styles.icon} color="#27AE60"/> 
+            <div>
+              <p className={styles.fctitle}>FAST</p>
+              <p className={styles.fcdetail}>Book in 60 sec</p>
+            </div>
+          </div>
+          <div className={styles.fcright}>
+            <LucideVerified className={styles.icon} color="#17A5C6"/> 
+            <div>
+              <p className={styles.fctitle}>VERIFIED</p>
+              <p className={styles.fcdetail}>Top 1% Cleaners</p>
+            </div>
+          </div>
         </motion.div>
 
       </div>

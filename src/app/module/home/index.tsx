@@ -22,7 +22,9 @@ const HomeModule = () => {
         <AboutSection/>
       </div>
       <DetailsSection/>
-      <ProcessSection/>
+      <div id="process">
+        <ProcessSection/>
+      </div>
       <div id="pricing">
         <PriceSection/>
       </div>

@@ -129,11 +129,26 @@ columnHelper.accessor("status", {
   header: "Status",
   cell: (info) => {
     const status = info.getValue();
-    const formattedStatus = status === "canceled" ? "Cancelled" : status;
-    return <div className="min-w-[80px]">{formattedStatus}</div>;
+
+    const isCanceled = status === "canceled";
+
+    return (
+      <div
+        className={`min-w-[80px] text-center px-3 py-1 rounded-full text-xs font-medium uppercase
+          ${
+            isCanceled
+              ? "bg-red-100 text-red-600"
+              : "bg-green-100 text-green-600"
+          }
+        `}
+      >
+        {isCanceled ? "Cancelled" : status}
+      </div>
+    );
   },
   size: 120,
 }),
+
 
   columnHelper.display({
     id: "actions",

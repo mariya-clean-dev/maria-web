@@ -19,11 +19,12 @@ import {
   TableHead,
   TableHeader,
   TableRow,
+  TableFooter
 } from "@/components/ui/table";
 import { columns } from "./components/columns";
 import Link from "next/link";
 import useGetBookingDetails from "@/queries/services/booking-details/useGetBookingDetails";
-import { Loader2 } from "lucide-react";
+import { Loader2, LogOut, LucideArrowLeft } from "lucide-react";
 import { DateEditDialog } from "./components/DateEditDialog";
 import { useUpdateSchedule } from "@/queries/services/booking-details/useUpdateSchedule";
 import useCustomToast from "@/hooks/use-custom-toast";
@@ -196,19 +197,19 @@ export default function BookingsPage() {
 
   return (
     <>
-      <div className="min-h-screen bg-white py-12 pt-32">
+      <div className="min-h-screen bg-[#F4F7F9] py-12 pt-25">
         <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-center text-[#27AE60] mt-8 mb-4">
+          <div className="max-w-300 mx-auto">
+            <h2 className="text-3xl font-bold text-center text-primary mt-8 mb-4">
               Subscription Details
             </h2>
-            <p className="text-center text-lg mb-8">
+            <p className="text-center text-lg mb-10">
               Showing the details about the current service plan and can edit
               the upcoming Date
             </p>
 
-            <div className="border rounded-lg overflow-hidden mb-8">
-              <div className="overflow-x-auto">
+            <div className="rounded-t-3xl overflow-hidden shadow-[0_7px_29px_rgba(100,100,100,0.2)]">
+              <div className="overflow-x-auto ">
                 <Table>
                   <TableHeader>
                     {table.getHeaderGroups().map((headerGroup) => (
@@ -217,7 +218,7 @@ export default function BookingsPage() {
                           <TableHead
                             key={header.id}
                             style={{ width: header.getSize() }}
-                            className="bg-gray-50 font-semibold text-gray-700"
+                            className="bg-white font-bold text-gray-600 px-8 py-6 uppercase"
                           >
                             {header.isPlaceholder
                               ? null
@@ -241,6 +242,7 @@ export default function BookingsPage() {
                             <TableCell
                               key={cell.id}
                               style={{ width: cell.column.getSize() }}
+                              className="px-8 py-4 bg-white"
                             >
                               {flexRender(
                                 cell.column.columnDef.cell,
@@ -266,51 +268,61 @@ export default function BookingsPage() {
             </div>
 
             {/* Pagination Controls */}
-            <div className="flex justify-center items-center gap-2 mt-4">
-              <Button
+            <div className="flex sm:flex-row flex-col items-center justify-between md:gap-2 gap-5 bg-white rounded-b-3xl px-8 py-5 border-t shadow-[0_7px_29px_rgba(100,100,100,0.2)]">
+              <div className="flex items-center gap-2">
+                <div className="flex items-center">
+                  <p className="text-[#808080] text-[14px]">Show</p>
+                <select
+                className="ml-2 border rounded-[8px] bg-white px-3 py-2 font-semibold text-[13px]"
+                value={table.getState().pagination.pageSize}
+                onChange={(e) => table.setPageSize(Number(e.target.value))}
+              >
+                {[10, 20, 50].map((size) => (
+                  <option key={size} value={size}
+                  className="font-semibold text-[15px]">
+                     {size}
+                  </option>
+                ))}
+              </select>
+                </div>
+              <span className="ml-4 text-[#808080] text-[14px] font-semibold">
+                Page {table.getState().pagination.pageIndex + 1} of{" "}
+                {table.getPageCount()}
+              </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Button
+                className="disabled:bg-[#F1F5F9] disabled:text-[#080808] rounded-lg"
                 disabled={!table.getCanPreviousPage()}
                 onClick={() => table.previousPage()}
               >
                 Previous
               </Button>
               <Button
+              className="disabled:bg-[#F1F5F9] disabled:text-[#080808] rounded-lg"
                 disabled={!table.getCanNextPage()}
                 onClick={() => table.nextPage()}
               >
                 Next
               </Button>
-              <span className="ml-4">
-                Page {table.getState().pagination.pageIndex + 1} of{" "}
-                {table.getPageCount()}
-              </span>
-              <select
-                className="ml-4 border rounded px-2 py-1"
-                value={table.getState().pagination.pageSize}
-                onChange={(e) => table.setPageSize(Number(e.target.value))}
-              >
-                {[10, 20, 50].map((size) => (
-                  <option key={size} value={size}>
-                    Show {size}
-                  </option>
-                ))}
-              </select>
+              </div>
             </div>
 
-            <div className="flex justify-center gap-4 mt-8">
+            <div className="flex justify-center items-center gap-4 mt-8">
               <Link href="/">
-                <Button variant="outline" className="border-gray-300">
-                  Back to Home Page
+                <Button variant="outline" className="border-gray-300 p-5 rounded-xl shadow-none">
+                  <LucideArrowLeft/> Back to Home 
                 </Button>
               </Link>
               <Button
                 variant="ghost"
-                className="text-red-500 hover:text-red-700 hover:bg-red-50"
+                className="text-red-500 hover:text-red-700 hover:bg-red-50 p-5 rounded-xl shadow-none"
                 onClick={() => {
                   sessionStorage.clear();
                   window.location.href = "/";
                 }}
               >
-                Logout
+                <LogOut/> Logout
               </Button>
             </div>
           </div>

@@ -45,9 +45,9 @@ export default function DetailsSection() {
             }}
           >
             <span className={styles.label}>THE DETAILS</span>
-            <h2 className={styles.heading}>Every corner, covered.</h2>
+            <h2 className={styles.heading}>Every Corner, Covered.</h2>
           </motion.div>
-
+{/* 
           <motion.a
             href="#"
             className={styles.cta}
@@ -61,7 +61,7 @@ export default function DetailsSection() {
             }}
           >
             VIEW FULL CHECKLIST <ArrowRight size={16} />
-          </motion.a>
+          </motion.a> */}
         </motion.div>
 
         {/* CARDS */}

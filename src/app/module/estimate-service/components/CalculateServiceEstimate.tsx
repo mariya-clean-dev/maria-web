@@ -243,7 +243,7 @@ export default function CalculateServiceEstimate({ setView  }: any) {
                           >
                             <FormControl>
                               <SelectTrigger className="h-12 w-full">
-                                <SelectValue />
+                                <SelectValue placeholder="Select size" />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
@@ -272,7 +272,7 @@ export default function CalculateServiceEstimate({ setView  }: any) {
                           >
                             <FormControl>
                               <SelectTrigger className="h-12 w-full">
-                                <SelectValue />
+                                <SelectValue placeholder="Select type" />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
@@ -301,7 +301,7 @@ export default function CalculateServiceEstimate({ setView  }: any) {
                           >
                             <FormControl>
                               <SelectTrigger className="h-12 w-full">
-                                <SelectValue />
+                                <SelectValue placeholder="Select property" />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
@@ -438,7 +438,8 @@ export default function CalculateServiceEstimate({ setView  }: any) {
                       control={form.control}
                       name="ecoFriendly"
                       render={({ field }) => (
-                        <FormItem className="flex flex-row items-start justify-between rounded-xl border-2 border-[#F5F5F4] bg-[#FAFAF9] p-4">
+                        <FormItem className="flex flex-row items-start justify-between rounded-xl border-2 border-[#F5F5F4] bg-[#FAFAF9] p-4"
+                        >
                           <FormControl>
                             <Switch
                               checked={field.value}
