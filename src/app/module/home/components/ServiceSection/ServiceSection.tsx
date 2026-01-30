@@ -9,26 +9,31 @@ const services = [
     icon: Sparkles,
     title: "Regular Cleaning",
     desc: "For consistently clean homes",
+    image: "/service-image/service1.png",
   },
   {
     icon: Home,
     title: "Deep Cleaning",
     desc: "A reset for kitchens, baths, and corners",
+    image: "/service-image/service2.png",
   },
   {
     icon: Package,
     title: "Move-in / Move-out",
     desc: "Detailed cleaning for transitions",
+    image: "/service-image/service3.png",
   },
   {
     icon: Hammer,
     title: "Post-Construction",
     desc: "Dust and debris cleanup after work",
+    image: "/service-image/service4.png",
   },
   {
     icon: Building2,
     title: "Commercial",
     desc: "Small offices and studios",
+    image: "/service-image/serrvice7.jpeg",
   },
 ];
 
@@ -55,8 +60,8 @@ export default function ServiceSection() {
         >
           <span className={styles.label}>OUR EXPERTISE</span>
           <h2 className={styles.heading}>
-            Curated cleaning solutions
-            <br /> for every lifestyle.
+            Curated Cleaning Solutions
+            <br /> for Every Lifestyle.
           </h2>
         </motion.div>
 
@@ -89,6 +94,7 @@ export default function ServiceSection() {
           return (
             <motion.div
               className={styles.card}
+              style={{ backgroundImage: `url(${service.image})` }}
               key={index}
               variants={{
                 hidden: { opacity: 0},
@@ -96,6 +102,7 @@ export default function ServiceSection() {
               }}
               transition={{ duration: 0.4, ease: "easeOut" }}
             >
+              <div className={styles.overlay}></div>
               <motion.div
                 className={styles.iconWrapper}
                 whileHover={{ scale: 1.05 }}

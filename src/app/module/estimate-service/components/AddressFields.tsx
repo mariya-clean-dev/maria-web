@@ -21,7 +21,7 @@ export function AddressFields({ form }: AddressFieldsProps) {
         name="address1"
         render={({ field }) => (
           <FormItem>
-            <FormLabel className="uppercase text-xs">Address Line 1</FormLabel>
+            <FormLabel className="uppercase text-xs">Address</FormLabel>
             <FormControl>
               <Input placeholder="Enter address first line" {...field} />
             </FormControl>

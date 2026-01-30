@@ -254,7 +254,7 @@ useEffect(() => {
       areaSize: areaSize,
       isEco: estimateValues?.ecoFriendly,
       price: plan.finalPrice,
-      paymentMethod: values.paymentMethod === "Cash/Zelle/Venmo" ? "offline" : "online",
+      paymentMethod: values.paymentMethod === "Cash/Venmo" ? "offline" : "online",
       recurringTypeId:
         bookingType === "one_time" ? null : plan.recurringTypeId,
       address: {
@@ -339,9 +339,9 @@ useEffect(() => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="max-w-[900px] mx-auto"
+          className="max-w-225 mx-auto"
         >
-          <Card className="bg-white rounded-[40px]  px-[25px] md:px-[48px] py-[48px] md:py-[48px] shadow-[0_5px_20px_rgba(0,0,0,0.10)] ">
+          <Card className="bg-white rounded-[40px]  px-6.25 md:px-12 py-12 md:py-12 shadow-[0_5px_20px_rgba(0,0,0,0.10)] ">
 
             <h1 className="text-3xl md:text-4xl font-bold text-center">
               Booking Confirmation
@@ -378,7 +378,7 @@ useEffect(() => {
                     <FormControl>
                         <Textarea
                         placeholder="Gate code is 1234, please focus on the kitchen..."
-                        className="resize-none min-h-[100px] bg-[#FAFAF9] border-none shadow-none"
+                        className="resize-none min-h-25 bg-[#FAFAF9] border-none shadow-none"
                         {...field}
                         />
                     </FormControl>

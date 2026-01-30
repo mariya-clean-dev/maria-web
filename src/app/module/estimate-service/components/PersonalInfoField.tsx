@@ -24,7 +24,7 @@ export function PersonalInfoFields({ form }: PersonalInfoFieldsProps) {
           <FormItem>
             <FormLabel className="uppercase text-xs">FIRST NAME</FormLabel>
             <FormControl>
-              <Input  {...field} />
+              <Input placeholder="Enter your first name" {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -38,7 +38,7 @@ export function PersonalInfoFields({ form }: PersonalInfoFieldsProps) {
           <FormItem>
             <FormLabel className="uppercase text-xs">LAST NAME</FormLabel>
             <FormControl>
-              <Input  {...field} />
+              <Input placeholder="Enter your last name" {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -54,7 +54,7 @@ export function PersonalInfoFields({ form }: PersonalInfoFieldsProps) {
           <FormItem>
             <FormLabel className="uppercase text-xs">EMAIL</FormLabel>
             <FormControl>
-              <Input type="email" {...field} />
+              <Input placeholder="Enter your email" type="email" {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -68,7 +68,7 @@ export function PersonalInfoFields({ form }: PersonalInfoFieldsProps) {
           <FormItem>
             <FormLabel className="uppercase text-xs">PHONE</FormLabel>
             <FormControl>
-              <Input placeholder="(555) 000-0000" {...field} />
+              <Input placeholder="Enter your phone number" {...field} />
             </FormControl>
             <FormMessage />
           </FormItem>

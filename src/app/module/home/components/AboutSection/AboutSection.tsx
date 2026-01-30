@@ -78,7 +78,7 @@ export default function AboutSection() {
               },
             }}
           >
-            More than just a <br /> cleaning service.
+            More Than Just a <br /> Cleaning Service.
           </motion.h2>
 
           <motion.p

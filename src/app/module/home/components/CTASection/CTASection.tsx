@@ -22,7 +22,7 @@ export default function CTASection() {
         }}
       >
         Ready for a <br />
-        <span>fresh start?</span>
+        <span>Fresh Start?</span>
       </motion.h2>
 
       {/* DESCRIPTION */}

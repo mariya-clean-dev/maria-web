@@ -15,7 +15,7 @@ export default function PriceSection() {
         viewport={{ once: true }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       >
-        We offer great <span>price</span> plan for the <br />
+        We Offer Great <span>Price</span> Plan for the <br />
         Services
       </motion.h2>
 

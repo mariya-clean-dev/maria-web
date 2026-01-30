@@ -3,8 +3,34 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./Footer.module.css";
+import { useRouter, usePathname } from "next/navigation";
+
 
 export default function Footer(){
+
+  const router = useRouter();
+const pathname = usePathname();
+
+const handleFooterNavigation = (
+  e: React.MouseEvent<HTMLAnchorElement>,
+  sectionId: string
+) => {
+  e.preventDefault();
+
+  // Navigate with hash
+  router.push(`/#${sectionId}`);
+
+  // Clean URL + smooth scroll
+  setTimeout(() => {
+    window.history.replaceState(null, "", "/");
+
+    document
+      .getElementById(sectionId)
+      ?.scrollIntoView({ behavior: "smooth" });
+  }, 50);
+};
+
+
   return (
     <footer className={styles.footer}>
       <div className={styles.wrapper}>
@@ -40,10 +66,10 @@ export default function Footer(){
           <div className={styles.column}>
             <h4>COMPANY</h4>
             <ul>
-              <li><Link href="#about">About</Link></li>
-              <li><Link href="#services">Services</Link></li>
-              <li><Link href="#pricing">Pricing</Link></li>
-              <li><Link href="#reviews">Reviews</Link></li>
+              <li><Link href="/" onClick={(e) => handleFooterNavigation(e, "about")}>About</Link></li>
+              <li><Link href="/" onClick={(e) => handleFooterNavigation(e, "services")}>Services</Link></li>
+              <li><Link href="/" onClick={(e) => handleFooterNavigation(e, "pricing")}>Pricing</Link></li>
+              <li><Link href="/" onClick={(e) => handleFooterNavigation(e, "reviews")}>Reviews</Link></li>
             </ul>
           </div>
 
@@ -69,7 +95,7 @@ export default function Footer(){
           </div>
 
           <p className={styles.copy}>
-            © {new Date().getFullYear()} Clean by Maria.
+            © {new Date().getFullYear()} Clean by Maria.Designed and Developed by <a href="https://palqar.com/about"><span>Palqar Technologies</span></a>
           </p>
         </div>
       </div>

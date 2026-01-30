@@ -70,7 +70,7 @@
 }
 
 .label {
-  font-size: 12px;
+  font-size: 15px;
   font-weight: 700;
   color: #17a5c6;
   display: inline-block;
@@ -85,7 +85,7 @@
 }
 
 .description {
-  font-size: 18px;
+  font-size: 19px;
   color: #A6A09B;
   line-height: 1.7;
   font-weight: 300;
@@ -95,7 +95,7 @@
 .features {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 130px 48px;
+  gap: 90px 48px;
 }
 
 .feature {
@@ -117,12 +117,12 @@
 }
 
 .feature h4 {
-  font-size: 18px;
+  font-size: 19px;
   font-weight: 700;
 }
 
 .feature p {
-  font-size: 14px;
+  font-size: 16px;
   color: #79716B;
   line-height: 1.6;
 }

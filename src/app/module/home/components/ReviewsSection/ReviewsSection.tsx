@@ -69,7 +69,7 @@ export default function ReviewsSection() {
             },
           }}
         >
-          Trusted by your <br /> neighbors.
+          Trusted by Your <br /> Neighbors
         </motion.h2>
       </motion.div>
 
