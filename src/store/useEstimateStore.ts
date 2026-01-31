@@ -18,7 +18,7 @@ interface EstimateUserInfo {
 
 interface EstimateStoreType {
   estimateValues: EstimateValues | null;
-  setEstimateValues: (estimateValue: any) => void;
+  setEstimateValues: (estimateValue: EstimateValues) => void;
 
 
   userInfo: EstimateUserInfo | null;
@@ -27,7 +27,8 @@ interface EstimateStoreType {
 
 export const useEstimateStore = create<EstimateStoreType>((set) => ({
   estimateValues: null,
-  setEstimateValues: (estimateValue) => set({ estimateValues: estimateValue }),
+  setEstimateValues: (estimateValue) => 
+    set({ estimateValues: estimateValue }),
 
 
   userInfo: null,

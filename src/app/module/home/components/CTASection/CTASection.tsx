@@ -52,7 +52,11 @@ export default function CTASection() {
           ease: "easeOut",
         }}
       >
-        <button className={styles.button} onClick={() => setOpen(true)}>
+        <button className={styles.button} 
+        onClick={() => {
+          setOpen(true);
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }}>
           Get Estimate
         </button>
       </motion.div>

@@ -72,7 +72,11 @@ export default function HeroSection() {
               whileTap={{ scale: 0.99 }}
               transition={{ type: "spring", stiffness: 400 ,damping:25}}
             >
-              <button  className={styles.button} onClick={() => setOpen(true)}>
+              <button  className={styles.button} 
+              onClick={() => {
+                setOpen(true);
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}>
                 See My Estimate
               </button>
               <div className={styles.review}>
