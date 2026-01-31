@@ -1,6 +1,6 @@
 /* Overlay */
 .overlay {
-  position: sticky;
+  position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(4px);
@@ -126,8 +126,26 @@
 
 /* Mobile */
 @media (max-width: 480px) {
+  .overlay {
+    align-items: flex-end;
+  }
   .modal {
     padding: 32px 24px;
-    margin: 0 16px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    width: 100%;
+    max-width: 100%;
+    animation: slideUp 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
   }
 }

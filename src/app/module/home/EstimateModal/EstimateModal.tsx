@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect,useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./EstimateModal.module.css";
 import { X, User, Mail, MapPin, ArrowRight } from "lucide-react";
@@ -25,6 +25,19 @@ export default function EstimateModal({ isOpen, onClose }: Props) {
 
   const [error, setError] = useState<string | null>(null);
   const { setUserInfo } = useEstimateStore();
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isOpen]);
+
 
 
   if (!isOpen) return null;
