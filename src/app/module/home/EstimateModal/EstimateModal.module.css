@@ -20,6 +20,7 @@
   border-radius: 28px;
   box-shadow: 0 40px 120px rgba(0, 0, 0, 0.35);
   animation: pop 0.25s ease;
+  overflow-y: auto;
 }
 
 @keyframes pop {
@@ -120,8 +121,18 @@
 .error {
   font-size: 13px;
   color: #dc2626;
-  text-align: center;
-  margin-top: -6px;
+  text-align: left;
+  margin-top: 6px;
+  margin-left: 6px;
+  display: block;
+
+}
+.info {
+  background: #e8f4ff;
+  color: #0b63ce;
+  padding: 10px 12px;
+  border-radius: 6px;
+  font-size: 13px;
 }
 
 /* Mobile */
@@ -134,8 +145,13 @@
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
     max-width: 100%;
     animation: slideUp 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .submit{
+    margin-bottom: 25px;
   }
 }
 
