@@ -118,7 +118,7 @@ const handleSubmit = (e: React.FormEvent) => {
       }
       else if (res.data?.success === false) {
         setInfoMessage(
-          "We are not currently servicing your area, but we’ve saved your information and will notify you when we expand to your location."
+          "Sorry-We're not in your area yet, but we're expanding soon!"
         );
       } 
       else {
