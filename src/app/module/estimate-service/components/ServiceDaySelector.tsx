@@ -21,6 +21,8 @@ import { DaySelector } from "./DaySelector";
 import { TimeSlotSelector } from "./TimeSlotSelector";
 import { useEffect, useState } from "react";
 import { Calendar } from "@/components/ui/calendar";
+import { useEstimateStore } from "@/store/useEstimateStore";
+
 
 interface ServiceDaySelectorProps {
   dayIndex: number;
@@ -52,6 +54,10 @@ export function ServiceDaySelector({
   const [selectedCalendarDate, setSelectedCalendarDate] = useState<Date | undefined>(
     serviceDay.selectedDate ? new Date(serviceDay.selectedDate) : undefined
   );
+
+  const { userInfo } = useEstimateStore();
+  const pincode = userInfo?.pincode ?? null;
+
 
   useEffect(() => {
     setSelectedCalendarDate(serviceDay.selectedDate ? new Date(serviceDay.selectedDate) : undefined);
@@ -200,6 +206,7 @@ export function ServiceDaySelector({
             selectedDate={selectedCalendarDate}
             totalDuration={totalDuration}
             selectedPlanId={selectedPlanId} 
+            pincode={pincode}
           />
 
           {/* Save Button */}

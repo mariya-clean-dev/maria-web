@@ -47,14 +47,13 @@ import Stepper from "./Stepper";
 
 
 export default function BookingConfirmation({ setView,selectedPlanId }: any) {
-
   const router = useRouter();
   const { success, showError } = useCustomToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
 
   const { servicePlan } = useServicePlanStore();
-  const { estimateValues } = useEstimateStore();
+  const { estimateValues,userInfo } = useEstimateStore();
   const { mutate: createBooking } = useCreateBooking();
 
   const form = useForm<FormValues>({
@@ -80,6 +79,16 @@ useEffect(() => {
     form.setValue("plan", selectedPlanId);
   }
 }, [selectedPlanId, form]);
+
+useEffect(() => {
+  if (userInfo?.pincode) {
+    form.setValue("zipcode", userInfo.pincode, {
+      shouldValidate: true,
+      shouldDirty: false,
+    });
+  }
+}, [userInfo?.pincode, form]);
+
 
 
 

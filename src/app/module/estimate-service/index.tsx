@@ -1,9 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import CalculateServiceEstimate from "./components/CalculateServiceEstimate";
 import ServicePlan from "./components/ServicePlan";
 import BookingConfirmation from "./components/BookingConfirmation";
+import { useRouter } from "next/navigation";
+import { useEstimateStore } from "@/store/useEstimateStore";
 
 type ViewType =
   | "estimate"
@@ -12,6 +14,17 @@ type ViewType =
 
 
 const EstimateServiceModule = () => {
+
+  const router = useRouter();
+  const { userInfo } = useEstimateStore();
+
+  useEffect(() => {
+    if (!userInfo?.pincode) {
+      router.replace("/");
+    }
+  }, [userInfo?.pincode, router]);
+
+  if (!userInfo?.pincode) return null;
   const [view, setView] = useState<ViewType>("estimate");
   
 
