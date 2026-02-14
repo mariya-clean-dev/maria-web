@@ -204,8 +204,7 @@ export default function BookingsPage() {
               Subscription Details
             </h2>
             <p className="text-center text-lg mb-10">
-              Showing the details about the current service plan and can edit
-              the upcoming Date
+              Showing the details about the current service plan and and reschedule your upcoming service date
             </p>
 
             <div className="rounded-t-3xl overflow-hidden shadow-[0_7px_29px_rgba(100,100,100,0.2)]">

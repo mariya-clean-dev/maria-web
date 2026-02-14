@@ -15,6 +15,7 @@ interface TimeSlotSelectorProps {
   selectedDate?: Date | null;
   totalDuration?: number | null;
   selectedPlanId: string | null;
+  pincode: string | null;
 }
 
 export function TimeSlotSelector({
@@ -26,6 +27,7 @@ export function TimeSlotSelector({
   selectedDate,
   totalDuration,
   selectedPlanId,
+  pincode
 }: TimeSlotSelectorProps) {
   // Fetch time slots from API
   let dateForApiCall: string | null = null;
@@ -42,7 +44,8 @@ export function TimeSlotSelector({
     dayOfWeek,
     dateForApiCall,
     totalDuration,
-    selectedPlanId
+    selectedPlanId,
+    pincode
   );
 
   // If week or day is not selected yet, show a message

@@ -6,7 +6,7 @@ import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { Loader2 } from "lucide-react";
+import { Loader2, LucideMail } from "lucide-react";
 import OtpInput from "react-otp-input";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
@@ -135,29 +135,15 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col justify-center md:flex-row bg-[#17A5C61A] md:bg-transparent">
-      {/* Left side - Image with padding */}
-      <motion.div className="w-full md:w-1/2 bg-primary  min-h-[300px] md:min-h-screen overflow-hidden rounded-tr-[40px] rounded-br-[40px] hidden md:flex"
-      initial={{ x: -80, opacity: 0 }}
-      animate={{ x: 0, opacity: 1 }}
-      transition={{
-        duration: 0.8,
-        ease: [0.22, 1, 0.36, 1],
-      }}
-      >
-        <div className="relative w-full h-full  overflow-hidden ">
-          <Image
-            src="/login-image.png"
-            alt="Cleaning professional"
-            fill
-            className="object-fit"
-            priority
-            unoptimized
-          />
-        </div>
-      </motion.div>
-
-      <motion.div className="w-full md:w-1/2 p-6 md:p-10 lg:p-16 flex flex-col justify-center"
+    <div className="relative flex min-h-screen flex-col justify-center lg:flex-row bg-primary overflow-hidden">
+      <div
+          className="absolute inset-0
+                    bg-[url('/service-image/serrvice7.jpeg')] 
+                    bg-cover bg-center 
+                    opacity-50 blur-sm
+                    lg:hidden"
+        />
+      <motion.div className="w-full lg:w-1/2 p-6 md:p-10 lg:p-16 flex flex-col justify-center"
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{
@@ -166,7 +152,8 @@ export default function LoginPage() {
         ease: [0.22, 1, 0.36, 1],
       }}
       >
-        <div className="max-w-md mx-auto w-full space-y-2 bg-[#17A5C61A] border-2 border-[#17A5C61A] px-10 py-15 rounded-[20px]">
+        <LoginStepper step={otpSent ? 2 : 1} />
+        <div className="max-w-md mx-auto w-full space-y-2 bg-[#ffff] border-2 border-blue-200 shadow-md px-10 py-15 rounded-[20px] z-1">
           {/* Logo */}
           <div className="flex justify-center mb-8">
             <Image
@@ -178,7 +165,7 @@ export default function LoginPage() {
             />
           </div>
 
-          <h1 className="text-4xl font-bold mb-2 text-center">Welcome back</h1>
+          <h1 className="text-4xl font-bold mb-5 text-center">Welcome back</h1>
           {/* <p className="text-gray-500 mb-8 text-center">
             Don&apos;t have an account?{" "}
             <Link href="/signup" className="text-[#27AE60] hover:underline">
@@ -198,14 +185,18 @@ export default function LoginPage() {
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Email</FormLabel>
+                      <FormLabel className="mb-1">Enter Your Email</FormLabel>
                       <FormControl>
+                        <div className="relative">
+                        <LucideMail className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+
                         <Input
-                          placeholder="Enter your email"
+                          placeholder="you@example.com"
                           type="email"
                           {...field}
-                          className="h-12"
+                          className="h-12 pl-12"
                         />
+                      </div>
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -214,7 +205,7 @@ export default function LoginPage() {
 
                 <Button
                   type="submit"
-                  className="w-full h-12 bg-[#27AE60] hover:bg-[#219653] text-white"
+                  className="w-full h-12 bg-[#27AE60] hover:bg-[#219653] text-white rounded-2xl"
                   disabled={getOtpMutation.isPending}
                 >
                   {getOtpMutation.isPending ? (
@@ -239,7 +230,8 @@ export default function LoginPage() {
                   control={otpForm.control}
                   name="email"
                   render={({ field }) => (
-                    <FormItem>
+                    <FormItem
+                    className="hidden">
                       <FormLabel>Email</FormLabel>
                       <FormControl>
                         <Input
@@ -254,13 +246,12 @@ export default function LoginPage() {
                     </FormItem>
                   )}
                 />
-
                 <FormField
                   control={otpForm.control}
                   name="otp"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Enter OTP sent to your email</FormLabel>
+                      <FormLabel className="mb-1">Enter OTP sent to your email</FormLabel>
                       <FormControl>
                         <div className="flex justify-start w-90">
                           <OtpInput
@@ -268,12 +259,12 @@ export default function LoginPage() {
                             onChange={handleOtpChange}
                             numInputs={6}
                             renderSeparator={
-                              <span className="w-1 md:w-2"></span>
+                              <span className="w-1 md:w-1"></span>
                             }
                             renderInput={(props) => (
                               <Input
                                 {...props}
-                                className="!w-10 !h-10 sm:!w-12 sm:!h-12 md:!w-12 md:!h-12 text-center p-0 sm:p-2"
+                                className="!w-11 !h-11 sm:!w-12 sm:!h-12 md:!w-12 md:!h-12 text-center p-0 sm:p-2"
                                 inputMode="numeric"
                               />
                             )}
@@ -350,6 +341,68 @@ export default function LoginPage() {
           </p>
         </div>
       </motion.div>
+
+      {/* right side - Image with padding */}
+
+      <motion.div className="w-full md:w-1/2  min-h-[300px] md:max-h-screen overflow-hidden hidden md:flex"
+      initial={{ x: -80, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{
+        duration: 0.8,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      >
+        <div className="relative w-full h-full  overflow-hidden">
+          <Image
+            src="/login-lady.png"
+            alt="Cleaning professional"
+            fill
+            className="object-cover"
+            priority
+            unoptimized
+          />
+        </div>
+      </motion.div>
+    </div>
+  );
+}
+
+
+function LoginStepper({ step }: { step: 1 | 2 }) {
+  return (
+    <div className="flex items-center justify-center mb-8 z-1">
+      {/* Step 1 */}
+      <div className="flex items-center">
+        <div
+          className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-semibold
+          ${step >= 2 ? "bg-[#27AE60] text-white" : "bg-[#27AE60] text-white"}`}
+        >
+          {step >= 2 ? "✓" : "1"}
+        </div>
+        <span className="ml-2 text-sm text-white">
+          Enter email
+        </span>
+      </div>
+
+      {/* Line */}
+      <div
+        className={`mx-4 h-0.5 w-12 
+        ${step >= 2 ? "bg-white/80" : "bg-white/50"}`}
+      />
+
+      {/* Step 2 */}
+      <div className="flex items-center">
+        <div
+          className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-semibold
+          ${step === 2 ? "bg-[#27AE60] text-white" : "bg-white/30 text-white/50"}`}
+        >
+          2
+        </div>
+        <span className={`ml-2 text-sm 
+         ${step ==2 ? " text-white" :"text-white/50"} `}>
+          Enter code
+        </span>
+      </div>
     </div>
   );
 }
