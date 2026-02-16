@@ -30,14 +30,11 @@ export function TimeSlotSelector({
   pincode
 }: TimeSlotSelectorProps) {
   // Fetch time slots from API
-  let dateForApiCall: string | null = null;
-  if (selectedDate) {
-    const datePlusOneDay = new Date(selectedDate);
-    datePlusOneDay.setDate(selectedDate.getDate());
-    dateForApiCall = datePlusOneDay.toISOString().split('T')[0];
-  }
 
-  const formattedDate = selectedDate ? selectedDate.toISOString().split('T')[0] : null;
+  const dateForApiCall = selectedDate
+  ? selectedDate.toLocaleDateString("en-CA") // YYYY-MM-DD
+  : null;
+
 
   const { data, isLoading, isError, error } = useTimeSlotList(
     // weekOfMonth,

@@ -77,9 +77,23 @@ export function ServiceDaySelector({
 
   // Handler for calendar date selection
   const handleDateSelect = (date: Date | undefined) => {
-    setSelectedCalendarDate(date);
-    onServiceDaySelect(dayKey, "selectedDate", date || null); // Pass date to parent
+    if (!date) {
+      setSelectedCalendarDate(undefined);
+      onServiceDaySelect(dayKey, "selectedDate", null);
+      return;
+    }
+
+    // normalize to local midnight (kills timezone bug)
+    const localDate = new Date(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate()
+    );
+
+    setSelectedCalendarDate(localDate);
+    onServiceDaySelect(dayKey, "selectedDate", localDate);
   };
+
 
   // Function to disable dates
   const isDateDisabled = (date: Date) => {
