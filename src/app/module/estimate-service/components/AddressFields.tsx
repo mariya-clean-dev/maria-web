@@ -69,7 +69,7 @@ export function AddressFields({ form }: AddressFieldsProps) {
           <FormItem>
             <FormLabel className="uppercase text-xs">Zipcode</FormLabel>
             <FormControl>
-              <Input {...field} />
+              <Input {...field} disabled />
             </FormControl>
             <FormMessage />
           </FormItem>

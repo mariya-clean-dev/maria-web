@@ -81,13 +81,23 @@ useEffect(() => {
 }, [selectedPlanId, form]);
 
 useEffect(() => {
-  if (userInfo?.pincode) {
-    form.setValue("zipcode", userInfo.pincode, {
-      shouldValidate: true,
-      shouldDirty: false,
-    });
+  if (userInfo) {
+    if (userInfo.pincode) {
+      form.setValue("zipcode", userInfo.pincode, {
+        shouldValidate: true,
+        shouldDirty: false,
+      });
+    }
+
+    if (userInfo.email) {
+      form.setValue("email", userInfo.email, {
+        shouldValidate: true,
+        shouldDirty: false,
+      });
+    }
   }
-}, [userInfo?.pincode, form]);
+}, [userInfo, form]);
+
 
 
 
