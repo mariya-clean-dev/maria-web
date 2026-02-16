@@ -54,7 +54,7 @@ export function PersonalInfoFields({ form }: PersonalInfoFieldsProps) {
           <FormItem>
             <FormLabel className="uppercase text-xs">EMAIL</FormLabel>
             <FormControl>
-              <Input placeholder="Enter your email" type="email" {...field} />
+              <Input placeholder="Enter your email" type="email" {...field} disabled/>
             </FormControl>
             <FormMessage />
           </FormItem>
