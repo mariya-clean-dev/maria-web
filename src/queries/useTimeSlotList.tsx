@@ -84,7 +84,6 @@ const useTimeSlotList = (
   enabled:
   (hasValidDate || hasValidDayOfWeek) &&
   (totalDuration !== null && totalDuration > 0)
-    
   });
 };
 
