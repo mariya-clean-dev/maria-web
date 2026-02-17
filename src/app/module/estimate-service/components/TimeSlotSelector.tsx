@@ -11,11 +11,11 @@ interface TimeSlotSelectorProps {
   onSelect: (time: TimeSlot) => void;
   hasError?: boolean;
   // weekOfMonth: string | null;
-  dayOfWeek: string | null;
+  dayOfWeek?: string | null;
   selectedDate?: Date | null;
   totalDuration?: number | null;
-  selectedPlanId: string | null;
-  pincode: string | null;
+  selectedPlanId?: string | null;
+  pincode?: string | null;
 }
 
 export function TimeSlotSelector({
@@ -23,11 +23,11 @@ export function TimeSlotSelector({
   onSelect,
   hasError = false,
   // weekOfMonth,
-  dayOfWeek,
+  dayOfWeek=null,
   selectedDate,
   totalDuration,
-  selectedPlanId,
-  pincode
+  selectedPlanId=null,
+  pincode=null,
 }: TimeSlotSelectorProps) {
   // Fetch time slots from API
 

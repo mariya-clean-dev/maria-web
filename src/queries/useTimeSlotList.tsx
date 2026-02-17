@@ -18,6 +18,9 @@ const fetchTimeSlot = async (dayOfWeek?: number, date?: string, totalDuration?: 
   if (dayOfWeek !== undefined && dayOfWeek >= 0 && !date) {
     params.dayOfWeek = dayOfWeek;
   }
+  if (date) {
+    params.date = date;
+  }
 
   if (totalDuration !== undefined && totalDuration !== null && totalDuration > 0) {
     params.durationMins = totalDuration;
@@ -36,6 +39,7 @@ const fetchTimeSlot = async (dayOfWeek?: number, date?: string, totalDuration?: 
     params.pincode = pincode; 
   }
 
+console.log("API CALLED", params);
 
   const response = await axiosInstance.get(`/scheduler/time-slots`, {
     params,
@@ -77,7 +81,10 @@ const useTimeSlotList = (
         pincode ?? undefined
       ),
     // Enable only if we have either a valid dayOfWeek OR a valid date, but not both
-    enabled: (hasValidDayOfWeek || hasValidDate) && !!pincode,
+  enabled:
+  (hasValidDate || hasValidDayOfWeek) &&
+  (totalDuration !== null && totalDuration > 0)
+    
   });
 };
 
