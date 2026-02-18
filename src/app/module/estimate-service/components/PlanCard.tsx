@@ -56,7 +56,6 @@ export function PlanCard({ plan, field, onSelect  }: PlanCardProps) {
   return (
     <div className="h-full">
       <Label
-        htmlFor={plan.recurringTypeId}
         className="cursor-pointer block h-full"
       >
         <Card
