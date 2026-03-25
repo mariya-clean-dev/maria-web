@@ -10,11 +10,13 @@ import FaqSection from "./components/FaqSection/FaqSection";
 import CTASection from "./components/CTASection/CTASection";
 import Footer from "./components/Footer/Footer";
 import PriceSection from "./components/PriceSection/PriceSection";
+import AppDownloadSection from "./components/AppDownloadSection/AppDownloadSection";
 
 const HomeModule = () => {
   return (
     <>
       <HeroSection />
+      <AppDownloadSection/>
       <div id="services">
         <ServicesSection />
       </div>
