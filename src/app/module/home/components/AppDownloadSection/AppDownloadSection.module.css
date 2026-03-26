@@ -38,7 +38,6 @@
 /* LEFT */
 .left {
   width: 50%;
-  max-width: 520px;
 }
 
 .badge {
@@ -85,7 +84,6 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 14px;
   margin-top: 24px;
-  max-width: 420px;
 }
 
 .featureItem {
