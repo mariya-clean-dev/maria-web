@@ -3,7 +3,7 @@
 import Image from "next/image";
 import styles from "./AppDownloadSection.module.css";
 import { motion } from "framer-motion";
-import { BarChart3, CalendarCheck, Sparkles, UserCheck, Users } from "lucide-react";
+import { CalendarPlus, Clock, CreditCard, MessageCircle, Sparkles } from "lucide-react";
 
 export default function AppDownloadSection() {
   return (
@@ -34,33 +34,32 @@ export default function AppDownloadSection() {
             NOW AVAILABLE
             </span>
             <h2 className={styles.heading}>
-              Manage Your Cleaning
-              Business <span>Effortlessly</span>
+              Book Your Home <span>Cleaning</span> in Seconds
             </h2>
 
             <p className={styles.desc}>
-              Track bookings, manage staff, monitor performance, and handle clients — all in one powerful admin app.
+              Schedule cleaning, manage bookings, track your cleaner, and stay updated — all from one simple app.
             </p>
 
             <div className={styles.features}>
             <div className={styles.featureItem}>
-                <Users size={16} />
-                <p>Staff Management</p>
+                <CalendarPlus size={16} />
+                <p>Easy Booking</p>
             </div>
 
             <div className={styles.featureItem}>
-                <CalendarCheck size={16} />
-                <p>Booking Tracking</p>
+                <Clock size={16} />
+                <p>Schedule Tracking</p>
             </div>
 
             <div className={styles.featureItem}>
-                <BarChart3 size={16} />
-                <p>Performance Analytics</p>
+                <MessageCircle size={16} />
+                <p>Seamless Communication</p>
             </div>
 
             <div className={styles.featureItem}>
-                <UserCheck size={16} />
-                <p>Client Management</p>
+                <CreditCard size={16} />
+                <p>Secure Payments</p>
             </div>
             </div>
 
@@ -127,7 +126,7 @@ export default function AppDownloadSection() {
             transition={{ duration: 0.7 }}
           >
             <Image
-              src="/adsection/mockup.png"
+              src="/adsection/phone.png"
               alt="app preview"
               width={420}
               height={600}
