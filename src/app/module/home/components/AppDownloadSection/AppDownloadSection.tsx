@@ -3,7 +3,7 @@
 import Image from "next/image";
 import styles from "./AppDownloadSection.module.css";
 import { motion } from "framer-motion";
-import { CalendarPlus, Clock, CreditCard, MessageCircle, Sparkles } from "lucide-react";
+import { Bell, CalendarCheck, CalendarPlus, MessageCircle, Sparkles } from "lucide-react";
 
 export default function AppDownloadSection() {
   return (
@@ -48,8 +48,8 @@ export default function AppDownloadSection() {
             </div>
 
             <div className={styles.featureItem}>
-                <Clock size={16} />
-                <p>Schedule Tracking</p>
+                <CalendarCheck size={16} />
+                <p>Manage Appointments</p>
             </div>
 
             <div className={styles.featureItem}>
@@ -58,8 +58,8 @@ export default function AppDownloadSection() {
             </div>
 
             <div className={styles.featureItem}>
-                <CreditCard size={16} />
-                <p>Secure Payments</p>
+                <Bell size={16} />
+                <p>Instant Updates</p>
             </div>
             </div>
 
