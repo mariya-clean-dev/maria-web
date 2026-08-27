@@ -1,6 +1,7 @@
 "use client";
 
 import Navbar from "../Navbar";
+import FloatingContact from "../module/home/components/FloatingContact/FloatingContact";
 
 export default function MainLayout({
   children,
@@ -11,6 +12,7 @@ export default function MainLayout({
     <div className="min-h-screen">
       <Navbar />
       {children}
+      <FloatingContact />
     </div>
   );
 }
