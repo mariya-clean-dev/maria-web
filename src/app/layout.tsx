@@ -30,7 +30,6 @@ export default function RootLayout({
           </Suspense>
         </QueryProvider>
         <Toaster />
-        {process.env.NEXT_PUBLIC_CLARITY_ID && (
           <Script
             id="microsoft-clarity"
             strategy="afterInteractive"
@@ -45,10 +44,9 @@ export default function RootLayout({
                   t.src="https://www.clarity.ms/tag/"+i;
                   y=l.getElementsByTagName(r)[0];
                   y.parentNode.insertBefore(t,y);
-              })(window, document, "clarity", "script", "${process.env.NEXT_PUBLIC_CLARITY_ID}");
+              })(window, document, "clarity", "script", "yexvk7qps8");
             `}
           </Script>
-        )}
       </body>
     </html>
   );
