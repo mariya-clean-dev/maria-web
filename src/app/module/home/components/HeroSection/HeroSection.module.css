@@ -6,6 +6,7 @@
   background: linear-gradient(to right, #FAFAF9 50%, #17A5C60D 50%);
   font-family: Inter;
 }
+
 .contentWrapper {
   position: relative;
   height: 100%;
@@ -88,7 +89,8 @@
   object-fit: cover;
   border-radius: 32px;
 }
-.fcleft{
+
+.fcleft {
   position: absolute;
   display: flex;
   gap: 8px;
@@ -103,7 +105,8 @@
   animation: floatUp 4s ease-in-out infinite;
   will-change: transform;
 }
-.fcright{
+
+.fcright {
   position: absolute;
   display: flex;
   gap: 8px;
@@ -118,22 +121,26 @@
   animation: floatDown 4s ease-in-out infinite;
   will-change: transform;
 }
-.fctitle{
+
+.fctitle {
   font-size: 12px;
   color: #808080;
   font-weight: 600;
 }
-.fcdetail{
+
+.fcdetail {
   font-weight: 700;
 }
-.fcleft .icon{
+
+.fcleft .icon {
   background-color: #27AE602d;
   border-radius: 10px;
   padding: 8px;
   width: 40px;
   height: 40px;
 }
-.fcright .icon{
+
+.fcright .icon {
   background-color: #17a6c62d;
   border-radius: 10px;
   padding: 8px;
@@ -190,7 +197,7 @@
 .stars {
   display: flex;
   gap: 4px;
-  color: #fbbf24; 
+  color: #fbbf24;
 }
 
 .rating p {
@@ -203,19 +210,26 @@
   font-weight: 700;
   color: #111;
 }
+
 @keyframes floatUp {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-14px);
   }
 }
 
 @keyframes floatDown {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(14px);
   }
@@ -257,12 +271,14 @@
   .heroSection {
     margin-top: 80px;
   }
+
   .contentWrapper {
     gap: 40px;
     padding: 0 16px;
     flex-direction: column;
   }
-  .leftContent{
+
+  .leftContent {
     text-align: center;
     width: 100%;
     display: flex;
@@ -270,6 +286,7 @@
     align-items: center;
     justify-content: center;
   }
+
   .badge {
     font-size: 11px;
     padding: 6px 16px;
@@ -293,6 +310,7 @@
     height: 420px;
     border-radius: 24px;
   }
+
   .rightImage img {
     border-radius: 24px;
   }
@@ -300,6 +318,10 @@
 }
 
 @media (max-width: 480px) {
+  .heroSection {
+    padding: 50px 0;
+    margin-top: 80px;
+  }
 
   .heading {
     font-size: 34px;
@@ -325,24 +347,30 @@
     height: 300px;
     border-radius: 20px;
   }
+
   .rightImage img {
     border-radius: 20px;
   }
+
   .fcleft,
-  .fcright{
+  .fcright {
     padding: 10px;
   }
-  .fctitle{
+
+  .fctitle {
     font-size: 10px;
   }
-  .fcdetail{
+
+  .fcdetail {
     font-size: 12px;
   }
-  .fcleft .icon{
+
+  .fcleft .icon {
     width: 35px;
     height: 35px;
   }
-  .fcright .icon{
+
+  .fcright .icon {
     width: 35px;
     height: 35px;
   }

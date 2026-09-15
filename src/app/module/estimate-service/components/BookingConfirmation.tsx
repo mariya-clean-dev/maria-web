@@ -41,7 +41,7 @@ import {
   dayOfWeekToNumber,
   extractAreaSize,
 } from "@/services/heplerFunctions";
-import { CreditCard, FileText, Loader2, LockIcon } from "lucide-react";
+import { CreditCard, FileText, Loader2, LockIcon, ChevronLeft } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Stepper from "./Stepper";
 
@@ -351,8 +351,8 @@ useEffect(() => {
   // ======== RENDER ========
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 pt-32">
-      <Stepper currentStep={3} />
+    <div className="min-h-screen bg-gray-50 py-12 pt-32 pb-32 md:pb-12">
+      <Stepper currentStep={3} onBack={() => setView('plans')} />
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -360,12 +360,19 @@ useEffect(() => {
           transition={{ duration: 0.6 }}
           className="max-w-225 mx-auto"
         >
-          <Card className="bg-white rounded-[40px]  px-6.25 md:px-12 py-12 md:py-12 shadow-[0_5px_20px_rgba(0,0,0,0.10)] ">
+          <Card className="bg-white rounded-[40px] px-6 py-8 md:px-12 md:py-12 shadow-[0_5px_20px_rgba(0,0,0,0.10)] relative mt-4 md:mt-0">
+            <button
+              type="button"
+              onClick={() => setView('plans')}
+              className="absolute left-4 top-4 md:left-8 md:top-8 flex items-center justify-center text-[#17A5C6] hover:opacity-80 transition-opacity bg-[#17A5C6]/10 p-1.5 md:p-2 rounded-full cursor-pointer"
+            >
+              <ChevronLeft strokeWidth={2.5} className="w-5 h-5 md:w-6 md:h-6" />
+            </button>
 
-            <h1 className="text-3xl md:text-4xl font-bold text-center">
+            <h1 className="text-2xl md:text-4xl font-bold text-center mt-6 md:mt-0">
               Booking Confirmation
             </h1>
-            <p className="text-gray-600 text-center mb-4">Complete your details to secure your slot.</p>
+            <p className="text-sm md:text-base text-gray-600 text-center mb-4">Complete your details to secure your slot.</p>
 
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="grid grid-cols-1 lg:grid-cols-2 gap-10">
@@ -521,7 +528,7 @@ useEffect(() => {
                 <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full h-12 bg-[#19A4C6] hover:bg-[#19A4C6]/90 text-white rounded-full disabled:pointer-events-none"
+                    className="hidden md:flex w-full h-12 bg-[#19A4C6] hover:bg-[#19A4C6]/90 text-white rounded-full disabled:pointer-events-none"
                     >
                     {isSubmitting ? (
                         <>
@@ -538,7 +545,31 @@ useEffect(() => {
                           )}
                         </span>
                     )}
-                    </Button>
+                </Button>
+
+                <div className="md:hidden fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-gray-200 z-50 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
+                  <Button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full h-12 bg-[#19A4C6] hover:bg-[#19A4C6]/90 text-white rounded-full disabled:pointer-events-none"
+                      >
+                      {isSubmitting ? (
+                          <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          Processing...
+                          </>
+                      ) : (
+                          <span className="flex items-center justify-center gap-2">
+                            Book Now
+                            {selectedPlan?.finalPrice && (
+                              <span className="font-semibold">
+                                - {formatPrice(selectedPlan.finalPrice)}
+                              </span>
+                            )}
+                          </span>
+                      )}
+                  </Button>
+                </div>
               </div>
 
 

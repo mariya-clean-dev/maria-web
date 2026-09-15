@@ -27,6 +27,9 @@ const EstimateServiceModule = () => {
   if (!userInfo?.pincode) return null;
   const [view, setView] = useState<ViewType>("estimate");
   
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [view]);
 
   return (
     <>

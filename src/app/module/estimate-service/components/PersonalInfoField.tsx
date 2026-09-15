@@ -16,12 +16,12 @@ interface PersonalInfoFieldsProps {
 export function PersonalInfoFields({ form }: PersonalInfoFieldsProps) {
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex gap-6">
+      <div className="flex flex-col md:flex-row gap-6">
         <FormField
         control={form.control}
         name="firstName"
         render={({ field }) => (
-          <FormItem>
+          <FormItem className="w-full">
             <FormLabel className="uppercase text-xs">FIRST NAME</FormLabel>
             <FormControl>
               <Input placeholder="Enter your first name" {...field} />
@@ -35,7 +35,7 @@ export function PersonalInfoFields({ form }: PersonalInfoFieldsProps) {
         control={form.control}
         name="lastName"
         render={({ field }) => (
-          <FormItem>
+          <FormItem className="w-full">
             <FormLabel className="uppercase text-xs">LAST NAME</FormLabel>
             <FormControl>
               <Input placeholder="Enter your last name" {...field} />
@@ -54,7 +54,7 @@ export function PersonalInfoFields({ form }: PersonalInfoFieldsProps) {
           <FormItem>
             <FormLabel className="uppercase text-xs">EMAIL</FormLabel>
             <FormControl>
-              <Input placeholder="Enter your email" type="email" {...field} disabled/>
+              <Input placeholder="Enter your email" type="email" {...field} disabled className="disabled:opacity-100 disabled:text-black font-medium" />
             </FormControl>
             <FormMessage />
           </FormItem>

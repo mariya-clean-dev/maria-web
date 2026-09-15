@@ -25,7 +25,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
 import { Card, CardContent } from "@/components/ui/card";
-import { Factory, Leaf, Loader, Minus, Package, Plus } from "lucide-react";
+import { Factory, Leaf, Loader, Minus, Package, Plus, ChevronLeft } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { useEstimateCalculation } from "@/queries/estimate-calculation/useEstimateCalculation";
 import useListServices from "@/queries/services/useListServices";
@@ -33,6 +33,7 @@ import useCustomToast from "@/hooks/use-custom-toast";
 import { useEstimateStore } from "@/store/useEstimateStore";
 import { useServicePlanStore } from "@/store/useServicePlanStore";
 import Stepper from "./Stepper";
+import { useRouter } from "next/navigation";
 
 // Define form validation schema
 const formSchema = z.object({
@@ -64,6 +65,7 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 export default function CalculateServiceEstimate({ setView  }: any) {
+  const router = useRouter();
   const [roomsValue, setRoomsValue] = useState(0);
   const [bathroomsValue, setBathroomsValue] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
@@ -214,11 +216,18 @@ export default function CalculateServiceEstimate({ setView  }: any) {
           className="max-w-[900px] mx-auto"
         >
 
-          <Card className="bg-white rounded-[40px]  px-[25px] md:px-[100px] py-[48px] md:py-[48px] shadow-[0_5px_20px_rgba(0,0,0,0.10)] ">
-            <h1 className="text-3xl md:text-4xl font-bold text-center">
+          <Card className="bg-white rounded-[40px] px-6 py-8 md:px-[100px] md:py-[48px] shadow-[0_5px_20px_rgba(0,0,0,0.10)] relative mt-4 md:mt-0">
+            <button
+              type="button"
+              onClick={() => router.push('/')}
+              className="absolute left-4 top-4 md:left-8 md:top-8 flex items-center justify-center text-[#17A5C6] hover:opacity-80 transition-opacity bg-[#17A5C6]/10 p-1.5 md:p-2 rounded-full cursor-pointer"
+            >
+              <ChevronLeft strokeWidth={2.5} className="w-5 h-5 md:w-6 md:h-6" />
+            </button>
+            <h1 className="text-2xl md:text-4xl font-bold text-center mt-6 md:mt-0">
               Get Your Estimate
             </h1>
-            <p className="text-gray-600 text-center">
+            <p className="text-sm md:text-base text-gray-600 text-center">
               Fill out the form below to receive a customized cleaning service
               estimate.
             </p>
@@ -438,7 +447,7 @@ export default function CalculateServiceEstimate({ setView  }: any) {
                       control={form.control}
                       name="ecoFriendly"
                       render={({ field }) => (
-                        <FormItem className="flex flex-row items-start justify-between rounded-xl border-2 border-[#F5F5F4] bg-[#FAFAF9] p-4"
+                        <FormItem className="relative flex flex-row items-start justify-between rounded-xl border-2 border-[#F5F5F4] bg-[#FAFAF9] p-4 cursor-pointer hover:bg-gray-100/50 transition-colors"
                         >
                           <FormControl>
                             <Switch
@@ -454,7 +463,7 @@ export default function CalculateServiceEstimate({ setView  }: any) {
                           <div className="space-y-0.5">
                             <div className="flex items-center space-x-2">
                               <Leaf className="h-4 w-4 text-[#A6A09B]" />
-                              <FormLabel className="font-bold text-[#1C1917]">
+                              <FormLabel className="font-bold text-[#1C1917] before:absolute before:inset-0 before:cursor-pointer">
                                 Eco-Friendly Cleaning
                               </FormLabel>
                             </div>
@@ -471,7 +480,8 @@ export default function CalculateServiceEstimate({ setView  }: any) {
                       control={form.control}
                       name="materialsProvided"
                       render={({ field }) => (
-                        <FormItem className="flex flex-row items-start justify-between rounded-xl border-2 border-[#F5F5F4] bg-[#FAFAF9] p-4 ">
+                        <FormItem className="relative flex flex-row items-start justify-between rounded-xl border-2 border-[#F5F5F4] bg-[#FAFAF9] p-4 cursor-pointer hover:bg-gray-100/50 transition-colors"
+                        >
                           <FormControl>
                             <Switch
                               checked={field.value}
@@ -486,7 +496,7 @@ export default function CalculateServiceEstimate({ setView  }: any) {
                           <div className="space-y-0.5">
                             <div className="flex items-center space-x-2">
                               <Package className="h-4 w-4 text-[#A6A09B]" />
-                              <FormLabel className="font-bold text-[#1C1917] ">
+                              <FormLabel className="font-bold text-[#1C1917] before:absolute before:inset-0 before:cursor-pointer">
                                 Materials Provided
                               </FormLabel>
                             </div>

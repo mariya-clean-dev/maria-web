@@ -3,7 +3,8 @@
 import styles from "./ServiceSection.module.css";
 import {Sparkles,Home,Package,Hammer,Building2,} from "lucide-react";
 import { motion } from "framer-motion";
-
+import { useState } from "react";
+import EstimateModal from "../../EstimateModal/EstimateModal";
 const services = [
   {
     icon: Sparkles,
@@ -38,7 +39,9 @@ const services = [
 ];
 
 export default function ServiceSection() {
+  const [open, setOpen] = useState(false);
   return (
+    <>
     <section className={styles.serviceSection}>
       {/* Header */}
       <motion.div
@@ -101,6 +104,10 @@ export default function ServiceSection() {
                 visible: { opacity: 1 },
               }}
               transition={{ duration: 0.4, ease: "easeOut" }}
+              onClick={() => {
+                setOpen(true);
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
             >
               <div className={styles.overlay}></div>
               <motion.div
@@ -117,5 +124,7 @@ export default function ServiceSection() {
         })}
       </motion.div>
     </section>
+    <EstimateModal isOpen={open} onClose={() => setOpen(false)} />
+    </>
   );
 }
