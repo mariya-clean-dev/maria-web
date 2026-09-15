@@ -17,7 +17,7 @@
 .label {
   font-size: 15px;
   font-weight: 700;
-  color: #61B35C; 
+  color: #61B35C;
   display: inline-block;
   margin-bottom: 15px;
 }
@@ -35,7 +35,7 @@
   align-items: stretch;
   justify-content: center;
   gap: 48px;
-  
+
 }
 
 .step {
@@ -84,6 +84,7 @@
   background: transparent;
   overflow: hidden;
 }
+
 .lineInner {
   width: 100%;
   height: 100%;
@@ -97,10 +98,12 @@
   .wrapper {
     padding: 20px 40px;
   }
-  .step{
+
+  .step {
     padding: 0 35px;
   }
-  .line{
+
+  .line {
     top: 16%;
     width: 90%;
   }
@@ -110,22 +113,26 @@
   .heading {
     font-size: 32px;
   }
-    .steps {
+
+  .steps {
     grid-template-columns: 1fr;
     gap: 32px;
   }
+
   .step {
     max-width: 100%;
   }
-  .line{
+
+  .line {
     display: none;
   }
 }
 
 @media (max-width: 480px) {
- .wrapper {
-    padding: 60px 0;
+  .wrapper {
+    padding: 50px 0;
   }
+
   .wrapper {
     padding: 20px 20px;
   }

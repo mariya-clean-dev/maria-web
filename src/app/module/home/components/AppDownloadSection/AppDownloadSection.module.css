@@ -1,22 +1,21 @@
 .section {
-
   width: 100%;
-  padding: 80px 0;
+  padding: 80px 50px;
 }
 
 .wrapper {
   position: relative;
-  max-width: 1300px;
   margin: 0 auto;
   border-radius: 40px;
   overflow: hidden;
   padding: 80px 60px;
 }
+
 .wrapper::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(255,255,255,0.2);
+  background: rgba(255, 255, 255, 0.2);
   z-index: 1;
 }
 
@@ -64,14 +63,23 @@
 .heading span {
   color: #17A5C6;
 }
+
 .phone {
   animation: floatPhone 6s ease-in-out infinite;
 }
 
 @keyframes floatPhone {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
 }
+
 .desc {
   margin-top: 20px;
   font-size: 18px;
@@ -94,6 +102,7 @@
   font-weight: 500;
   color: #374151;
 }
+
 .featureItem svg {
   color: #17A5C6;
 }
@@ -117,11 +126,13 @@
   gap: 16px;
   margin-top: 28px;
 }
+
 .storeIcon {
   width: 22px;
   height: 22px;
   object-fit: contain;
 }
+
 .storeBtn img[src*="Apple"] {
   filter: invert(1);
 }
@@ -139,13 +150,13 @@
   text-decoration: none;
   border: none;
   transition: all 0.3s ease;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
 .storeBtn:hover {
   transform: translateY(-2px) scale(1.03);
   background: #000;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 }
 
 /* Text inside */
@@ -209,6 +220,10 @@
 /* ================= RESPONSIVE ================= */
 
 @media (max-width: 1024px) {
+  .section {
+    padding: 80px 40px;
+  }
+
   .wrapper {
     padding: 60px 40px;
   }
@@ -235,6 +250,7 @@
   .badge {
     margin-bottom: 12px;
   }
+
   .content {
     flex-direction: column;
     text-align: center;
@@ -291,6 +307,10 @@
 }
 
 @media (max-width: 480px) {
+  .section {
+    padding: 50px 20px;
+  }
+
   .wrapper {
     padding: 40px 20px;
     border-radius: 24px;

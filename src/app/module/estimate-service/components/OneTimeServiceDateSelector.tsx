@@ -132,16 +132,17 @@ export function OneTimeServiceDateSelector({
                                 )}
                             </div>
                         ) : (
-                            <>
-                                {/* <p className="text-sm text-gray-500">
-                                    {hasError ? "Selection required" : "Click to select"}
-                                </p> */}
-                                {hasError && (
+                            <div className="text-sm">
+                                {hasError ? (
                                     <p className="text-xs text-red-500">
                                         Please select {missingSelections.join(" and ")}
                                     </p>
+                                ) : (
+                                    <p className="text-gray-500">
+                                        Select Date & Time
+                                    </p>
                                 )}
-                            </>
+                            </div>
                         )}
                     </CardContent>
                 </Card>

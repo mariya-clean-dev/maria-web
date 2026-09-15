@@ -21,7 +21,7 @@
 }
 
 .heading {
-  font-size:60px;
+  font-size: 60px;
   font-weight: 700;
   color: #1c1917;
   line-height: 1.2;
@@ -98,6 +98,7 @@
   .reviewsSection {
     padding: 80px 40px;
   }
+
   .heading {
     font-size: 34px;
   }
@@ -110,7 +111,7 @@
 /* Small mobile */
 @media (max-width: 480px) {
   .reviewsSection {
-    padding: 100px 20px;
+    padding: 50px 20px;
   }
 
   .heading {

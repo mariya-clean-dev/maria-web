@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import styles from "./EstimateNavbar.module.css";
-import { ArrowLeft } from "lucide-react";
+import { Home } from "lucide-react";
 import { useEstimateStore } from "@/store/useEstimateStore";
 
 
@@ -24,7 +24,7 @@ export default function EstimateNavbar({ customerName }: Props) {
           onClick={() => router.push("/")}
           aria-label="Back to home"
         >
-          <ArrowLeft size={18} />
+          <Home size={18} />
           <span>Back to Home</span>
         </button>
 

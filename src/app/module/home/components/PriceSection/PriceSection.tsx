@@ -2,9 +2,13 @@
 
 import styles from "./PriceSection.module.css";
 import { motion } from "framer-motion";
+import { useState } from "react";
+import EstimateModal from "../../EstimateModal/EstimateModal";
 
 export default function PriceSection() {
+  const [open, setOpen] = useState(false);
   return (
+    <>
     <section className={styles.priceSection}>
       
       {/* HEADING */}
@@ -48,6 +52,10 @@ export default function PriceSection() {
               },
             },
           }}
+          onClick={() => {
+            setOpen(true);
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
         >
           <h3>One-Time</h3>
           <p>
@@ -68,6 +76,10 @@ export default function PriceSection() {
                 ease: [0.22, 1, 0.36, 1],
               },
             },
+          }}
+          onClick={() => {
+            setOpen(true);
+            window.scrollTo({ top: 0, behavior: "smooth" });
           }}
         >
           <span className={styles.badge}>MOST POPULAR</span>
@@ -91,6 +103,10 @@ export default function PriceSection() {
               },
             },
           }}
+          onClick={() => {
+            setOpen(true);
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
         >
           <h3>Bi-Weekly</h3>
           <p>
@@ -100,5 +116,7 @@ export default function PriceSection() {
         </motion.div>
       </motion.div>
     </section>
+    <EstimateModal isOpen={open} onClose={() => setOpen(false)} />
+    </>
   );
 }

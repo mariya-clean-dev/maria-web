@@ -18,6 +18,7 @@ import { Card } from "@/components/ui/card";
 import { useServicePlanStore } from "@/store/useServicePlanStore";
 import useCustomToast from "@/hooks/use-custom-toast";
 import Stepper from "./Stepper";
+import { ChevronLeft } from "lucide-react";
 
 export default function ServicePlan({ setView }: any) {
   const { servicePlan } = useServicePlanStore();
@@ -41,14 +42,21 @@ export default function ServicePlan({ setView }: any) {
           transition={{ duration: 0.6 }}
           className="max-w-[900px] mx-auto"
         >
-          <Card className="bg-white rounded-[40px] px-[48px] py-[48px] shadow-lg ">
+          <Card className="bg-white rounded-[40px] px-6 py-8 md:px-[48px] md:py-[48px] shadow-lg relative mt-4 md:mt-0">
+            <button
+              type="button"
+              onClick={() => setView('estimate')}
+              className="absolute left-4 top-4 md:left-8 md:top-8 flex items-center justify-center text-[#17A5C6] hover:opacity-80 transition-opacity bg-[#17A5C6]/10 p-1.5 md:p-2 rounded-full cursor-pointer"
+            >
+              <ChevronLeft strokeWidth={2.5} className="w-5 h-5 md:w-6 md:h-6" />
+            </button>
 
-            <div className="flex flex-col items-center gap-3">
-             <h1 className="text-3xl md:text-4xl font-bold text-center">
+            <div className="flex flex-col items-center gap-3 mt-6 md:mt-0">
+             <h1 className="text-2xl md:text-4xl font-bold text-center">
               Your Estimate Results
             </h1>
-            <p className="text-gray-600 text-center max-w-[550px]">This is a preliminary estimate. Final pricing may vary based on your home. We&apos;re happy to tailor our services to fit your needs.</p>
-            <p className="text-[#1C1917] font-bold text-[18px] mb-4">Enjoy guaranteed best <span className="text-[#61B35C]">pricing</span> and <span className="text-[#61B35C]">flexible</span> service options.</p>
+            <p className="text-sm md:text-base text-gray-600 text-center max-w-[550px]">This is a preliminary estimate. Final pricing may vary based on your home. We&apos;re happy to tailor our services to fit your needs.</p>
+            <p className="text-[#1C1917] font-bold text-[15px] md:text-[18px] mb-4 text-center">Enjoy guaranteed best <span className="text-[#61B35C]">pricing</span> and <span className="text-[#61B35C]">flexible</span> service options.</p>
 
             </div>
             <Form {...form}>
