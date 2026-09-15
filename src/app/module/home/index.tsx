@@ -16,27 +16,27 @@ const HomeModule = () => {
   return (
     <>
       <HeroSection />
-      <AppDownloadSection/>
+      <AppDownloadSection />
       <div id="services">
         <ServicesSection />
       </div>
       <div id="about">
-        <AboutSection/>
+        <AboutSection />
       </div>
-      <DetailsSection/>
+      <DetailsSection />
       <div id="process">
-        <ProcessSection/>
+        <ProcessSection />
       </div>
       <div id="pricing">
-        <PriceSection/>
+        <PriceSection />
       </div>
-      <PromiseSection/>
+      <PromiseSection />
       <div id="reviews">
-        <ReviewsSection/>
+        <ReviewsSection />
       </div>
-      <FaqSection/>
-      <CTASection/>
-      <Footer/>
+      <FaqSection />
+      <CTASection />
+      <Footer />
     </>
   );
 };

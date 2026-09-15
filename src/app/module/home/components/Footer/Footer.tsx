@@ -94,6 +94,11 @@ const handleFooterNavigation = (
             <span>925-539-2941</span>
           </div>
 
+          <div className={styles.legal}>
+            <Link href="/privacy">Privacy Policy</Link>
+            <Link href="/terms">Terms of Service</Link>
+          </div>
+
           <p className={styles.copy}>
             © {new Date().getFullYear()} Clean by Maria.Designed and Developed by <a href="https://palqar.com/about"><span>Palqar Technologies</span></a>
           </p>
