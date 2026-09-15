@@ -1,0 +1,413 @@
+/* ============================================================
+   Legal.module.css — Privacy Policy & Terms of Service
+   Breakpoints: 1024 · 768 · 480 · 360
+   ============================================================ */
+
+/* ─── Wrapper ─────────────────────────────────────────────── */
+
+.legalWrapper {
+  margin-top: 88px;
+  font-family: Inter, sans-serif;
+  background-color: #FAFAF9;
+  min-height: 100vh;
+  padding: 60px 24px;
+}
+
+@media (max-width: 1024px) {
+  .legalWrapper {
+    padding: 50px 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .legalWrapper {
+    margin-top: 80px;
+    padding: 40px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .legalWrapper {
+    padding: 28px 12px;
+  }
+}
+
+@media (max-width: 360px) {
+  .legalWrapper {
+    padding: 20px 10px;
+  }
+}
+
+/* ─── Container ───────────────────────────────────────────── */
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 60px;
+  background-color: #ffffff;
+  border-radius: 24px;
+  box-shadow: rgba(100, 100, 111, 0.1) 0px 7px 29px 0px;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    padding: 48px 44px;
+    border-radius: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 32px 24px;
+    border-radius: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 24px 18px;
+    border-radius: 12px;
+  }
+}
+
+@media (max-width: 360px) {
+  .container {
+    padding: 20px 14px;
+    border-radius: 10px;
+  }
+}
+
+/* ─── Title ───────────────────────────────────────────────── */
+
+.title {
+  font-size: 44px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 16px;
+  text-align: center;
+  line-height: 1.2;
+}
+
+@media (max-width: 1024px) {
+  .title {
+    font-size: 38px;
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 30px;
+    margin-bottom: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 360px) {
+  .title {
+    font-size: 22px;
+  }
+}
+
+.title span {
+  color: #17A5C6;
+  font-style: italic;
+  font-family: Poppins, sans-serif;
+}
+
+/* ─── Date ────────────────────────────────────────────────── */
+
+.date {
+  font-size: 14px;
+  color: #808080;
+  margin-bottom: 48px;
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 768px) {
+  .date {
+    font-size: 12px;
+    margin-bottom: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  .date {
+    font-size: 11px;
+    margin-bottom: 28px;
+  }
+}
+
+/* ─── Section ─────────────────────────────────────────────── */
+
+.section {
+  margin-bottom: 40px;
+}
+
+@media (max-width: 768px) {
+  .section {
+    margin-bottom: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    margin-bottom: 24px;
+  }
+}
+
+/* ─── Section Title ───────────────────────────────────────── */
+
+.sectionTitle {
+  font-size: 22px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #E7E5E4;
+  padding-bottom: 12px;
+}
+
+@media (max-width: 1024px) {
+  .sectionTitle {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sectionTitle {
+    font-size: 18px;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sectionTitle {
+    font-size: 16px;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+  }
+}
+
+@media (max-width: 360px) {
+  .sectionTitle {
+    font-size: 15px;
+  }
+}
+
+/* ─── Body Text ───────────────────────────────────────────── */
+
+.text {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #555;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 768px) {
+  .text {
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .text {
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+}
+
+@media (max-width: 360px) {
+  .text {
+    font-size: 13px;
+    line-height: 1.65;
+  }
+}
+
+.text strong {
+  color: #111;
+  font-weight: 600;
+}
+
+/* ─── List ────────────────────────────────────────────────── */
+
+.list {
+  list-style: none;
+  padding-left: 20px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 480px) {
+  .list {
+    padding-left: 16px;
+    margin-bottom: 12px;
+  }
+}
+
+.list li {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #555;
+  margin-bottom: 12px;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .list li {
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .list li {
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 8px;
+  }
+}
+
+@media (max-width: 360px) {
+  .list li {
+    font-size: 13px;
+    line-height: 1.65;
+  }
+}
+
+.list li::before {
+  content: "•";
+  color: #17A5C6;
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+  position: absolute;
+}
+
+/* ─── Redirect Card ───────────────────────────────────────── */
+
+.redirectCard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+  margin-bottom: 0;
+  padding: 12px 24px;
+  background-color: #FAFAF9;
+  border-radius: 999px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid #E7E5E4;
+}
+
+@media (max-width: 768px) {
+  .redirectCard {
+    padding: 12px 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .redirectCard {
+    flex-direction: column;
+    gap: 6px;
+    border-radius: 16px;
+    padding: 16px 20px;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 480px) {
+  .redirectCard {
+    padding: 14px 16px;
+    border-radius: 12px;
+    gap: 4px;
+  }
+}
+
+@media (max-width: 360px) {
+  .redirectCard {
+    padding: 12px 14px;
+    border-radius: 10px;
+  }
+}
+
+/* ─── Redirect Text ───────────────────────────────────────── */
+
+.redirectText {
+  font-size: 14px;
+  color: #808080;
+  font-weight: 500;
+}
+
+.redirectText span {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .redirectText {
+    font-size: 13px;
+  }
+
+  .redirectText span {
+    display: block;
+    font-size: 12px;
+    font-weight: 400;
+    margin-top: 2px;
+    color: #9CA3AF;
+  }
+}
+
+@media (max-width: 360px) {
+  .redirectText {
+    font-size: 12px;
+  }
+}
+
+/* ─── Redirect Button ─────────────────────────────────────── */
+
+.redirectButton {
+  color: #17A5C6;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+}
+
+@media (max-width: 480px) {
+  .redirectButton {
+    font-size: 13px;
+  }
+}
+
+.redirectButton::after {
+  content: "→";
+  margin-left: 4px;
+  font-size: 16px;
+  transition: transform 0.2s ease;
+}
+
+.redirectButton:hover {
+  opacity: 0.8;
+}
+
+.redirectButton:hover::after {
+  transform: translateX(3px);
+}

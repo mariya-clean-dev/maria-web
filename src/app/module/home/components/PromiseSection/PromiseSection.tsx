@@ -163,7 +163,7 @@ export default function PromiseSection() {
           </motion.div>
 
           <motion.a
-            href="#"
+            href="/terms"
             className={styles.link}
             variants={{
               hidden: { opacity: 0, y: 14 },
