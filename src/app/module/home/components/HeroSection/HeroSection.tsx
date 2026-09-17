@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import styles from "./HeroSection.module.css";
 import { LucideClock4, LucideStar, LucideVerified, Sparkles, User, UserCircle } from "lucide-react";
 import { motion } from "framer-motion";
@@ -9,6 +10,14 @@ import EstimateModal from "../../EstimateModal/EstimateModal";
 
 export default function HeroSection() {
   const [open, setOpen] = useState(false);
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    if (searchParams.get("openEstimate") === "true") {
+      setOpen(true);
+    }
+  }, [searchParams]);
+
   return (
     <>
     <section className={styles.heroSection}>

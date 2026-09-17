@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect,useState } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import styles from "./EstimateModal.module.css";
 import { X, User, Mail, MapPin, ArrowRight } from "lucide-react";
 import { useEstimateInit } from "@/queries/estimate/useEstimateInit";
@@ -15,11 +15,12 @@ type Props = {
 
 export default function EstimateModal({ isOpen, onClose }: Props) {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { mutate, isPending  } = useEstimateInit();
 
   const [form, setForm] = useState({
     name: "",
-    email: "",
+    email: (typeof window !== "undefined" ? new URLSearchParams(window.location.search).get("email") : "") || "",
     pincode: "",
   });
 
@@ -45,10 +46,16 @@ export default function EstimateModal({ isOpen, onClose }: Props) {
   }, [isOpen]);
 
   useEffect(() => {
+    let currentEmail = "";
+    if (typeof window !== "undefined") {
+      const urlParams = new URLSearchParams(window.location.search);
+      currentEmail = searchParams.get("email") || urlParams.get("email") || "";
+    }
+
     if (!isOpen) {
       setForm({
         name: "",
-        email: "",
+        email: currentEmail, // Keep the email if it's in the URL
         pincode: "",
       });
 
@@ -59,8 +66,12 @@ export default function EstimateModal({ isOpen, onClose }: Props) {
       });
 
       setInfoMessage(null);
+    } else {
+      if (currentEmail) {
+        setForm((prev) => ({ ...prev, email: currentEmail }));
+      }
     }
-  }, [isOpen]);
+  }, [isOpen, searchParams]);
 
 
 
