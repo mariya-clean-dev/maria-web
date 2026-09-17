@@ -22,7 +22,7 @@ import {
 import { useGetOtp } from "@/queries/authentication/useGetOtp";
 import { useVerifyOtp } from "@/queries/authentication/useVerifyOtp";
 import useCustomToast from "@/hooks/use-custom-toast";
-import { useRouter } from "nextjs-toploader/app";
+import { useRouter } from "next/navigation";
 
 const emailSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address." }),
@@ -131,6 +131,7 @@ export default function LoginPage() {
   const [otpSent, setOtpSent] = useState(false);
   const [otp, setOtp] = useState("");
   const [email, setEmail] = useState("");
+  const [showUnregisteredModal, setShowUnregisteredModal] = useState(false);
 
   const { success, showError } = useCustomToast();
   const getOtpMutation = useGetOtp();
@@ -153,7 +154,7 @@ export default function LoginPage() {
     await getOtpMutation.mutateAsync({ email: values.email }, {
       onSuccess: (data) => {
         if (data?.message === "Not A Registered User") {
-          showError("This email is not registered.");
+          setShowUnregisteredModal(true);
           setOtpSent(false);
         } else {
           setOtpSent(true);
@@ -658,6 +659,107 @@ export default function LoginPage() {
             ✦ Professional cleaning, trusted since day one
           </motion.p>
         </motion.div>
+
+        {/* ══ UNREGISTERED MODAL ══ */}
+        <AnimatePresence>
+          {showUnregisteredModal && (
+            <div style={{
+              position: "fixed",
+              inset: 0,
+              zIndex: 9999,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: 20
+            }}>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  background: "rgba(12, 90, 110, 0.4)",
+                  backdropFilter: "blur(4px)",
+                }}
+                onClick={() => setShowUnregisteredModal(false)}
+              />
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 20 }}
+                style={{
+                  position: "relative",
+                  width: "100%",
+                  maxWidth: 400,
+                  background: "#ffffff",
+                  borderRadius: 24,
+                  padding: "36px 32px",
+                  boxShadow: "0 24px 60px rgba(12, 90, 110, 0.2)",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  textAlign: "center"
+                }}
+              >
+                <div style={{
+                  width: 64,
+                  height: 64,
+                  borderRadius: "50%",
+                  background: "#e8f9fd",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginBottom: 20,
+                  color: "#17A5C6"
+                }}>
+                  <ShieldCheck size={32} />
+                </div>
+                <h3 style={{
+                  fontFamily: "'Nunito', sans-serif",
+                  fontSize: 22,
+                  fontWeight: 800,
+                  color: "#0d3d4d",
+                  marginBottom: 12
+                }}>
+                  Account Not Found
+                </h3>
+                <p style={{
+                  fontSize: 15,
+                  color: "#7fa9b5",
+                  fontWeight: 500,
+                  lineHeight: 1.5,
+                  marginBottom: 28
+                }}>
+                  Please book a service first to create your account and get an estimate for your cleaning.
+                </p>
+                <button
+                  className="lp-btn-primary"
+                  onClick={() => {
+                    setShowUnregisteredModal(false);
+                    router.push(`/?openEstimate=true&email=${encodeURIComponent(email)}`);
+                  }}
+                  style={{ width: "100%", marginBottom: 12 }}
+                >
+                  Book a Service
+                </button>
+                <button
+                  onClick={() => setShowUnregisteredModal(false)}
+                  style={{
+                    background: "none",
+                    border: "none",
+                    fontSize: 14,
+                    fontWeight: 700,
+                    color: "#9eadb5",
+                    cursor: "pointer"
+                  }}
+                >
+                  Cancel
+                </button>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>
 
       </div>
 
