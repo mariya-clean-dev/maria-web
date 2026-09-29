@@ -79,10 +79,15 @@ export function PlanCard({ plan, field, onSelect  }: PlanCardProps) {
             )}
           >
             <h3 className="text-xl font-bold mb-2">{plan.title}</h3>
-            <div className="mb-4">
+            <div className="mb-4 flex items-baseline flex-wrap gap-1">
               <span className="text-3xl font-bold">
                 {formatPrice(plan.finalPrice)}
               </span>
+              {plan.strikeoutPrice && plan.strikeoutPrice > plan.finalPrice ? (
+                <span className="text-lg text-gray-400 line-through ml-1">
+                  {formatPrice(plan.strikeoutPrice)}
+                </span>
+              ) : null}
               <span className="text-gray-600 ml-1">{periodText}</span>
             </div>
             {plan.discountPercent > 0 && (
