@@ -16,14 +16,33 @@ import { PlanCard } from "./PlanCard";
 import { Card } from "@/components/ui/card";
 
 import { useServicePlanStore } from "@/store/useServicePlanStore";
+import { useEstimateStore } from "@/store/useEstimateStore";
+import useListServices from "@/queries/services/useListServices";
 import useCustomToast from "@/hooks/use-custom-toast";
 import Stepper from "./Stepper";
 import { ChevronLeft } from "lucide-react";
 
 export default function ServicePlan({ setView }: any) {
   const { servicePlan } = useServicePlanStore();
+  const { estimateValues } = useEstimateStore();
+  const { data: serviceData } = useListServices();
 
   const { error } = useCustomToast();
+
+  // Resolve selected service name from the service list
+  const selectedService = serviceData?.data?.find(
+    (s: any) => s.id === estimateValues?.cleaningType
+  );
+  const isRegularCleaning =
+    selectedService?.name?.toLowerCase().includes("regular") ?? false;
+
+  // Show all plans for Regular Cleaning; only One Time for everything else
+  const visibleEstimates = isRegularCleaning
+    ? servicePlan?.estimates
+    : servicePlan?.estimates?.filter((plan: any) =>
+        plan.title?.toLowerCase().includes("one time") ||
+        plan.recurringTypeId === "notASubcriptionTypeId"
+      );
 
   const form = useForm<FormValues>({
     resolver: zodResolver(FORM_SCHEMA),
@@ -70,9 +89,13 @@ export default function ServicePlan({ setView }: any) {
                       <RadioGroup
                         onValueChange={field.onChange}
                         value={field.value}
-                        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                        className={
+                          visibleEstimates?.length === 1
+                            ? "flex justify-center gap-6"
+                            : "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                        }
                       >
-                        {servicePlan?.estimates?.map((plan: any) => (
+                        {visibleEstimates?.map((plan: any) => (
                           <PlanCard
                             key={plan.recurringTypeId}
                             plan={plan}

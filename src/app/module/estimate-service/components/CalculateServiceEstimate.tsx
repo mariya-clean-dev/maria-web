@@ -66,26 +66,32 @@ type FormValues = z.infer<typeof formSchema>;
 
 export default function CalculateServiceEstimate({ setView  }: any) {
   const router = useRouter();
-  const [roomsValue, setRoomsValue] = useState(0);
-  const [bathroomsValue, setBathroomsValue] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
 
+  // Store hooks — must come first so estimateValues is available for useState/useForm
   const { success, showError } = useCustomToast();
-  const { setEstimateValues } = useEstimateStore();
+  const { estimateValues, setEstimateValues } = useEstimateStore();
   const { setServicePlan } = useServicePlanStore();
+
+  const [roomsValue, setRoomsValue] = useState(estimateValues?.rooms ?? 0);
+  const [bathroomsValue, setBathroomsValue] = useState(estimateValues?.bathrooms ?? 0);
+  const [isLoading, setIsLoading] = useState(false);
 
   //Api
   const { mutateAsync: estimateCalculation } = useEstimateCalculation();
   const { data: serviceData } = useListServices();
 
   // Initialize form with react-hook-form and zod validation
+  // Restore previously saved values from the store when navigating back
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      rooms: 0,
-      bathrooms: 0,
-      ecoFriendly: false,
-      materialsProvided: false,
+      homeSize: estimateValues?.homeSize ?? undefined,
+      cleaningType: estimateValues?.cleaningType ?? undefined,
+      propertyType: estimateValues?.propertyType ?? undefined,
+      rooms: estimateValues?.rooms ?? 0,
+      bathrooms: estimateValues?.bathrooms ?? 0,
+      ecoFriendly: estimateValues?.ecoFriendly ?? false,
+      materialsProvided: estimateValues?.materialsProvided ?? false,
     },
   });
 

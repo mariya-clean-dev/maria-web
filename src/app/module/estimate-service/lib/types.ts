@@ -30,6 +30,7 @@ export interface PlanOption {
   description: string;
   discountPercent: number;
   finalPrice: number;
+  strikeoutPrice?: number;
   isPopular?: boolean;
   daysRequired?: number;
 }

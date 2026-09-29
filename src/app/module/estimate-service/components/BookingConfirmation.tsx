@@ -36,12 +36,13 @@ import { useServicePlanStore } from "@/store/useServicePlanStore";
 import { useEstimateStore } from "@/store/useEstimateStore";
 import useCustomToast from "@/hooks/use-custom-toast";
 import { useCreateBooking } from "@/queries/services/useCreateBooking";
+import { useValidateCoupon } from "@/queries/estimate/useValidateCoupon";
 import { useRouter } from "next/navigation";
 import {
   dayOfWeekToNumber,
   extractAreaSize,
 } from "@/services/heplerFunctions";
-import { CreditCard, FileText, Loader2, LockIcon, ChevronLeft } from "lucide-react";
+import { CreditCard, FileText, Loader2, LockIcon, ChevronLeft, Tag, X, CheckCircle2 } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Stepper from "./Stepper";
 
@@ -50,6 +51,16 @@ export default function BookingConfirmation({ setView,selectedPlanId }: any) {
   const router = useRouter();
   const { success, showError } = useCustomToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Coupon state
+  const [couponCode, setCouponCode] = useState("");
+  const [appliedCoupon, setAppliedCoupon] = useState<{
+    discountAmount: number;
+    finalAmount: number;
+    description: string;
+    code: string;
+  } | null>(null);
+  const { mutate: validateCoupon, isPending: isCouponLoading } = useValidateCoupon();
 
 
   const { servicePlan } = useServicePlanStore();
@@ -272,7 +283,7 @@ useEffect(() => {
       materialProvided: estimateValues?.materialsProvided,
       areaSize: areaSize,
       isEco: estimateValues?.ecoFriendly,
-      price: plan.finalPrice,
+      price: finalBookingPrice,
       paymentMethod: values.paymentMethod === "Cash/Venmo" ? "offline" : "online",
       recurringTypeId:
         bookingType === "one_time" ? null : plan.recurringTypeId,
@@ -347,6 +358,44 @@ useEffect(() => {
   const selectedPlan = servicePlan?.estimates?.find(
   (p: any) => p.recurringTypeId === selectedPlanId
 );
+
+  const finalBookingPrice = appliedCoupon
+    ? appliedCoupon.finalAmount
+    : selectedPlan?.finalPrice;
+
+  // ======== COUPON HANDLER ========
+
+  const handleApplyCoupon = () => {
+    if (!couponCode.trim()) return;
+    if (!selectedPlan?.finalPrice) return;
+
+    validateCoupon(
+      { code: couponCode.trim(), bookingAmount: selectedPlan.finalPrice },
+      {
+        onSuccess: (data) => {
+          setAppliedCoupon({
+            discountAmount: data.discountAmount,
+            finalAmount: data.finalAmount,
+            description: data.coupon.description,
+            code: data.coupon.code,
+          });
+          success(`Coupon applied! You save ${formatPrice(data.discountAmount)}`);
+        },
+        onError: (error: any) => {
+          setAppliedCoupon(null);
+          const msg =
+            error?.response?.data?.message ||
+            "Invalid coupon code. Please try again.";
+          showError(msg);
+        },
+      }
+    );
+  };
+
+  const handleRemoveCoupon = () => {
+    setAppliedCoupon(null);
+    setCouponCode("");
+  };
 
   // ======== RENDER ========
 
@@ -524,6 +573,78 @@ useEffect(() => {
                 </div>
                 </div>
 
+                {/* Coupon Code Section */}
+                <div>
+                  <h3 className="text-[16px] font-bold mb-4 border-b border-[#F5F5F4] pb-2">
+                    Coupon Code
+                  </h3>
+
+                  {appliedCoupon ? (
+                    <div className="flex items-start justify-between bg-green-50 border border-green-200 rounded-2xl p-4">
+                      <div className="flex items-start gap-3">
+                        <CheckCircle2 className="text-green-500 mt-0.5 shrink-0" size={18} />
+                        <div>
+                          <p className="font-bold text-green-700 text-sm">{appliedCoupon.code} applied!</p>
+                          <p className="text-green-600 text-xs mt-0.5">{appliedCoupon.description}</p>
+                          <p className="text-green-700 font-semibold text-sm mt-1">
+                            You save {formatPrice(appliedCoupon.discountAmount)}
+                          </p>
+                        </div>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={handleRemoveCoupon}
+                        className="text-gray-400 hover:text-gray-600 transition-colors cursor-pointer"
+                      >
+                        <X size={16} />
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="flex gap-2">
+                      <div className="relative flex-1">
+                        <Tag className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={16} />
+                        <Input
+                          placeholder="Enter coupon code"
+                          value={couponCode}
+                          onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
+                          onKeyDown={(e) => e.key === "Enter" && (e.preventDefault(), handleApplyCoupon())}
+                          className="pl-9 h-11 bg-[#FAFAF9] border border-[#E7E5E4] rounded-xl uppercase tracking-widest text-sm"
+                        />
+                      </div>
+                      <Button
+                        type="button"
+                        onClick={handleApplyCoupon}
+                        disabled={isCouponLoading || !couponCode.trim()}
+                        className="h-11 px-5 bg-[#17A5C6] hover:bg-[#17A5C6]/90 text-white rounded-xl cursor-pointer disabled:opacity-50"
+                      >
+                        {isCouponLoading ? (
+                          <Loader2 className="h-4 w-4 animate-spin" />
+                        ) : (
+                          "Apply"
+                        )}
+                      </Button>
+                    </div>
+                  )}
+
+                  {/* Price summary */}
+                  {appliedCoupon && selectedPlan && (
+                    <div className="mt-3 space-y-1.5 text-sm border-t border-[#F5F5F4] pt-3">
+                      <div className="flex justify-between text-gray-500">
+                        <span>Original price</span>
+                        <span>{formatPrice(selectedPlan.finalPrice)}</span>
+                      </div>
+                      <div className="flex justify-between text-green-600 font-medium">
+                        <span>Coupon discount</span>
+                        <span>- {formatPrice(appliedCoupon.discountAmount)}</span>
+                      </div>
+                      <div className="flex justify-between font-bold text-base text-[#1C1917]">
+                        <span>Total</span>
+                        <span>{formatPrice(appliedCoupon.finalAmount)}</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
 
                 <Button
                     type="submit"
@@ -537,13 +658,13 @@ useEffect(() => {
                         </>
                     ) : (
                         <span className="flex items-center justify-center gap-2">
-                          Book Now
-                          {selectedPlan?.finalPrice && (
-                            <span className="font-semibold">
-                              - {formatPrice(selectedPlan.finalPrice)}
-                            </span>
-                          )}
-                        </span>
+                            Book Now
+                            {finalBookingPrice && (
+                              <span className="font-semibold">
+                                - {formatPrice(finalBookingPrice)}
+                              </span>
+                            )}
+                          </span>
                     )}
                 </Button>
 
